@@ -3,116 +3,107 @@
 @section('title',__('website.contact'))
 
 @section('content')
-    <!-- Inner Banner -->
-    <div class="inner-banner inner-bg1">
-        <div class="container-fluid">
-            <div class="container-max">
-                <div class="inner-title">
-                    <span>{{ __('website.Contact Us') }}</span>
-                    <h2>{{ __('website.We’re Always Helpful') }} <br> {{ __('website.To Lend A Hand') }}</h2>
+    <!-- Banner Header -->
+    <section class="section section-banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-md-12 col-sm-12 col-12">
+                    <h2 class="title-h2">{{ __('website.Contact Us') }}</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('website.home') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ __('website.Contact Us') }}</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Inner Banner End -->
+        <div class="section-banner__box">
+            <div class="section-banner__thumb">
+                <img class="section-banner__img" src="https://via.placeholder.com/960x290" alt="Image Banner">
+            </div>
+        </div>
+    </section>
 
-    <!-- Service Area Four -->
-    <div class="service-area-four pt-100 pb-70">
+    <!-- Contact Info -->
+    <section class="section section-contact">
         <div class="container">
-            <div class="row justify-content-center">
-                @foreach ($services as $service)
-                <div class="col-lg-3 col-sm-6">
-                    <div class="service-card service-card-bg-three section-bg">
-                        <a href="{{route('service-details',$service->slug)}}">
-                            <h3>{{ app()->getLocale() == 'en' ? $service->title_en :$service->title_ar }}</h3>
-                        </a>
-                        <p class="text-break">{!! app()->getLocale() == 'en' ? $service->quote_en :$service->quote_ar !!}</p>
-                        <a href="{{route('service-details',$service->slug)}}" class="learn-more-btn">
-                            {{ __('website.Read More') }}
-                            @if(app()->getLocale() == 'en')
-                                <i class='bx bx-right-arrow-alt'></i>
-                            @else
-                                <span class="bx bx-left-arrow-alt"></span>
-                            @endif
-                        </a>
+
+            <p class="before-title text-center">Be in touch</p>
+            <h2 class="title-h2 text-center">Contact Info</h2>
+            <p class="text-center after-title">We tried to provide you with the most necessary information, so that it would be easier for you to contact us in any way convenient for you.</p>
+
+            <div class="row-contact">
+                <div class="col-contact">
+                    <img src="/website/img/icons/call.svg" alt="">
+                    <h3 class="title-h3">Call us</h3>
+                    <ul class="col-contact__list">
+                        <li class="col-contact__list-item"><span>Phone:</span> +1 6547 78 98</li>
+                        <li class="col-contact__list-item"><span>Fax:</span> +1 6547 88 99</li>
+                    </ul>
+                </div>
+                <div class="col-contact">
+                    <img src="/website/img/icons/speech-bubble.svg" alt="">
+                    <h3 class="title-h3">Chat us</h3>
+                    <ul class="col-contact__list">
+                        <li class="col-contact__list-item"><span>Skype:</span> desart_agency</li>
+                        <li class="col-contact__list-item"><span>Telegram:</span> @desart</li>
+                    </ul>
+                </div>
+                <div class="col-contact">
+                    <img src="/website/img/icons/location.svg" alt="">
+                    <h3 class="title-h3">Visit us</h3>
+                    <ul class="col-contact__list">
+                        <li class="col-contact__list-item"><span>Address:</span> 555 W Madison St, Chicago, IL 60661, USA</li>
+                    </ul>
+                </div>
+                <div class="col-contact">
+                    <img src="/website/img/icons/clock.svg" alt="">
+                    <h3 class="title-h3">Working hours</h3>
+                    <ul class="col-contact__list">
+                        <li class="col-contact__list-item"><span>Mon - Fri:</span> 9 am till 6 pm</li>
+                        <li class="col-contact__list-item"><span>Sat, Sun:</span> closed</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-map">
+        <iframe class="iframe-map" src="https://maps.google.com/maps?&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street%2C%20Dublin%2C%20Ireland+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"></iframe>
+    </section>
+
+    <!-- Form -->
+    <section class="section section-form">
+        <div class="container">
+
+            <p class="before-title text-center">let’s talk</p>
+            <h2 class="title-h2 text-center">Send Us a Massage</h2>
+            <p class="text-center after-title">We are always happy to talk with you. Be sure to write to us if you have any questions or need help and support.</p>
+
+            <form method="post" action="#" id="contact-form">
+                <div class="form">
+                    <div class="response"></div>
+                    <div class="form-item">
+                        <input class="form__input name" type="text" placeholder="First name">
+                    </div>
+                    <div class="form-item">
+                        <input class="form__input" type="text" placeholder="Last name">
+                    </div>
+                    <div class="form-item">
+                        <input class="form__input email" type="email" placeholder="Email address">
+                    </div>
+                    <div class="form-item">
+                        <input class="form__input" type="text" placeholder="Phone number">
+                    </div>
+                    <div class="form-item w-100">
+                        <textarea class="form__textarea" rows="3" placeholder="Enter your massage"></textarea>
+                    </div>
+                    <div class="form-item text-center">
+                        <button type="button" class="btn btn-primary" id="submit">Send</button>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            </form>
         </div>
-    </div>
-    <!-- Service Area Four End -->
-
-    <!-- Map Area Two -->
-    <div class="map-area-two">
-        <div class="container-fluid m-0 p-0">
-            {!! $setting->map !!}
-            <div class="contact-wrap">
-                <div class="contact-form">
-                    <span>{{__('website.Send message')}}</span>
-                    <h2>{{__('website.Contact With Us')}}</h2>
-                    <form id="contactForm" action="{{ route('contact.store') }}" method="post">
-                        @csrf
-                        <div class="row justify-content-center">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-user'></i>
-                                    <input type="text" name="name" placeholder="{{ __('website.Your Name') }}" required id="name" class="form-control" data-error="{{ __('website.Please enter your name') }}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-user'></i>
-                                    <input type="email" name="email" id="email" class="form-control" required data-error="{{ __('website.Please enter your email') }}" placeholder="{{ __('website.Your Email') }}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-phone'></i>
-                                    <input type="text" name="phone" id="phone_number" required data-error="{{ __('website.Please enter your number') }}" class="form-control" placeholder="{{ __('website.Your Phone') }}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-file'></i>
-                                    <input type="text" name="topic" id="msg_subject" class="form-control" required data-error="{{ __('website.Please enter your subject') }}" placeholder="{{ __('website.Your Topic') }}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <i class='bx bx-envelope'></i>
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="8" required data-error="{{ __('website.Write your message') }}" placeholder="{{ __('website.Message') }}"></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <button type="submit" class="default-btn default-hot-toddy">
-                                    {{ __('website.Send Message') }}
-                                    @if(app()->getLocale() == 'en')
-                                        <i class='bx bx-right-arrow-alt'></i>
-                                    @else
-                                        <span class="bx bx-left-arrow-alt"></span>
-                                    @endif
-                                </button>
-                                <div id="msgSubmit" class="h3 text-center hidden"></div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Map Area Two End -->
-
-    @include('components.home.newsletter')
+    </section>
 @endsection
