@@ -1,24 +1,12 @@
-<!-- Jquery Min JS -->
-<script data-cfasync="false" src="{{ asset('website/js/email-decode.min.js')}}"></script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="{{ asset('website/js/jquery.min.js')}}"></script>
-<!-- Bootstrap Min JS -->
-<script src="{{ asset('website/js/bootstrap.bundle.min.js')}}"></script>
-<!-- Owl Carousel Min JS -->
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="{{ asset('website/js/popper.min.js')}}"></script>
+<script src="{{ asset('website/js/bootstrap.min.js')}}"></script>
+<!-- Owl Carousel -->
 <script src="{{ asset('website/js/owl.carousel.min.js')}}"></script>
-<script src="{{ asset('website/js/carousel-thumbs.js')}}"></script>
-<!-- Meanmenu JS -->
-<script src="{{ asset('website/js/meanmenu.js')}}"></script>
-<!-- Magnific Popup JS -->
-<script src="{{ asset('website/js/jquery.magnific-popup.min.js')}}"></script>
-<!-- Wow JS -->
+<!-- Plugins -->
+<script src="{{ asset('website/js/waypoints.min.js')}}"></script>
+<script src="{{ asset('website/js/jquery.counterup.min.js')}}"></script>
 <script src="{{ asset('website/js/wow.min.js')}}"></script>
-<!-- Nice Select JS -->
-<script src="{{ asset('website/js/jquery.nice-select.min.js')}}"></script>
-<!-- Ajaxchimp Min JS -->
-<script src="{{ asset('website/js/jquery.ajaxchimp.min.js')}}"></script>
-<!-- Form Validator Min JS -->
-<script src="{{ asset('website/js/form-validator.min.js')}}"></script>
-<!-- Contact Form JS -->
-<script src="{{ asset('website/js/contact-form-script.js')}}"></script>
-<!-- Custom JS -->
-<script src="{{ asset('website/js/custom.js')}}"></script>
+<script src="{{ asset('website/js/plugins.js')}}"></script>

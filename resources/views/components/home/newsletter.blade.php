@@ -1,32 +1,25 @@
-<!-- Newsletter Area -->
-<div class="newsletter-area pt-100 pb-70">
+<section class="section section-newsletter">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <div class="newsletter-content">
-                    <i class='flaticon-email'></i>
-                    <h2>{{ __('website.Join our weekly') }} <b class="section-color">{{ __('website.Newsletter') }}</b></h2>
-                </div>
-            </div>
-
-            <div class="col-lg-5">
-                <div class="newsletter-form-area">
-                    <form class="newsletter-form" data-toggle="validator" method="POST" action="{{ route('contact.subscribe') }}">
-                        @csrf
-                        <input type="email" class="form-control" placeholder="Enter Your Email" name="email" required autocomplete="off">
-                        <button class="default-btn default-hot-toddy" type="submit">
-                            {{ __('website.Subscribe') }}
-                            @if(app()->getLocale() == 'en')
-                                <i class='bx bx-right-arrow-alt'></i>
-                            @else
-                                <i class='bx bx-left-arrow-alt'></i>
-                            @endif
-                        </button>
-                        <div id="validator-newsletter" class="form-result"></div>
-                    </form>
-                </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="before-title">newsletter</p>
+                <h2 class="title-h2">Want to Be Always Informed?</h2>
+                <form>
+                    <div class="form-newsletter">
+                        <div class="form-newsletter-item form-newsletter-input">
+                            <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Enter your email">
+                        </div>
+                        <div class="form-newsletter-item">
+                            <button type="submit" class="btn btn-primary mb-2">Subscribe</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-<!-- Newsletter Area End -->
+    <div class="box-newsletter">
+        <div class="thumb-newsletter wow fadeInUp" data-wow-duration="1000ms">
+            <img class="thumb-newsletter-img" src="https://via.placeholder.com/556x572" alt="Image Newsletter">
+        </div>
+    </div>
+</section>
