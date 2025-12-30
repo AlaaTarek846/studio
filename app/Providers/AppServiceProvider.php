@@ -27,15 +27,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $shareSetting = Setting::first();
-        $galleries = Gallery::whereStatus(1)->take(6)->get();
-
-
 
         View::share([
             'shareSetting' => $shareSetting,
-            'galleries' => $galleries,
         ]);
-//        Gate::policy(StoreProduct::class, StoreProductPolicy::class);
+
         Paginator::useBootstrap();
     }
 }

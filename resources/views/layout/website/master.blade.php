@@ -104,64 +104,40 @@
     <!-- Article Schema (JSON-LD) - will be provided by child views -->
     @stack('structured_data')
 
-    <!-- bootstrap css -->
-    <!-- CSS here -->
+    <!-- Animation CSS File -->
+    <link href="{{ asset('website/css/animate.css')}}" rel="stylesheet">
+    <!-- Bootstrap -->
     @if(app()->getLocale() == 'ar')
         <link rel="stylesheet" href="{{ asset('website/css/bootstrap-rtl.min.css')}}">
     @else
-        <link rel="stylesheet" href="{{ asset('website/css/bootstrap.min.css')}}">
+        <link href="{{ asset('website/css/bootstrap.min.css')}}" rel="stylesheet">
     @endif
-    <!-- Owl Carousel CSS -->
+    <!-- Font Awesome -->
+    <link href="{{ asset('website/css/font-awesome.min.css')}}" rel="stylesheet">
+    <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{ asset('website/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" href="{{ asset('website/css/owl.theme.default.min.css')}}">
-    <!-- Flaticon CSS -->
-    <link rel="stylesheet" href="{{ asset('website/fonts/flaticon.css')}}">
-    <!-- Boxicons CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/boxicons.min.css')}}">
-    <!-- Animate Min CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/animate.min.css')}}">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/magnific-popup.css')}}">
-    <!-- Meanmenu CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/meanmenu.css')}}">
-    <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/nice-select.min.css')}}">
-
+    <!-- Material Design Iconic -->
+    <link rel="stylesheet" href="{{ asset('website/css/material-design-iconic-font.min.css')}}">
+    <!-- Custom Style -->
     @if(app()->getLocale() == 'ar')
-        <!-- Style CSS -->
-        <link rel="stylesheet" href="{{ asset('website/css/style-rtl.css')}}">
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="{{ asset('website/css/responsive-rtl.css')}}">
+        <link href="{{ asset('website/css/style-rtl.css')}}" rel="stylesheet">
+        <link href="{{ asset('website/css/responsive-rtl.css')}}" rel="stylesheet">
     @else
-        <!-- Style CSS -->
-        <link rel="stylesheet" href="{{ asset('website/css/style.css')}}">
-        <!-- Responsive CSS -->
-        <link rel="stylesheet" href="{{ asset('website/css/responsive.css')}}">
+        <link href="{{ asset('website/css/style.css')}}" rel="stylesheet">
+        <link href="{{ asset('website/css/responsive.css')}}" rel="stylesheet">
     @endif
-    <!-- Theme Dark CSS -->
-    <link rel="stylesheet" href="{{ asset('website/css/theme-dark.css')}}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('website/img/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{ asset('website/img/favicon.ico')}}">
 
     @stack('style')
 </head>
 
 <body>
 
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="d-table">
-            <div class="d-table-cell">
-                <div class="spinner">
-                    <div class="circle1"></div>
-                    <div class="circle2"></div>
-                    <div class="circle3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End Preloader -->
+    <!-- PRELOADER -->
+    <div id="preloader"></div>
 
     <!-- header-area -->
      @include('layout.website.header')

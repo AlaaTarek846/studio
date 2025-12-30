@@ -4,308 +4,461 @@
 
 @section('content')
 
-    <!-- Home Slider Area -->
-    <div class="home-slider-area">
-        <div class="container-fluid m-0 p-0">
-            <div class="home-slider owl-carousel owl-theme">
-                @foreach($homeSliders as $homeSlider)
-                <div class="slider-item">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-lg-5 col-xxl-6">
-                            <div class="home-slider-content">
-                                <span>{{ $homeSlider->title_color }}</span>
-                                <h1>{{ $homeSlider->title }}</b></h1>
-                                <p>{!!  $homeSlider->description !!} </p>
-                                <div class="home-slider-btn">
-
-                                    <a href="{{route('contact')}}" class="default-btn active">
-                                        {{ __('website.contact') }}
-                                        @if(app()->getLocale() == 'en')
-                                            <i class='bx bx-right-arrow-alt'></i>
-                                        @else
-                                            <i class='bx bx-left-arrow-alt'></i>
-                                        @endif
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-7 col-xxl-6 pr-0">
-                            <div class="home-slider-img">
-                                <img src="{{$homeSlider->background->url}}" alt="Images">
-                            </div>
-                        </div>
+    <!-- Banner Carousel -->
+    <div class="owl-carousel banner-carousel">
+        <div class="banner-carousel-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-12 col-sm-12 col-12 wow fadeInUp" data-wow-duration="1000ms">
+                        <h1 class="title-h1">
+                            Creative Web Design Studio
+                        </h1>
+                        <p class="description">We create new technologies for your business thanks to our wonderful team of professionals. Together we can reach new heights.</p>
+                        <a href="about.html" class="btn btn-primary">Learn more</a>
                     </div>
                 </div>
-                @endforeach
-
+            </div>
+            <span class="carousel-number">.01</span>
+            <div class="box-banner">
+                <div class="thumb-banner">
+                    <img class="thumb-banner-img" src="https://via.placeholder.com/1070x880" alt="Image Banner">
+                </div>
             </div>
         </div>
-    </div>
-    <!-- Home Slider Area End -->
-
-    <!-- Service Area -->
-    <div class="service-area pt-100 pb-70">
-        <div class="container">
-            <div class="row justify-content-center">
-
-                @foreach($services as $index => $service)
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="service-card service-card-bg {{$index == 1? 'active':''}}">
-                            <i class='flaticon-value'></i>
-                            <a href="{{route('service')}}">
-                                <h3>{{$service->title}}</h3>
-                            </a>
-                            <p class="text-break">{!! app()->getLocale() == 'en' ? $service->quote_en :$service->quote_ar !!}</p>
-                            <a href="{{route('service')}}" class="learn-more-btn">
-                                {{ __('website.Learn More') }}
-                                @if(app()->getLocale() == 'en')
-                                    <i class='bx bx-right-arrow-alt'></i>
-                                @else
-                                    <i class='bx bx-left-arrow-alt'></i>
-                                @endif
-                            </a>
-                        </div>
-                    </div>
-
-                @endforeach
-            </div>
-        </div>
-    </div>
-    <!-- Service Area End -->
-
-    <!-- House Area Two -->
-    <div class="house-area-two pt-100  pb-70">
-        <div class="container">
-            <div class="row justify-content-center">
-
-                @foreach($propertyTypes as $index => $propertyType)
-                    <div class="col-lg-6 col-md-6">
-                        <div class="house-card">
-                            <a href="property-details.html">
-                                <img src="{{$propertyType->media->url}}" alt="Images">
-                            </a>
-                            <div class="content">
-                                <span>{{$propertyType->title}}</span>
-                                <a href="property-details.html">
-                                    <h3>{{$propertyType->title}}</h3>
-                                </a>
-                                <p>
-                                    {{$propertyType->description}}
-                                </p>
-                                <a href="{{$index == 1 ? route('areas') : route('apartments') }}" class="learn-btn">
-                                    {{ __('website.Learn More') }}
-                                    @if(app()->getLocale() == 'en')
-                                        <i class='bx bx-right-arrow-alt'></i>
-                                    @else
-                                        <i class='bx bx-left-arrow-alt'></i>
-                                    @endif
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-    <!-- House Area Two End -->
-
-
-
-
-    <!-- Property Section -->
-    <section class="property-section pb-70">
-        <div class="container-fluid">
-            <div class="container-max">
-                <div class="property-section-text">
-                    <div class="section-title">
-                        <span>{{ __('website.The Projects') }}</span>
-                        <h2>
-                            {{ __('website.Projects') }}
-                            <br>{{ __('website.Real Estate') }}</br>
-
-                                                        
-
-                        </h2>
+        <div class="banner-carousel-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-12 col-sm-12 col-12">
+                        <h1 class="title-h1">
+                            Creative Web Design Studio
+                        </h1>
+                        <p class="description">We create new technologies for your business thanks to our wonderful team of professionals. Together we can reach new heights.</p>
+                        <a href="" class="btn btn-primary">Learn more</a>
                     </div>
                 </div>
+            </div>
+            <span class="carousel-number">.02</span>
+            <div class="box-banner">
+                <div class="thumb-banner">
+                    <img class="thumb-banner-img" src="https://via.placeholder.com/1070x880" alt="Image Banner">
+                </div>
+            </div>
+        </div>
+        <div class="banner-carousel-item">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-md-12 col-sm-12 col-12">
+                        <h1 class="title-h1">
+                            Creative Web Design Studio
+                        </h1>
+                        <p class="description">We create new technologies for your business thanks to our wonderful team of professionals. Together we can reach new heights.</p>
+                        <a href="" class="btn btn-primary">Learn more</a>
+                    </div>
+                </div>
+            </div>
+            <span class="carousel-number">.03</span>
+            <div class="box-banner">
+                <div class="thumb-banner">
+                    <img class="thumb-banner-img" src="https://via.placeholder.com/1070x880" alt="Image Banner">
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="row pt-45">
-                    @foreach($projects as $project)
-                        <div class="col-lg-4 col-md-6">
-                            <div class="single-property">
-                                <div class="images">
-                                    <a href="{{route('developments',$project->slug)}}">
-                                        <img src="{{$project->media->url}}" alt="Images">
-                                    </a>
-                                    <div class="property-content">
-                                        <span>{{$project->title}}</span>
-                                        <a href="{{route('developments',$project->slug)}}">
-                                            <h3>{{$project->title}}</h3>
-                                        </a>
-                                        <p>{{$project->description}}</p>
-                                        <a href="{{route('apartments',$project->slug)}}" class="learn-more-btn">
-                                           {{ __('website.Learn More') }}
-                                            @if(app()->getLocale() == 'en')
-                                                <i class='bx bx-right-arrow-alt'></i>
-                                            @else
-                                                <i class='bx bx-left-arrow-alt'></i>
-                                            @endif
-                                        </a>
-                                    </div>
-                                </div>
+    <!-- About Us -->
+    <section class="section section-about">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-xl-6 col-md-6 col-sm-12 col-12">
+                    <div class="img-about">
+                        <div class="img-about-item">
+                            <div class="thumb-back">
+                                <img class="thumb-back-img" src="https://via.placeholder.com/300x350" alt="Image Back">
                             </div>
                         </div>
-                    @endforeach
+                        <div>
+                            <div class="thumb-front wow fadeInUp" data-wow-duration="1000ms">
+                                <img class="thumb-front-img" src="https://via.placeholder.com/330x437" alt="Image Front">
+                            </div>
+                        </div>
+                    </div>
 
-
+                </div>
+                <div class="col-xl-5 col-md-5 col-sm-12 col-12">
+                    <p class="before-title scnd">about us</p>
+                    <h2 class="title-h2">We are the Creative Digital Team</h2>
+                    <p class="after-title">Our digital company has been developing products for 15 years.</p>
+                    <p class="description">We’ve got a lot of awards for our work and develop applications that became popular in the world. We try not to miss important details in each area.</p>
+                    <button type="button" class="btn-play" data-toggle="modal" data-target="#videoModal">Watch video</button>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Property Section End -->
 
-    <!-- Testimonial Area -->
-    <div class="testimonial-area pt-100">
-        <div class="container">
-            <div class="testimonial-slider owl-carousel owl-theme">
-
-                @foreach($testimonials as $testimonial)
-                    <div class="testimonial-item">
-                        <h3>{{$testimonial->name}}</h3>
-                        <p>
-                            {{$testimonial->description}}
-                        </p>
-                    </div>
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial Area End -->
-
-
-
-    <!-- Blog Area -->
-    <div class="blog-area pb-70">
-        <div class="container">
-            <div class="section-title text-center">
-                <span>{{ __('website.REAL ESTATE BLOG') }}</span>
-                <h2 class="margin-auto">{!! __('website.Blog News & Updates') !!}</h2>
-            </div>
-            <div class="row pt-45">
-                @foreach($articles as $article)
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-card">
-                            <a href="{{route('blog-details',$article->route_slug ?? $article->id)}}">
-                                <img src="{{$article->media->url}}" alt="Blog Images">
-                            </a>
-                            <div class="content">
-                                <span>{{ app()->getLocale() == 'en' ? $article->created_at->format('F d, Y') : $article->created_at->format('d F, Y')    }}</span>
-                                <a href="{{route('blog-details',$article->route_slug ?? $article->id)}}">
-                                    <h3>{{$article->title}}</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-
-            </div>
-        </div>
-    </div>
-    <!-- Blog Area End -->
-
-    <!-- Contact Area -->
-    <div class="contact-area">
-        <div class="container">
-            <div class="contact-option">
-                <div class="contact-form">
-                    <span>{{ __('website.SEND MESSAGE') }}</span>
-                    <h2>{{ __('website.Contact With Us') }}</h2>
-                    <form action="{{ route('contact.store') }}" method="POST" id="contactForm">
-                        @csrf
-                        <div class="row justify-content-center">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-user'></i>
-                                    <input type="text" name="name" id="name" class="form-control" required data-error="{{ __('website.Please enter your name') }}" placeholder="{{ __('website.Your Name') }}*">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="form-group">
-                                    <i class='bx bx-user'></i>
-                                    <input type="email" name="email" id="email" class="form-control" required data-error="{{ __('website.Please enter your email') }}" placeholder="{{ __('website.Your Email') }}*">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-sm-12">
-                                <div class="form-group">
-                                    <i class='bx bx-phone'></i>
-                                    <input type="text" name="phone" id="phone_number" required data-error="{{ __('website.Please enter your number') }}" class="form-control" placeholder="{{ __('website.Your Phone')}}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-sm-12">
-                                <div class="form-group">
-                                    <i class='bx bx-envelope'></i>
-                                    <input type="text" name="topic" id="msg_subject" required data-error="{{ __('website.Please enter your subject') }}" class="form-control" placeholder="{{ __('website.Your Topic') }}">
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <div class="form-group">
-                                    <i class='bx bx-envelope'></i>
-                                    <textarea name="message" class="form-control" id="message" cols="30" rows="8" required data-error="{{ __('website.Write your message') }}" placeholder="{{ __('website.Message') }}"></textarea>
-                                    <div class="help-block with-errors"></div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12 col-md-12">
-                                <button type="submit" class="default-btn default-bg-buttercup">
-                                    {{ __('website.Send Message') }}
-                                    @if(app()->getLocale() == 'en')
-                                        <i class='bx bx-right-arrow-alt'></i>
-                                    @else
-                                        <i class='bx bx-left-arrow-alt'></i>
-                                    @endif
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <!-- Count -->
+    <section class="section section-count">
+        <div class="container text-center box-count">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-count">
+                <div class="col mb-2">
+                    <p class="title-count counter">125</p>
+                    <p class="text-count">Happy Clients</p>
+                </div>
+                <div class="col mb-2">
+                    <p class="title-count counter">250</p>
+                    <p class="text-count">Successful Projects</p>
+                </div>
+                <div class="col mb-2">
+                    <p class="title-count counter">40</p>
+                    <p class="text-count">Team Members</p>
+                </div>
+                <div class="col mb-2">
+                    <p class="title-count counter">20</p>
+                    <p class="text-count">Awards Winning</p>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Contact Area End -->
+    </section>
 
+    <!-- Get a Free -->
+    <section class="section section-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="before-title">Come on! we don’t bite :)</p>
+                    <h2 class="title-h2">Get a Free Consultation</h2>
+                    <a href="contact.html" class="btn btn-primary">Get started!</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-action">
+            <div class="thumb-action">
+                <img class="thumb-action-img" src="https://via.placeholder.com/1000x1121" alt="Image Newsletter">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-services">
+        <div class="container">
+
+            <p class="before-title text-center">Services that we provide</p>
+            <h2 class="title-h2 text-center">We Develop Digital Products</h2>
+
+            <div class="row-services">
+                <div class="col-services">
+                    <img src="/img/icons/icon-design.svg" alt="">
+                    <h3 class="title-h3">UI/UX Design</h3>
+                    <p class="description">Everything starts with the beautiful. And professional design is of great importance in this matter.</p>
+                    <a class="btn-text btn-text-img" href="services-detail.html">Read more</a>
+                </div>
+                <div class="col-services col-services-center">
+                    <img src="/img/icons/icon-web-development.svg" alt="">
+                    <h3 class="title-h3">Web Development</h3>
+                    <p class="description">Our developers are carefully considering how your product should work while maintaining its flexibility.</p>
+                    <a class="btn-text btn-text-img" href="services-detail.html">Read more</a>
+                </div>
+                <div class="col-services">
+                    <img src="/img/icons/icon-SEO.svg" alt="">
+                    <h3 class="title-h3">SEO Optimization</h3>
+                    <p class="description">Promotion of your product is an important step in making money and constant popularity among consumers.</p>
+                    <a class="btn-text btn-text-img" href="services-detail.html">Read more</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases -->
+    <section class="section section-case">
+        <div class="container">
+            <div class="row justify-content-end portfolio">
+                <div class="col-md-12 col-xl-4">
+                    <p class="before-title">recent projects</p>
+                    <h2 class="title-h2">Check Our Latest&nbsp;Cases</h2>
+                    <p class="description">We always try to implement our creative ideas at the highest level. You can see it by looking at our portfolio.</p>
+                    <a href="portfolio.html" class="btn btn-primary">View all</a>
+                </div>
+            </div>
+        </div>
+        <div class="box-case">
+            <div class="row row-cols-3 row-case">
+                <div class="col col-case">
+                    <div class="case-item case-1">
+                        <div class="team-info">
+                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-case">
+                    <div class="case-item case-2">
+                        <div class="team-info">
+                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-case">
+                    <div class="case-item case-3">
+                        <div class="team-info">
+                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
     @include('components.home.newsletter')
 
-    <!-- Map Area -->
-{{--    <div class="map-area">--}}
-{{--        <div class="container-fluid m-0 p-0">--}}
-{{--            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1887.3734131639715!2d-96.95588917878352!3d18.89830951964275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c4e51eb45eacad%3A0x465ac54aa2735573!2zUmluY29uIGRlbCBCb3NxdWUsIOCmleCmsOCnjeCmoeCni-CmrOCmviwg4Kat4KeH4Kaw4Ka-4KaV4KeN4Kaw4KeB4KacLCDgpq7gp4fgppXgp43gprjgpr_gppXgp4s!5e0!3m2!1sbn!2sbd!4v1594641366896!5m2!1sbn!2sbd"  allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>--}}
-{{--            <div class="map-content">--}}
-{{--                <span>CONTACT FOR PROJECT</span>--}}
-{{--                <h2>Do You Have A Project In <b>Mind?</b></h2>--}}
-{{--                <div class="map-content-left">--}}
-{{--                    <span>CALL US NOW</span>--}}
-{{--                    <h3><a href="tel:+5678555178">+5 678 555 178</a></h3>--}}
-{{--                </div>--}}
-{{--                <div class="map-content-right">--}}
-{{--                    <span>GET IN TOUCH</span>--}}
-{{--                    <h3><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection#41282f272e012e27352e316f222e2c"><span class="__cf_email__" data-cfemail="c7aea9a1a887a8a1b3a8b7e9a4a8aa">[email&#160;protected]</span></a></h3>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-    <!-- Map Area End -->
+    <!-- Team Carousel -->
+    <section class="section section-team">
+        <div class="container">
+            <p class="before-title text-center">our team</p>
+            <h2 class="title-h2 text-center">Experts In Their Field</h2>
+            <p class="text-center after-title">The best professionals will work on your product.<br>We can safely say that success is guaranteed to your business.</p>
+        </div>
+        <div class="owl-carousel team-carousel text-center">
+            <div class="team-carousel-item team-carousel-1">
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-2">
+                <div class="team-info">
+                    <p class="team-name">Alex Freeman</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-3">
+                <div class="team-info">
+                    <p class="team-name">Jonh Doe</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-4">
+                <div class="team-info">
+                    <p class="team-name">Sam Beffort</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-5">
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-6">
+
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-7">
+                <div class="team-info">
+                    <p class="team-name">Alex Freeman</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-8">
+                <div class="team-info">
+                    <p class="team-name">Jonh Doe</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-9">
+                <div class="team-info">
+                    <p class="team-name">Sam Beffort</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-10">
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-11">
+
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-12">
+                <div class="team-info">
+                    <p class="team-name">Alex Freeman</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-13">
+                <div class="team-info">
+                    <p class="team-name">Jonh Doe</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-14">
+                <div class="team-info">
+                    <p class="team-name">Sam Beffort</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="team-carousel-item team-carousel-15">
+                <div class="team-info">
+                    <p class="team-name">Aleksander Firson</p>
+                    <ul class="team-social">
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
+                        </li>
+                        <li class="team-social-item">
+                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="section section-blog">
+
+        <div class="container">
+
+            <p class="before-title text-center">develop yourself - read more</p>
+            <h2 class="title-h2 text-center">Resent News And Articles</h2>
+
+            <div class="row-blog">
+                <div class="col-post">
+                    <div class="thumb-blog thumb-blog-1">
+                        <div class="post-date">Oct 12, 2019</div>
+                    </div>
+                    <h3 class="title-h3 line-clamp">
+                        <a href="blog-single.html">How to create an amazing design for your site without</a>
+                    </h3>
+                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
+                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
+                </div>
+                <div class="col-post col-post-center">
+                    <div class="thumb-blog thumb-blog-2">
+                        <div class="post-date">Oct 12, 2019</div>
+                    </div>
+                    <h3 class="title-h3 line-clamp">
+                        <a href="blog-single.html">How to create an amazing design for your site without</a>
+                    </h3>
+                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
+                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
+                </div>
+                <div class="col-post">
+                    <div class="thumb-blog thumb-blog-3">
+                        <div class="post-date">Oct 12, 2019</div>
+                    </div>
+                    <h3 class="title-h3 line-clamp">
+                        <a href="blog-single.html">How to create an amazing design for your site without</a>
+                    </h3>
+                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design company</p>
+                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
 
 @endsection
