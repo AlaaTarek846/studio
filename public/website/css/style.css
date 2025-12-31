@@ -126,7 +126,7 @@ a:hover {
     width: 3.85rem;
     height: 7.71rem;
     display: block;
-    background-image: url(img/logo/logo-shape.svg);
+    background-image: url(../img/logo/logo-shape.svg);
     position: absolute;
     left: -1.92rem;
     top: calc(50% - 3rem);
@@ -1721,12 +1721,6 @@ a:hover {
   @media (max-width: 767.98px) {
     .thumb-blog {
       height: 173px; } }
-  .thumb-blog-1 {
-    background-image: url(https://via.placeholder.com/310x173); }
-  .thumb-blog-2 {
-    background-image: url(https://via.placeholder.com/310x173); }
-  .thumb-blog-3 {
-    background-image: url(https://via.placeholder.com/310x173); }
 
 .post-date {
   position: absolute;

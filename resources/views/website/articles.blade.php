@@ -1,6 +1,6 @@
 @extends('layout.website.master')
 
-@section('title', __('website.contact'))
+@section('title', __('website.Articles'))
 
 @section('content')
     <!-- Banner Header -->
@@ -20,7 +20,7 @@
         </div>
         <div class="section-banner__box">
             <div class="section-banner__thumb">
-                <img class="section-banner__img" src="https://via.placeholder.com/960x290" alt="Image Banner">
+                <img class="section-banner__img" src="/website/img/header-img.jpg" alt="{{ __('website.Articles') }}">
             </div>
         </div>
     </section>
@@ -29,79 +29,103 @@
     <section class="section section-blog section-blog--full">
         <div class="container">
 
-            <div class="row-blog">
-                <div class="col-post">
-                    <div class="thumb-blog thumb-blog-1">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
+            @if($articles->count() > 0)
+                <div class="row-blog">
+                    @foreach($articles as $index => $article)
+                        <div class="col-post {{ ($index + 1) % 3 == 2 ? 'col-post-center' : '' }}">
+                            <div class="thumb-blog" style="background-image: url('{{ $article->media ? $article->media->url : '/website/img/blog/post1.png' }}');">
+                                <div class="post-date">
+                                    @if(app()->getLocale() == 'ar')
+                                        {{ \Carbon\Carbon::parse($article->created_at)->locale('ar')->translatedFormat('d M Y') }}
+                                    @else
+                                        {{ $article->created_at->format('M d, Y') }}
+                                    @endif
+                                </div>
+                            </div>
+                            <h3 class="title-h3 line-clamp">
+                                <a href="{{ route('blog-details', $article->route_slug ?? $article->id) }}">{{ $article->title }}</a>
+                            </h3>
+                            <p class="description line-clamp">{{ Str::limit(strip_tags($article->content), 100) }}</p>
+                            <a class="btn-text btn-text-img" href="{{ route('blog-details', $article->route_slug ?? $article->id) }}">{{ __('website.Read More') }}</a>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-post col-post-center">
-                    <div class="thumb-blog thumb-blog-2">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
-                </div>
-                <div class="col-post">
-                    <div class="thumb-blog thumb-blog-3">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design company</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
-                </div>
-                <div class="col-post">
-                    <div class="thumb-blog thumb-blog-1">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
-                </div>
-                <div class="col-post col-post-center">
-                    <div class="thumb-blog thumb-blog-2">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
-                </div>
-                <div class="col-post">
-                    <div class="thumb-blog thumb-blog-3">
-                        <div class="post-date">Oct 12, 2019</div>
-                    </div>
-                    <h3 class="title-h3 line-clamp">
-                        <a href="blog-single.html">How to create an amazing design for your site without</a>
-                    </h3>
-                    <p class="description line-clamp">Have you ever thought about your own site with clean and modern design company</p>
-                    <a class="btn-text btn-text-img" href="blog-single.html">Read more</a>
-                </div>
-            </div>
 
-            <!-- Pagination -->
-            <nav aria-label="">
-                <ul class="pagination pagination-lg">
-                    <li class="page-item active">
-                        <a class="page-link" href="#" tabindex="-1">1</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                </ul>
-            </nav>
+                <!-- Pagination -->
+                @if($articles->hasPages())
+                    <nav aria-label="{{ __('website.Pagination') }}">
+                        <ul class="pagination pagination-lg">
+                            {{-- Previous Page Link --}}
+                            @if ($articles->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span class="page-link" tabindex="-1">{{ __('website.Prev Post') }}</span>
+                                </li>
+                            @else
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $articles->appends(request()->query())->previousPageUrl() }}" rel="prev">{{ __('website.Prev Post') }}</a>
+                                </li>
+                            @endif
+
+                            {{-- Pagination Elements --}}
+                            @php
+                                $currentPage = $articles->currentPage();
+                                $lastPage = $articles->lastPage();
+                                $startPage = max(1, $currentPage - 2);
+                                $endPage = min($lastPage, $currentPage + 2);
+                            @endphp
+
+                            @if($startPage > 1)
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $articles->appends(request()->query())->url(1) }}">1</a>
+                                </li>
+                                @if($startPage > 2)
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                @endif
+                            @endif
+
+                            @for ($page = $startPage; $page <= $endPage; $page++)
+                                @if ($page == $currentPage)
+                                    <li class="page-item active">
+                                        <span class="page-link">{{ $page }}</span>
+                                    </li>
+                                @else
+                                    <li class="page-item">
+                                        <a class="page-link" href="{{ $articles->appends(request()->query())->url($page) }}">{{ $page }}</a>
+                                    </li>
+                                @endif
+                            @endfor
+
+                            @if($endPage < $lastPage)
+                                @if($endPage < $lastPage - 1)
+                                    <li class="page-item disabled">
+                                        <span class="page-link">...</span>
+                                    </li>
+                                @endif
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $articles->appends(request()->query())->url($lastPage) }}">{{ $lastPage }}</a>
+                                </li>
+                            @endif
+
+                            {{-- Next Page Link --}}
+                            @if ($articles->hasMorePages())
+                                <li class="page-item">
+                                    <a class="page-link" href="{{ $articles->appends(request()->query())->nextPageUrl() }}" rel="next">{{ __('website.Next Post') }}</a>
+                                </li>
+                            @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">{{ __('website.Next Post') }}</span>
+                                </li>
+                            @endif
+                        </ul>
+                    </nav>
+                @endif
+            @else
+                <div class="text-center">
+                    <p class="description">{{ __('website.No Data Found here') }}</p>
+                </div>
+            @endif
         </div>
     </section>
 

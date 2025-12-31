@@ -39,11 +39,21 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
-        if(!Subscribe::whereEmail($validated['email'])->first()) {
-            Subscribe::create($validated);
+        $existingSubscribe = Subscribe::whereEmail($validated['email'])->first();
+        
+        if($existingSubscribe) {
+            return response()->json([
+                'success' => false, 
+                'message' => __('website.Email Already Subscribed')
+            ], 200);
         }
 
-        return response()->json(['success' => true, 'message' => __('website.Message Send Successfully.')]);
+        Subscribe::create($validated);
+
+        return response()->json([
+            'success' => true, 
+            'message' => __('website.Subscribed Successfully')
+        ]);
     }
 
 }

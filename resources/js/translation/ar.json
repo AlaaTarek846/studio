@@ -144,6 +144,7 @@
     },
     "global": {
         "bathroom": "الحمام",
+        "topic": "الموضوع",
         "bedroom": "غرفة نوم",
         "living_room": "غرفة معيشة",
         "kitchen": "المطبخ",
