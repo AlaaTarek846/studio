@@ -26,6 +26,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">{{ $t('global.name') }}</th>
+                    <th scope="col">{{ $t('global.topic') }}</th>
                     <th scope="col">{{ $t('global.email') }}</th>
                     <th scope="col">{{ $t('global.phone') }}</th>
                     <th scope="col">{{ $t('global.message') }}</th>
@@ -37,6 +38,7 @@
                   <tr v-for="(item,index) in data" :key="item.id">
                     <td scope="row">{{index + 1}}</td>
                     <td>{{item.name}}</td>
+                    <td>{{item.topic}}</td>
                     <td>{{item.email}}</td>
                     <td>{{item.phone}}</td>
                     <td>{{item.message}}</td>

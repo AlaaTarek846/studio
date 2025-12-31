@@ -14,6 +14,7 @@ class ContactMessageResource extends JsonResource
             "id"        => $this->id,
             "name"      => $this->name,
             "email"      => $this->email,
+            "topic"      => $this->topic,
             "phone"      => $this->phone,
             "message"    => $this->message,
             "created_at" => $this->created_at->format("Y-m-d H:i"),

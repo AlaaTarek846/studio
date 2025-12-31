@@ -17,6 +17,7 @@ class ArticleController extends Controller
     public function index()
     {
         $setting = Setting::first();
+
         $articles = Article::with(['media', 'category'])
             ->withCount('comments')->where(function ($q) {
                 if (request()->search) {
@@ -30,7 +31,8 @@ class ArticleController extends Controller
                 if (request()->category_id) {
                     $q->where('category_id', request()->category_id);
                 }
-            })->whereStatus(1)->paginate(8);
+            })->whereStatus(1)->paginate(6);
+
         $categories = ArticleCategory::withCount('articles')->get();
         return view('website.articles', compact('articles', 'setting', 'categories'));
     }
