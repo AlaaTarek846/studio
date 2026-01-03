@@ -26,12 +26,15 @@ class OneAboutRequest extends FormRequest
             "title_en" => "required|string|max:200",
             "title_color_en" => "required|string|max:200",
             "title_color_ar" => "required|string|max:200",
-            "description_ar" => "required|string|max:300",
-            "description_en" => "required|string|max:200",
+            "description_ar" => "required|string|max:1000",
+            "description_en" => "required|string|max:1000",
+            "years_of_experience" => "required|integer|min:0",
             "details"        => "required",
             "details.*.title_ar" => "required|string|max:200",
             "details.*.title_en" => "required|string|max:200",
+            "details.*.count" => "required|integer|min:0",
             'first_photo' => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'second_photo' => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
         ];
     }
 }

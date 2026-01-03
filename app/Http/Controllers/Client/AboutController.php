@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use App\Models\CounterAbout;
 use App\Models\CounterSection;
 use App\Models\OneAbout;
@@ -24,10 +25,12 @@ class AboutController extends Controller
      */
     public function index()
     {
+        $teams = Team::with('media')->get();
+        $oneAbout = OneAbout::with(['details', 'firstPhoto', 'secondPhoto'])->first();
+        $testimonials = Testimonial::with('media')->whereStatus(1)->get();
+        $clients = Client::with('media')->whereStatus(1)->get();
         $setting = Setting::first();
-        $teams = Team::get();
-        $oneAbout = OneAbout::with('details')->first();
-        return view('website.about',compact('teams','setting','oneAbout'));
+        return view('website.about',compact('teams','oneAbout','clients','testimonials','setting'));
     }
 
 }

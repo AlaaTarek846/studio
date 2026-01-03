@@ -46,12 +46,22 @@ class Service extends Model
         return $this->morphOne(File::class, 'uploadable')->where('identifier', 'image');
     }
 
+    public function icon()
+    {
+        return $this->morphOne(File::class, 'uploadable')->where('identifier', 'icon');
+    }
+
 
 
 
     public function serviceFaqs()
     {
         return $this->hasMany(ServiceFaq::class);
+    }
+
+    public function video()
+    {
+        return $this->hasOne(ServiceVideo::class)->where('status', 1);
     }
 
     public function getSlugAttribute(){

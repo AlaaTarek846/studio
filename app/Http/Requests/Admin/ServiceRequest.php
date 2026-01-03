@@ -28,6 +28,7 @@ class ServiceRequest extends FormRequest
             "description_en"             => "required|string|min:5",
             "status"                     => "required|boolean",
             'image'                      => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'icon'                       => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif,svg','max:2048'],
             "quote_ar"                   => "required|string|min:5",
             "quote_en"                   => "required|string|min:5",
         ];

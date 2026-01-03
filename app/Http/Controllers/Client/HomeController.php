@@ -29,23 +29,13 @@ class HomeController extends Controller
     public function index()
     {
         $homeSliders = HomeSlider::get();
-        $services = Service::whereStatus(1)->take(4)->get();
-        $propertyTypes = PropertyType::get();
-
-        $testimonials = Testimonial::whereStatus(1)->get();
-        $setting = Setting::first();
-        foreach ($services as $service) {
-            $service->description_ar = Str::substr($service->description_ar, -84);
-            $service->description_en = Str::substr($service->description_en, -84);
-        }
-
+        $services = Service::whereStatus(1)->take(3)->get();
+        $oneAbout = OneAbout::with(['details', 'firstPhoto', 'secondPhoto'])->first();
+        $teams = Team::with('media')->get();
         $projects = Project::with('media')->whereStatus(1)->inRandomOrder()->limit(3)->get();
-        foreach ($projects as $project) {
-            $project->description = Str::substr($project->description, -84);
-        }
         $articles = Article::latest()->limit(3)->get();
 
-        return view('website.home',compact('homeSliders','propertyTypes','setting','articles','testimonials','services','projects'));
+        return view('website.home',compact('homeSliders','oneAbout','teams','articles','services','projects'));
     }
 
 }

@@ -11,32 +11,37 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                      <div class="col-md-12 mb-2">
-                        <label class="form-label">الاسم</label>
-                        <input type="text" class="form-control form-control-lg"  v-model="v$.name.$model"
-                               :class="{'is-invalid': v$.name.$error || errors[`name`],
-                                     'is-valid': !v$[`name`].$invalid && !errors[`name`]}">
+                      <div class="col-md-6 mb-2" v-for="lang in languages">
+                        <label class="form-label">{{ $t('global.name') }} ({{ lang == 'ar' ? 'عربي' : 'English' }})</label>
+                        <input type="text" class="form-control form-control-lg"  v-model="v$[`name_${lang}`].$model"
+                               :class="{'is-invalid': v$[`name_${lang}`].$error || errors[`name_${lang}`],
+                                     'is-valid': !v$[`name_${lang}`].$invalid && !errors[`name_${lang}`]}">
 
                         <div class="invalid-feedback">
-                          <span v-if="v$[`name`].required.$invalid">{{ $t('validation.fieldRequired') }}<br /> </span>
-                          <span v-if="v$.job.maxLength.$invalid">{{ $t('validation.NameMustHaveAtLeast', { max: 200 }) }}<br /></span>
+                          <span v-if="v$[`name_${lang}`].required.$invalid">{{ $t('validation.fieldRequired') }}<br /> </span>
+                          <span v-if="v$[`name_${lang}`].maxLength.$invalid">{{ $t('validation.NameMustHaveAtMost', { max: 200 }) }}<br /></span>
                         </div>
 
-                        <template v-if="errors[`name`]">
-                          <error-message v-for="(errorMessage, index) in errors[`name`]" :key="index">
+                        <template v-if="errors[`name_${lang}`]">
+                          <error-message v-for="(errorMessage, index) in errors[`name_${lang}`]" :key="index">
                             {{ errorMessage }}
                           </error-message>
                         </template>
                       </div>
 
-                      <div class="col-md-12 mb-2">
-                        <label class="form-label">اسم الوظيفة </label>
-                        <input type="text" class="form-control form-control-lg"  v-model="v$.job.$model"
-                               :class="{'is-invalid': v$.job.$error || errors[`job`],
-                                     'is-valid': !v$.job.$invalid && !errors[`job`]}">
+                      <div class="col-md-6 mb-2" v-for="lang in languages">
+                        <label class="form-label">{{ $t('label.job') }} ({{ lang == 'ar' ? 'عربي' : 'English' }})</label>
+                        <input type="text" class="form-control form-control-lg"  v-model="v$[`job_${lang}`].$model"
+                               :class="{'is-invalid': v$[`job_${lang}`].$error || errors[`job_${lang}`],
+                                     'is-valid': !v$[`job_${lang}`].$invalid && !errors[`job_${lang}`]}">
 
-                        <template v-if="errors[`job`]">
-                          <error-message v-for="(errorMessage, index) in errors[`job`]" :key="index">
+                        <div class="invalid-feedback">
+                          <span v-if="v$[`job_${lang}`].required.$invalid">{{ $t('validation.fieldRequired') }}<br /> </span>
+                          <span v-if="v$[`job_${lang}`].maxLength.$invalid">{{ $t('validation.NameMustHaveAtMost', { max: 200 }) }}<br /></span>
+                        </div>
+
+                        <template v-if="errors[`job_${lang}`]">
+                          <error-message v-for="(errorMessage, index) in errors[`job_${lang}`]" :key="index">
                             {{ errorMessage }}
                           </error-message>
                         </template>
@@ -160,8 +165,10 @@
   });
 
   function defaultData(){
-    submitData.data.name = '';
-    submitData.data.job = '';
+    languages.value.forEach((lang) => {
+      submitData.data[`name_${lang}`] = '';
+      submitData.data[`job_${lang}`] = '';
+    });
     submitData.data.status = true;
     submitData.data.image = '';
     is_disabled.value = false;
@@ -182,8 +189,10 @@
             .then((res) => {
               loading.value = true;
               let l = res.data.data;
-              submitData.data.name = l.name;
-              submitData.data.job  = l.job;
+              languages.value.forEach((lang) => {
+                submitData.data[`name_${lang}`] = l[`name_${lang}`] || '';
+                submitData.data[`job_${lang}`] = l[`job_${lang}`] || '';
+              });
               imageUpload.value = l.media;
               submitData.data.status = l.status == 1;
             })
@@ -205,15 +214,21 @@
     data:{
       status: true,
       image: '',
-      name: '',
-      job: '',
+      name_ar: '',
+      name_en: '',
+      job_ar: '',
+      job_en: '',
     }
   });
 
   const rules = computed(() => {
+    let langRules = {};
+    languages.value.forEach((lang) => {
+      langRules[`name_${lang}`] = {minLength: minLength(1),maxLength:maxLength(200),required,};
+      langRules[`job_${lang}`] = {minLength: minLength(1),maxLength:maxLength(200),required,};
+    });
     return {
-      name: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      job: { minLength: minLength(1),maxLength:maxLength(100),required, },
+      ...langRules,
       image: {required: requiredIf( (value) => {
           return props.type == 'create' || !imageUpload.value;
         })
@@ -229,9 +244,11 @@
       errors.value = {};
 
       let formData = new FormData();
-      formData.append('name', submitData.data.name);
+      languages.value.forEach((lang) => {
+        formData.append(`name_${lang}`, submitData.data[`name_${lang}`]);
+        formData.append(`job_${lang}`, submitData.data[`job_${lang}`]);
+      });
       formData.append('status', submitData.data.status ? 1 : 0);
-      formData.append('job', submitData.data.job);
     if(submitData.data.image) {
       formData.append('image', submitData.data.image);
     }

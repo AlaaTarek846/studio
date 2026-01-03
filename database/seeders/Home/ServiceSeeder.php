@@ -6,6 +6,7 @@ use App\Models\Faq;
 use App\Models\Service;
 use App\Models\File;
 use App\Models\ServiceFaq;
+use App\Models\ServiceVideo;
 use Illuminate\Database\Seeder;
 
 class ServiceSeeder extends Seeder
@@ -16,131 +17,184 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
        
-            $faqs = [
+            $services = [
                 [
-                    'title_ar'       => "تطوير سكني",
-                    'title_en'       => "Residentital Development",
-                    'slug_ar'       => "تطوير-سكني",
-                    'slug_en'       => "residentital-development",
-                    'description_en' => 'We provide innovative IT solutions tailored to your business needs, including system maintenance, software development, and technical support.',
-                    'description_ar' => 'نقدم حلولاً مبتكرة في مجال تقنية المعلومات مصممة خصيصاً لتلبية احتياجات أعمالك، بما في ذلك صيانة الأنظمة، وتطوير البرمجيات، والدعم الفني.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",
+                    'title_ar'       => "ورشة التمثيل الأساسية",
+                    'title_en'       => "Basic Acting Workshop",
+                    'slug_ar'       => "ورشة-التمثيل-الأساسية",
+                    'slug_en'       => "basic-acting-workshop",
+                    'description_en' => 'Learn the fundamentals of acting in our comprehensive basic workshop. Perfect for beginners who want to start their acting journey. We cover essential techniques, character development, and stage presence.',
+                    'description_ar' => 'تعلم أساسيات التمثيل في ورشتنا الشاملة للمبتدئين. مثالية للمبتدئين الذين يريدون بدء رحلتهم في عالم التمثيل. نغطي التقنيات الأساسية، تطوير الشخصية، والحضور المسرحي.',
+                    "quote_en"       => "Acting is not about being someone different. It's finding the similarity in what is apparently different, then finding myself in there.", 
+                    "quote_ar"       => "التمثيل ليس أن تكون شخصاً مختلفاً. إنه العثور على التشابه في ما يبدو مختلفاً، ثم العثور على نفسي هناك.",
                     'files'          => [
                         [
-                            'name'            => '1.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'             => '/storage/service/1.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'icon-design.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/icon-design.svg'
                         ]
                     ]
                 ],
                 [
-                    'title_en'       => "Construction Management",
-                    'title_ar'       => "إدارة البناء",
-                    'slug_ar'       => "إدارة-البناء",
-                    'slug_en'       => "construction-management",
-                    'description_en' => 'Protect your digital assets with advanced cyber security solutions. We offer threat detection, data protection, and network defense to keep your systems safe and resilient.',
-                    'description_ar' => 'احمِ أصولك الرقمية من خلال حلول متقدمة في الأمن السيبراني. نقدم خدمات كشف التهديدات، وحماية البيانات، وتأمين الشبكات لضمان سلامة أنظمتك واستمراريتها.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",
+                    'title_en'       => "Theater Acting Workshop",
+                    'title_ar'       => "ورشة التمثيل المسرحي",
+                    'slug_ar'       => "ورشة-التمثيل-المسرحي",
+                    'slug_en'       => "theater-acting-workshop",
+                    'description_en' => 'Master the art of theater acting with our specialized workshop. Learn stage techniques, voice projection, movement, and how to connect with live audiences. Perfect for those passionate about stage performance.',
+                    'description_ar' => 'أتقن فن التمثيل المسرحي في ورشتنا المتخصصة. تعلم تقنيات المسرح، إسقاط الصوت، الحركة، وكيفية التواصل مع الجمهور الحي. مثالية لعشاق الأداء المسرحي.',
+                    "quote_en"       => "The theater is a spiritual and social X-ray of its time. The stage is a magic circle where only the most real things happen.", 
+                    "quote_ar"       => "المسرح هو أشعة روحية واجتماعية لزمنه. المسرح دائرة سحرية حيث تحدث فقط أكثر الأشياء واقعية.",
                     'files'          => [
                         [
-                            'name'            => '2.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'       => '/storage/service/2.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'speech-bubble.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/speech-bubble.svg'
                         ]
                     ]
                 ],
                 [
-                    'title_en'       => "Commercial Development",
-                    'title_ar'       => "التطوير التجاري",
-                    'slug_ar'       => "التطوير-التجاري",
-                    'slug_en'       => "commercial-development",
-                    'description_en' => 'Empower your business with scalable and secure cloud services. We offer cloud hosting, data /storage, backup solutions, and seamless migration to the cloud.',
-                    'description_ar' => 'عزّز أعمالك من خلال خدمات سحابية قابلة للتوسع وآمنة. نقدم استضافة سحابية، تخزين بيانات، حلول نسخ احتياطي، وانتقال سلس إلى البيئة السحابية.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",
+                    'title_en'       => "Film Acting Workshop",
+                    'title_ar'       => "ورشة التمثيل السينمائي",
+                    'slug_ar'       => "ورشة-التمثيل-السينمائي",
+                    'slug_en'       => "film-acting-workshop",
+                    'description_en' => 'Discover the unique techniques of film acting. Learn how to work with cameras, understand framing, master subtle expressions, and deliver powerful performances on screen. Ideal for aspiring film actors.',
+                    'description_ar' => 'اكتشف تقنيات التمثيل السينمائي الفريدة. تعلم كيفية العمل مع الكاميرات، فهم الإطارات، إتقان التعبيرات الدقيقة، وتقديم أداء قوي على الشاشة. مثالية للممثلين السينمائيين الطموحين.',
+                    "quote_en"       => "Acting is a very personal process. It has to do with expressing your own personality, and discovering the character you're playing through your own experience.", 
+                    "quote_ar"       => "التمثيل عملية شخصية جداً. لها علاقة بالتعبير عن شخصيتك الخاصة، واكتشاف الشخصية التي تلعبها من خلال تجربتك الخاصة.",
                     'files'          => [
                         [
-                            'name'            => '3.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'       => '/storage/service/3.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'digital.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/digital.svg'
                         ]
                     ]
                 ],
                 [
-                    'title_en'       => "Property Managment",
-                    'title_ar'       => "إدارة الممتلكات",
-                    'slug_en'       => "property-management",
-                    'slug_ar'       => "إدارة-الممتلكات",
-                    'description_en' => 'We craft intuitive and visually engaging UI/UX designs that enhance user satisfaction and drive interaction. From wireframes to final prototypes, we ensure every detail delivers a seamless experience.',
-                    'description_ar' => 'نصمم واجهات استخدام جذابة وتجارب مستخدم سلسة تعزز رضا المستخدم وتزيد من التفاعل. من الرسوم التخطيطية إلى النماذج الأولية النهائية، نضمن أن كل تفصيل يقدم تجربة مثالية.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",
+                    'title_en'       => "Camera Preparation Workshop",
+                    'title_ar'       => "ورشة الإعداد للكاميرا",
+                    'slug_en'       => "camera-preparation-workshop",
+                    'slug_ar'       => "ورشة-الإعداد-للكاميرا",
+                    'description_en' => 'Prepare yourself for on-camera work with our specialized workshop. Learn how to position yourself, understand camera angles, work with lighting, and deliver natural performances that translate well on screen.',
+                    'description_ar' => 'جهز نفسك للعمل أمام الكاميرا في ورشتنا المتخصصة. تعلم كيفية وضع نفسك، فهم زوايا الكاميرا، العمل مع الإضاءة، وتقديم أداء طبيعي يترجم جيداً على الشاشة.',
+                    "quote_en"       => "The camera is like a person. You have to treat it with respect and understand its language. When you do, it will reveal your truth.", 
+                    "quote_ar"       => "الكاميرا مثل شخص. يجب أن تعاملها باحترام وتفهم لغتها. عندما تفعل ذلك، سوف تكشف حقيقتك.",
                     'files'          => [
                         [
-                            'name'            => '4.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'       => '/storage/service/4.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'app.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/app.svg'
                         ]
                     ]
                 ],
                 [
-
-                    'title_en'       => "Residentital Development",
-                    'title_ar'       => "التطوير السكني",
-                    'slug_en'       => "residentital-development",
-                    'slug_ar'       => "التطوير-السكني",
-                    'description_en' => 'Boost your brand visibility and engagement with our digital marketing services. We specialize in SEO, social media campaigns, content creation, and targeted advertising to help you reach the right audience.',
-                    'description_ar' => 'ضاعف تأثير علامتك التجارية من خلال حلولنا المتكاملة في التسويق الرقمي. من تحسين محركات البحث واستراتيجيات التواصل الاجتماعي إلى إنشاء محتوى جذاب وإعلانات موجهة بدقة، نساعدك على الوصول إلى الجمهور الأكثر أهمية.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",     
+                    'title_en'       => "Voice Expression Workshop",
+                    'title_ar'       => "ورشة التعبير الصوتي",
+                    'slug_en'       => "voice-expression-workshop",
+                    'slug_ar'       => "ورشة-التعبير-الصوتي",
+                    'description_en' => 'Master the art of voice acting and vocal expression. Learn voice control, modulation, accent work, and how to use your voice as a powerful tool for character development and emotional expression.',
+                    'description_ar' => 'أتقن فن التمثيل الصوتي والتعبير الصوتي. تعلم التحكم في الصوت، التعديل، العمل على اللهجات، وكيفية استخدام صوتك كأداة قوية لتطوير الشخصية والتعبير العاطفي.',
+                    "quote_en"       => "The voice is the most powerful tool an actor has. It can convey emotion, create character, and move audiences in ways that words alone cannot.", 
+                    "quote_ar"       => "الصوت هو أقوى أداة يمتلكها الممثل. يمكنه نقل المشاعر، خلق الشخصية، وتحريك الجماهير بطرق لا تستطيع الكلمات وحدها القيام بها.",     
                     'files'          => [
                         [
-                            'name'            => '5.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'       => '/storage/service/5.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'call.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/call.svg'
                         ]
                     ]
                 ],
                 [
-                    'title_en'       => "Construction Management",
-                    'title_ar'       => "إدارة البناء",
-                    'slug_en'       => "construction-management",
-                    'slug_ar'       => "إدارة-البناء",
-                    'description_en' => 'Unlock the power of your data with our advanced analytics solutions. We help you identify trends, optimize performance, and make data-driven decisions that fuel growth.',
-                    'description_ar' => 'اكتشف قوة بياناتك من خلال حلولنا المتقدمة لتحليلات البيانات. نساعدك على تحديد الاتجاهات، وتحسين الأداء، واتخاذ قرارات مبنية على البيانات تدفع نحو النمو.',
-                    "quote_en"       => "Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior.", 
-                    "quote_ar"       => "تصوّر استباقي للخبرات المعتمدة على الوسائط المتعددة واستراتيجيات النمو عبر الوسائط المختلفة. تصور سلس لرأس المال الفكري عالي الجودة دون الحاجة إلى تفوق خارجي.",
+                    'title_en'       => "Physical Movement Workshop",
+                    'title_ar'       => "ورشة الحركة الجسدية",
+                    'slug_en'       => "physical-movement-workshop",
+                    'slug_ar'       => "ورشة-الحركة-الجسدية",
+                    'description_en' => 'Develop your physical presence and movement skills. Learn body language, stage movement, choreography basics, and how to use your body to tell stories and express emotions effectively.',
+                    'description_ar' => 'طور حضورك الجسدي ومهارات الحركة. تعلم لغة الجسد، حركة المسرح، أساسيات الكوريوجرافيا، وكيفية استخدام جسدك لرواية القصص والتعبير عن المشاعر بفعالية.',
+                    "quote_en"       => "The body never lies. Every gesture, every movement tells a story. As actors, we must learn to speak the language of the body fluently.", 
+                    "quote_ar"       => "الجسد لا يكذب أبداً. كل إيماءة، كل حركة تحكي قصة. كممثلين، يجب أن نتعلم التحدث بلغة الجسد بطلاقة.",
                     'files'          => [
                         [
-                            'name'            => '6.png',
-                            'mime_type'       => 'image/jpg',
+                            'name'            => 'service.jpg',
+                            'mime_type'       => 'image/jpeg',
                             'uploaded_by'     => 1,
-                            'size'	          => 123,
+                            'size'	          => 50000,
                             'uploadable_type' => Service::class,
                             'identifier'      => 'image',
-                            'url'       => '/storage/service/6.jpg'
+                            'url'             => '/website/img/service.jpg'
+                        ],
+                        [
+                            'name'            => 'support.svg',
+                            'mime_type'       => 'image/svg+xml',
+                            'uploaded_by'     => 1,
+                            'size'	          => 10000,
+                            'uploadable_type' => Service::class,
+                            'identifier'      => 'icon',
+                            'url'             => '/website/img/icons/support.svg'
                         ]
                     ]
                 ]
@@ -148,44 +202,44 @@ class ServiceSeeder extends Seeder
 
             $ServiceFaqs = [
                 [
-                    'title_ar'       => "كيف تستخدم Techzen؟",
-                    'title_en'       => "How to use Techzen?",
-                    'description_en' => 'Technology is at the forefront of innovation and progress, enabling us to tackle some of the world’s biggest challenges and improve the quality of life for people around the globe.',
-                    'description_ar' => 'تعد التكنولوجيا في طليعة الابتكار والتقدم، مما يمكننا من مواجهة بعض أكبر تحديات العالم وتحسين جودة الحياة للناس في جميع أنحاء العالم.',
+                    'title_ar'       => "كيف أبدأ في ورش التمثيل؟",
+                    'title_en'       => "How do I start in acting workshops?",
+                    'description_en' => 'Starting your acting journey begins with choosing the right workshop for your level. Our basic acting workshop is perfect for beginners. You\'ll learn fundamental techniques, build confidence, and discover your unique acting style in a supportive environment.',
+                    'description_ar' => 'تبدأ رحلتك في التمثيل باختيار الورشة المناسبة لمستواك. ورشة التمثيل الأساسية مثالية للمبتدئين. ستتعلم التقنيات الأساسية، تبني الثقة، وتكتشف أسلوبك الفريد في التمثيل في بيئة داعمة.',
                     'sort' =>1
                 ],
                 [
-                    'title_en'       => "How to soft launch your business?",
-                    'title_ar'       => "كيف تطلق عملك تجريبياً؟",
-                    'description_en' => 'Technology is at the forefront of innovation and progress, enabling us to tackle some of the world’s biggest challenges and improve the quality of life for people around the globe.',
-                    'description_ar' => 'تعد التكنولوجيا في طليعة الابتكار والتقدم، مما يمكننا من مواجهة بعض أكبر تحديات العالم وتحسين جودة الحياة للناس في جميع أنحاء العالم.',
+                    'title_en'       => "What should I expect in my first workshop?",
+                    'title_ar'       => "ماذا يجب أن أتوقع في ورشتي الأولى؟",
+                    'description_en' => 'In your first workshop, expect a welcoming environment where you\'ll participate in warm-up exercises, basic acting techniques, and simple scene work. Our instructors provide individual attention and constructive feedback to help you grow.',
+                    'description_ar' => 'في ورشتك الأولى، توقع بيئة ترحيبية حيث ستشارك في تمارين الإحماء، تقنيات التمثيل الأساسية، وعمل مشاهد بسيطة. مدربونا يقدمون اهتماماً فردياً وملاحظات بناءة لمساعدتك على النمو.',
                     'sort' =>2
                 ],
                 [
-                    'title_en'       => "How to turn visitors into contributors?",
-                    'title_ar'       => "ما هي فوائد استخدام خدمات السحابة؟",
-                    'description_en' => 'Technology is at the forefront of innovation and progress, enabling us to tackle some of the world’s biggest challenges and improve the quality of life for people around the globe.',
-                    'description_ar' => 'تعد التكنولوجيا في طليعة الابتكار والتقدم، مما يمكننا من مواجهة بعض أكبر تحديات العالم وتحسين جودة الحياة للناس في جميع أنحاء العالم.',
+                    'title_en'       => "Do I need prior experience to join?",
+                    'title_ar'       => "هل أحتاج خبرة سابقة للانضمام؟",
+                    'description_en' => 'No prior experience is required! Our workshops are designed for all levels, from complete beginners to those looking to refine their skills. Each workshop is structured to accommodate different experience levels and learning paces.',
+                    'description_ar' => 'لا حاجة لخبرة سابقة! ورشنا مصممة لجميع المستويات، من المبتدئين تماماً إلى أولئك الذين يبحثون عن تحسين مهاراتهم. كل ورشة منظمة لاستيعاب مستويات الخبرة المختلفة ووتائر التعلم.',
                     'sort' =>3
                 ]
                 
             ];
 
-            foreach ($faqs as $faq) {
+            foreach ($services as $service) {
                 $model = Service::create([
                     'status'         => true,
-                    'title_en'       => $faq['title_en'],
-                    'title_ar'       => $faq['title_ar'],
-                    'description_en' => $faq['description_en'],
-                    'description_ar' => $faq['description_ar'],
-                    'quote_en'       => $faq['quote_en'],
-                    'quote_ar'       => $faq['quote_ar'],
-                    'slug_en'       => $faq['slug_en'],
-                    'slug_ar'       => $faq['slug_ar'],
+                    'title_en'       => $service['title_en'],
+                    'title_ar'       => $service['title_ar'],
+                    'description_en' => $service['description_en'],
+                    'description_ar' => $service['description_ar'],
+                    'quote_en'       => $service['quote_en'],
+                    'quote_ar'       => $service['quote_ar'],
+                    'slug_en'       => $service['slug_en'],
+                    'slug_ar'       => $service['slug_ar'],
 
                 ]);
-                if (isset($faq['files']) && is_array($faq['files'])) {
-                    foreach ($faq['files'] as $file) {
+                if (isset($service['files']) && is_array($service['files'])) {
+                    foreach ($service['files'] as $file) {
                         File::create([
                             'name'            => $file['name'],
                             'mime_type'       => $file['mime_type'],
@@ -209,6 +263,29 @@ class ServiceSeeder extends Seeder
                         'sort'           => $ServiceFaq['sort'],
                     ]);
                 }
+                
+                // Create video for each service
+                $video = ServiceVideo::create([
+                    'service_id'     => $model->id,
+                    'youtube_url'    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', // Example YouTube URL
+                    'title_ar'       => 'شاهد ورشة التمثيل في العمل',
+                    'title_en'       => 'Watch Our Acting Workshop in Action',
+                    'description_ar'  => 'شاهد كيف نعمل في ورش التمثيل الخاصة بنا. تعرف على بيئة التدريب والتفاعل بين المدربين والمشاركين.',
+                    'description_en' => 'Watch how we work in our acting workshops. Learn about the training environment and interaction between trainers and participants.',
+                    'status'         => true,
+                ]);
+                
+                // Add thumbnail image for video
+                File::create([
+                    'name'            => 'video.jpg',
+                    'mime_type'       => 'image/jpeg',
+                    'uploaded_by'     => 1,
+                    'size'            => 50000,
+                    'uploadable_type' => ServiceVideo::class,
+                    'uploadable_id'   => $video->id,
+                    'identifier'      => 'thumbnail',
+                    'url'             => '/website/img/video.jpg'
+                ]);
             
 
             }

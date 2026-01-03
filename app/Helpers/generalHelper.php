@@ -100,3 +100,30 @@ function productTransaction($order, $item, $product, $fromStore = null, $toStore
 
     return $productTransaction;
 }
+
+/**
+ * Extract excerpt from HTML content
+ *
+ * استخراج ملخص من محتوى HTML مع إزالة التاغات وتحديد الطول
+ *
+ * @param string $html HTML content
+ * @param int $length Maximum length of excerpt
+ * @return string Cleaned excerpt
+ */
+function getExcerpt($html, $length = 150) {
+    // Remove HTML tags
+    $text = strip_tags($html);
+    // Trim whitespace
+    $text = trim($text);
+    // Limit length
+    if (mb_strlen($text) > $length) {
+        $text = mb_substr($text, 0, $length);
+        // Find last space to avoid cutting words
+        $lastSpace = mb_strrpos($text, ' ');
+        if ($lastSpace !== false) {
+            $text = mb_substr($text, 0, $lastSpace);
+        }
+        $text .= '...';
+    }
+    return $text;
+}

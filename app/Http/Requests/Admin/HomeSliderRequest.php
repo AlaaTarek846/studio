@@ -24,10 +24,8 @@ class HomeSliderRequest extends FormRequest
         return [
             "title_ar" => "required|string|max:200",
             "title_en" => "required|string|max:200",
-            "title_color_en" => "required|string|max:200",
-            "title_color_ar" => "required|string|max:200",
-            "description_ar" => "required|string|max:500",
-            "description_en" => "required|string|max:500",
+            "description_ar" => "nullable|string|max:500",
+            "description_en" => "nullable|string|max:500",
             "status" =>  "required|boolean",
             'image' => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
         ];

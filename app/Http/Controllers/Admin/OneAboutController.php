@@ -32,7 +32,7 @@ class OneAboutController extends Controller
 
     public function show($id)
     {
-        $oneAbout = OneAbout::with(['details','firstPhoto'])->find($id);
+        $oneAbout = OneAbout::with(['details','firstPhoto','secondPhoto'])->find($id);
         return responseJson($oneAbout,'Data exited successfully',200);
     }
 
@@ -43,7 +43,11 @@ class OneAboutController extends Controller
             saveFiles($data['first_photo'], $oneAbout, 'oneAbout', "first_photo",'update');
         }
 
-        $oneAbout->update(Arr::except($data,['details','first_photo']));
+        if(isset($data['second_photo'])) {
+            saveFiles($data['second_photo'], $oneAbout, 'oneAbout', "second_photo",'update');
+        }
+
+        $oneAbout->update(Arr::except($data,['details','first_photo','second_photo']));
         foreach ($oneAbout->details() as $detail) {
             $detail->delete();
         }

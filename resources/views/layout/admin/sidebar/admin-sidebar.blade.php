@@ -11,9 +11,9 @@
 
     <!-- Start::home -->
         <li
-            class="slide has-sub {{ request()->routeIs('admin.page.home-sliders')   || request()->routeIs('admin.page.partners')  || request()->routeIs('admin.page.team') ? 'active open' : '' }}">
+            class="slide has-sub {{ request()->routeIs('admin.page.home-sliders')   || request()->routeIs('admin.page.partners')  || request()->routeIs('admin.page.team') || request()->routeIs('admin.page.clients') ? 'active open' : '' }}">
             <a href="javascript:void(0);"
-                class="side-menu__item {{ request()->routeIs('admin.page.home-sliders') ||  request()->routeIs('admin.page.partners')  || request()->routeIs('admin.page.team') ? 'active' : '' }}">
+                class="side-menu__item {{ request()->routeIs('admin.page.home-sliders') ||  request()->routeIs('admin.page.partners')  || request()->routeIs('admin.page.team') || request()->routeIs('admin.page.clients') ? 'active' : '' }}">
                 <i class="bi bi-map side-menu__icon"></i>
                 <span class="side-menu__label">الصفحة الرئيسية</span>
                 <i class="fe fe-chevron-right side-menu__angle"></i>
@@ -39,6 +39,12 @@
                     <a href="{{ route('admin.page.team') }}"
                         class="side-menu__item {{ request()->routeIs('admin.page.team') ? 'active' : '' }}">
                         اعضاء الشركة
+                    </a>
+                </li>
+                <li class="slide">
+                    <a href="{{ route('admin.page.clients') }}"
+                        class="side-menu__item {{ request()->routeIs('admin.page.clients') ? 'active' : '' }}">
+                        الشركاء
                     </a>
                 </li>
                 <li class="slide">

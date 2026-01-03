@@ -33,7 +33,7 @@
                         </span>
                       </div>
                     </td>
-                    <td>{{item.name}}</td>
+                    <td>{{item.name_ar}} / {{item.name_en}}</td>
                     <td>
                       <div class="hstack gap-2 fs-15">
                         <button

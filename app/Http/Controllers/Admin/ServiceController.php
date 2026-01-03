@@ -23,7 +23,7 @@ class ServiceController extends Controller
 
     public function index(Request $request)
     {
-        $services = Service::with('image')->paginate(10);
+        $services = Service::with(['image', 'icon', 'video.thumbnail'])->paginate(10);
         return responseJson(ServiceResource::collection($services->items()),'',200,getPaginates($services));
     }
 
@@ -35,24 +35,28 @@ class ServiceController extends Controller
     public function store(ServiceRequest $request)
     {
         $service = Service::create($request->validated());
-        saveFiles($request->image,$service,"service");
-         if(isset($request->image)) {
+        if(isset($request->image)) {
             saveFiles($request->image, $service, 'service', "image");
+        }
+        if(isset($request->icon)) {
+            saveFiles($request->icon, $service, 'service', "icon");
         }
         return responseJson([],'Created Successfully',200);
     }
 
     public function show($id)
     {
-        $service = Service::with(['translations','image'])->find($id);
+        $service = Service::with(['translations','image', 'icon'])->find($id);
         return responseJson($service,'Data exited successfully',200);
     }
 
     public function update(ServiceRequest $request, Service $service)
     {    
         if($request->hasFile('image')) {
-
             saveFiles($request->image, $service, 'service', "image",'update');
+        }
+        if($request->hasFile('icon')) {
+            saveFiles($request->icon, $service, 'service', "icon",'update');
         }
         $service->update($request->validated());
         return responseJson([],'Updated Successfully',200);

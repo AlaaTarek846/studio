@@ -20,406 +20,176 @@
         </div>
         <div class="section-banner__box">
             <div class="section-banner__thumb">
-                <img class="section-banner__img" src="https://via.placeholder.com/960x290" alt="Image Banner">
+                <img class="section-banner__img" src="/website/img/header-img.jpg" alt="Image Banner">
             </div>
         </div>
     </section>
 
     <!-- About Us -->
+    @if($oneAbout)
     <section class="section section-about">
         <div class="container">
             <div class="row justify-content-between align-items-end row-about">
                 <div class="col-xl-5 col-md-12 col-sm-12 col-12">
-                    <p class="before-title">we are special</p>
-                    <h2 class="title-h2">We are Creative And Professional Agency</h2>
-                    <p class="after-title">Our digital company has been developing products for 15 years.</p>
-                    <p class="text-description">We’ve got a lot of awards for our work and develop applications that became popular in the world. We try not to miss important details in each area.</p>
-                    <p class="text-description">Every morning in our company begins with hot coffee and a stand-up. Discussion is an important thing in the development process. Thus new ideas and ingenious solutions are born. Then we get to work with renewed vigor and inspiration. We are never bored.</p>
-                    <p class="text-description">We’ve got a lot of awards for our work and develop applications that became popular in the world. We try not to miss important details in each area.</p>
+                    <p class="before-title">{{ $oneAbout->title_color }}</p>
+                    <h2 class="title-h2">{{ $oneAbout->title }}</h2>
+                    <p class="text-description">{{ $oneAbout->description }}</p>
                 </div>
                 <div class="col-xl-6 col-md-12 col-sm-12 col-12 col-photo">
                     <div class="box-about">
+                        @if($oneAbout->secondPhoto)
                         <div class="box-about-item">
                             <div class="box-about-back">
-                                <img class="box-about-back__img" src="https://via.placeholder.com/300x350" alt="Image Back">
+                                <img class="box-about-back__img" src="{{ $oneAbout->secondPhoto->url }}" alt="{{ $oneAbout->title }}">
                             </div>
                         </div>
+                        @endif
+                        @if($oneAbout->firstPhoto)
                         <div>
                             <div class="box-about-front">
-                                <img class="box-about-front__img" src="https://via.placeholder.com/330x437" alt="Image Front">
+                                <img class="box-about-front__img" src="{{ $oneAbout->firstPhoto->url }}" alt="{{ $oneAbout->title }}">
                             </div>
                         </div>
+                        @endif
                         <div class="box-about-text">
-                            <p><span>15</span>Years of&nbsp;experience</p>
+                            <p><span>{{ $oneAbout->years_of_experience }}</span>{{ __('website.Years of experience') }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Count -->
+    @if($oneAbout && $oneAbout->details && $oneAbout->details->count() > 0)
     <section class="section section-count">
         <div class="container text-center box-count">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 row-count">
+                @foreach($oneAbout->details as $detail)
                 <div class="col mb-2">
-                    <p class="title-count counter">125</p>
-                    <p class="text-count">Happy Clients</p>
+                    <p class="title-count counter">{{ $detail->count }}</p>
+                    <p class="text-count">{{ $detail->title }}</p>
                 </div>
-                <div class="col mb-2">
-                    <p class="title-count counter">250</p>
-                    <p class="text-count">Successful Projects</p>
-                </div>
-                <div class="col mb-2">
-                    <p class="title-count counter">40</p>
-                    <p class="text-count">Team Members</p>
-                </div>
-                <div class="col mb-2">
-                    <p class="title-count counter">20</p>
-                    <p class="text-count">Awards Winning</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Get a Free -->
     <section class="section section-action">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <p class="before-title">Come on! we don’t bite :)</p>
-                    <h2 class="title-h2">Get a Free Consultation</h2>
-                    <a href="contact.html" class="btn btn-primary">Get started!</a>
+                    <p class="before-title">{{ __('website.Come join us') }}</p>
+                    <h2 class="title-h2">{{ __('website.Join Our Acting Workshops') }}</h2>
+                    <a href="{{route('contact')}}" class="btn btn-primary">{{ __('website.Get started') }}</a>
                 </div>
             </div>
         </div>
         <div class="box-action">
             <div class="thumb-action">
-                <img class="thumb-action-img" src="https://via.placeholder.com/1000x1121" alt="Image Newsletter">
+                <img class="thumb-action-img" src="/website/img/cta-bg.png" alt="Image Newsletter">
             </div>
         </div>
     </section>
 
-    <!-- Services -->
+    <!-- Testimonials -->
+    @if($testimonials && $testimonials->count() > 0)
     <section class="section section-feedback">
         <div class="container">
-
-            <p class="before-title">happy clients say</p>
-            <h2 class="title-h2">Feedbacks From Our Customers</h2>
+            <p class="before-title">{{ __('website.happy clients say') }}</p>
+            <h2 class="title-h2">{{ __('website.Feedbacks From Our Students') }}</h2>
 
             <div class="owl-carousel feedback-carousel">
+                @foreach($testimonials as $testimonial)
                 <div class="feedback-carousel-item">
                     <div class="box-user">
                         <div class="box-user-item">
+                            @if($testimonial->media)
                             <div class="box-user__thumb">
-                                <img class="box-user__img" src="https://via.placeholder.com/70x70" alt="">
+                                <img class="box-user__img" src="{{ $testimonial->media->url }}" alt="{{ $testimonial->name }}">
                             </div>
+                            @endif
                         </div>
                         <div class="box-user-item">
-                            <h3 class="title-h3">Paul Kemplys</h3>
-                            <p class="box-user__text">Director of KDO Company</p>
+                            <h3 class="title-h3">{{ $testimonial->name }}</h3>
+                            @if($testimonial->job)
+                            <p class="box-user__text">{{ $testimonial->job }}</p>
+                            @endif
                         </div>
                     </div>
-                    <p class="feedback-carousel__text">Great team, good support and development. very pleased with the cooperation. I will definitely contact this company again with new project.</p>
-                    <p class="feedback-carousel__date">Oct 12, 2019</p>
+                    @if($testimonial->description)
+                    <p class="feedback-carousel__text">{{ $testimonial->description }}</p>
+                    @endif
                 </div>
-                <div class="feedback-carousel-item">
-                    <div class="box-user">
-                        <div class="box-user-item">
-                            <div class="box-user__thumb">
-                                <img class="box-user__img" src="https://via.placeholder.com/70x70" alt="">
-                            </div>
-                        </div>
-                        <div class="box-user-item">
-                            <h3 class="title-h3">Paul Kemplys</h3>
-                            <p class="box-user__text">Director of KDO Company</p>
-                        </div>
-                    </div>
-                    <p class="feedback-carousel__text">Great team, good support and development. very pleased with the cooperation. I will definitely contact this company again with new project.</p>
-                    <p class="feedback-carousel__date">Oct 12, 2019</p>
-                </div>
-                <div class="feedback-carousel-item">
-                    <div class="box-user">
-                        <div class="box-user-item">
-                            <div class="box-user__thumb">
-                                <img class="box-user__img" src="https://via.placeholder.com/70x70" alt="">
-                            </div>
-                        </div>
-                        <div class="box-user-item">
-                            <h3 class="title-h3">Paul Kemplys</h3>
-                            <p class="box-user__text">Director of KDO Company</p>
-                        </div>
-                    </div>
-                    <p class="feedback-carousel__text">Great team, good support and development. very pleased with the cooperation. I will definitely contact this company again with new project.</p>
-                    <p class="feedback-carousel__date">Oct 12, 2019</p>
-                </div>
-                <div class="feedback-carousel-item">
-                    <div class="box-user">
-                        <div class="box-user-item">
-                            <div class="box-user__thumb">
-                                <img class="box-user__img" src="https://via.placeholder.com/70x70" alt="">
-                            </div>
-                        </div>
-                        <div class="box-user-item">
-                            <h3 class="title-h3">Paul Kemplys</h3>
-                            <p class="box-user__text">Director of KDO Company</p>
-                        </div>
-                    </div>
-                    <p class="feedback-carousel__text">Great team, good support and development. very pleased with the cooperation. I will definitely contact this company again with new project.</p>
-                    <p class="feedback-carousel__date">Oct 12, 2019</p>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
     <!-- Newsletter -->
     @include('components.home.newsletter')
 
     <!-- Team Carousel -->
-    <section class="section section-team">
+    @if($teams && $teams->count() > 0)
+    <section class="section section-team" style="background: url();">
         <div class="container">
-            <p class="before-title text-center">our team</p>
-            <h2 class="title-h2 text-center">Experts In Their Field</h2>
-            <p class="text-center after-title">The best professionals will work on your product.<br>We can safely say that success is guaranteed to your business.</p>
+            <p class="before-title text-center">{{ __('website.our team') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Our Acting Coaches') }}</h2>
+            <p class="text-center after-title">{{ __('website.The best professionals will guide you') }}<br>{{ __('website.We can safely say that success is guaranteed') }}</p>
         </div>
         <div class="owl-carousel team-carousel text-center">
-            <div class="team-carousel-item team-carousel-1">
+            @foreach($teams as $index => $team)
+            <div class="team-carousel-item team-carousel-{{ $index + 1 }}" style="background-image: url('{{ $team->media?->url }}');">
                 <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
+                    <p class="team-name">{{ $team->name }}</p>
+                    @if($team->job)
+                    <p class="team-job">{{ $team->job }}</p>
+                    @endif
                 </div>
             </div>
-            <div class="team-carousel-item team-carousel-2">
-                <div class="team-info">
-                    <p class="team-name">Alex Freeman</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-3">
-                <div class="team-info">
-                    <p class="team-name">Jonh Doe</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-4">
-                <div class="team-info">
-                    <p class="team-name">Sam Beffort</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-5">
-                <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-6">
-
-                <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-7">
-                <div class="team-info">
-                    <p class="team-name">Alex Freeman</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-8">
-                <div class="team-info">
-                    <p class="team-name">Jonh Doe</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-9">
-                <div class="team-info">
-                    <p class="team-name">Sam Beffort</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-10">
-                <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-11">
-
-                <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-12">
-                <div class="team-info">
-                    <p class="team-name">Alex Freeman</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-13">
-                <div class="team-info">
-                    <p class="team-name">Jonh Doe</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-14">
-                <div class="team-info">
-                    <p class="team-name">Sam Beffort</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="team-carousel-item team-carousel-15">
-                <div class="team-info">
-                    <p class="team-name">Aleksander Firson</p>
-                    <ul class="team-social">
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-facebook"></i></a>
-                        </li>
-                        <li class="team-social-item">
-                            <a href="" class="team-social-link" target="_blank"><i class="zmdi zmdi-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            @endforeach
         </div>
     </section>
+    @endif
 
-    <!-- Reasons Why -->
-    <section class="section section-reason">
+    <!-- Clients -->
+
+    <section class="section section-client">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-xl-6 col-md-12 col-sm-12 col-12">
-                    <p class="before-title">our advantages</p>
-                    <h2 class="title-h2">Why Choose Us</h2>
-                    <p class="after-title">Our digital company has been developing products for 15 years.</p>
-                    <p class="description">Every morning in our company begins with hot coffee and a stand-up. Discussion is an important thing in the development process. Thus new ideas and ingenious solutions are born. Then we get to work with renewed vigor and inspiration. We are never bored.</p>
-                    <ul class="list-decoration">
-                        <li class="list-decoration-item"><i class="zmdi zmdi-plus-square"></i> Integration with back-end systems</li>
-                        <li class="list-decoration-item"><i class="zmdi zmdi-plus-square"></i> User authentication-authorization</li>
-                        <li class="list-decoration-item"><i class="zmdi zmdi-plus-square"></i> Data services</li>
-                    </ul>
+
+            <p class="before-title text-center">{{ __('website.they trust us') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Our Clients') }}</h2>
+
+            @if($clients && $clients->count() > 0)
+                <div class="owl-carousel client-carousel text-center">
+                    @foreach($clients as $client)
+                        <div class="client-carousel-item">
+                            @if($client->media)
+                                @if($client->url)
+                                    <a href="{{ $client->url }}" target="_blank" rel="noopener noreferrer">
+                                        <img src="{{ $client->media->url }}" alt="{{ $client->name_ar ?? $client->name_en ?? 'Client' }}">
+                                    </a>
+                                @else
+                                    <img src="{{ $client->media->url }}" alt="{{ $client->name_ar ?? $client->name_en ?? 'Client' }}">
+                                @endif
+                            @endif
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-xl-6 col-md-12 col-sm-12 col-12">
-                    <div class="box-reason">
-                        <div class="box-reason-item">
-                            <img class="box-reason__img" src="/website/img/icons/icon-SEO.svg" alt="Digital">
-                            <h3 class="title-h3">Huge Digital Experience</h3>
-                        </div>
-                        <div class="box-reason-item">
-                            <img class="box-reason__img" src="/website/img/icons/content.svg" alt="Marketing">
-                            <h3 class="title-h3">Clear Marketing Strategy</h3>
-                        </div>
-                        <div class="box-reason-item">
-                            <img class="box-reason__img" src="/website/img/icons/app.svg" alt="Team">
-                            <h3 class="title-h3">Professional & Strong Team</h3>
-                        </div>
-                        <div class="box-reason-item">
-                            <img class="box-reason__img" src="/website/img/icons/branding.svg" alt="Tech">
-                            <h3 class="title-h3">Modern Technologies</h3>
-                        </div>
-                    </div>
+            @else
+                <div class="text-center">
+                    <p>{{ __('website.No Clients Found') }}</p>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 
 @endsection
+
+@push('script')
+@endpush
+

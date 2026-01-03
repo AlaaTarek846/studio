@@ -6,7 +6,7 @@
                 <div class="row justify-content-between align-items-center footer-nav">
                     <div class="col-xl-2 col-md-2 col-sm-12 col-12">
                         <a class="navbar-brand" href="index.html">
-                            <img class="logo" src="/img/logo-footer.png" alt="Desart">
+                            <img class="logo" src="/website/img/logo.png" alt="Desart" width="127" height="50" >
                         </a>
                     </div>
                     <div class="col-xl10 col-md-10 col-sm-12 col-12">
@@ -103,21 +103,21 @@
     </li>
 </ul>
 
-<!-- Video Modal -->
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">We are the Creative Digital Team</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lM02vNMRRB0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<!-- Video Modal -->--}}
+{{--<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--    <div class="modal-dialog" role="document">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal-header">--}}
+{{--                <h5 class="modal-title" id="exampleModalLabel">We are the Creative Digital Team</h5>--}}
+{{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                    <span aria-hidden="true">&times;</span>--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--            <div class="modal-body">--}}
+{{--                <div class="embed-responsive embed-responsive-16by9">--}}
+{{--                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/lM02vNMRRB0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}

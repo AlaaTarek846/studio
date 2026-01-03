@@ -28,6 +28,11 @@ class OneAbout extends Model
         return $this->morphOne(File::class, 'uploadable')->where('identifier', 'first_photo');
     }
 
+    public function secondPhoto()
+    {
+        return $this->morphOne(File::class, 'uploadable')->where('identifier', 'second_photo');
+    }
+
     public function getTitleAttribute($value)
     {
         return app()->getLocale() === 'ar' ? $this->title_ar : $this->title_en;

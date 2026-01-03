@@ -28,6 +28,7 @@ import companies from "./pages/admin/companies/index.vue";
 import areas from "./pages/admin/areas/index.vue";
 import properties from "./pages/admin/properties/index.vue";
 import resales from "./pages/admin/resales/index.vue";
+import clients from "./pages/admin/clients/index.vue";
 
 function Components (app) {
     app.component(`login`, Login);
@@ -60,6 +61,7 @@ function Components (app) {
     app.component(`areas`, areas);
     app.component(`properties`, properties);
     app.component(`resales`, resales);
+    app.component(`clients`, clients);
 }
 
 

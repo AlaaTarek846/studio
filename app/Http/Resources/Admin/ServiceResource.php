@@ -17,6 +17,8 @@ class ServiceResource extends JsonResource
             "quote"       => $this->quote_ar,
             "status"      => $this->status,
             'image'       => $this->image,
+            'icon'        => $this->icon,
+            'video'       => $this->video,
         ];
     }
 }

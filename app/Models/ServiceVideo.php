@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ServiceVideo extends Model
+{
+    use HasFactory;
+
+    protected $guarded = [];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function thumbnail()
+    {
+        return $this->morphOne(File::class, 'uploadable')->where('identifier', 'thumbnail');
+    }
+}

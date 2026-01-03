@@ -1,140 +1,157 @@
 @extends('layout.website.master')
 
-@section('title',__('website.Products'))
+@section('title','Modern Minimal Concept for Coolbabka Brand')
 
 @section('content')
-    <div class="stricky-header stricked-menu main-menu main-menu-four ">
-        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-    </div><!-- /.stricky-header -->
-
-
-
-    <!--Page Header Start-->
-    <section class="page-header">
-        <div class="page-header__bg" style="background-image: url(/website/images/backgrounds/page-header-bg.jpg);">
-        </div>
+    <!-- Banner Header -->
+    <section class="section section-banner">
         <div class="container">
-            <div class="page-header__inner">
-                <h2>{{ $project->title }}</h2>
-                <div class="thm-breadcrumb__box">
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="{{route('home')}}">{{ __('website.home') }}</a></li>
-                        <li>
-                            @if(app()->getLocale() == 'en')
-                                <span class="icon-arrow-left"></span>
-                            @else
-                                <span class="icon-arrow-right"></span>
-                            @endif
-                        </li>
-                        <li><a href="{{route('project')}}">{{ __('website.Products') }}</a></li>
-                        <li>
-                            @if(app()->getLocale() == 'en')
-                                <span class="icon-arrow-left"></span>
-                            @else
-                                <span class="icon-arrow-right"></span>
-                            @endif
-                        </li>
-                        <li>{{ $project->title }}</li>
-                    </ul>
+            <div class="row">
+                <div class="col-xl-6 col-md-12 col-sm-12 col-12">
+                    <h2 class="title-h2">Modern Minimal Concept for Coolbabka Brand</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('website.home') }}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('projects') }}">{{ __('website.Acting workshops') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Modern Minimal Concept for Coolbabka Brand</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
+        <div class="section-banner__box">
+            <div class="section-banner__thumb">
+                <img class="section-banner__img" src="/website/img/header-img.jpg" alt="Image Banner">
+            </div>
+        </div>
     </section>
-    <!--Page Header End-->
 
-    <!--Project Details Start-->
-    <section class="project-details">
+    <!-- Portfolio Description -->
+
+    <section class="section section-portfolio-work">
         <div class="container">
-            <div class="project-details__img-1">
-                <img {{ $project->media?->url }} alt="{{ $project->title }}">
-                <div class="project-details__info">
-                    <h3 class="project-details__info-title">{{__('website.Product')}}</h3>
-                    <div class="project-details__info-and-ratting">
-                        <ul class="project-details__info-list list-unstyled">
-                            <li>
-                                <p>{{__('website.Name')}}:<span>{{ $project->title }}</span></p>
+            <div class="row row-portfolio">
+                <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                    <!--Carousel Wrapper-->
+                    <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio" data-ride="carousel">
+                        <!--Slides-->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <img class="d-block w-100" src="https://via.placeholder.com/730x550" alt="First slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Second slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Third slide">
+                            </div>
+                            <div class="carousel-item">
+                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Four slide">
+                            </div>
+                        </div>
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                            <i class="zmdi zmdi-arrow-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                            <i class="zmdi zmdi-arrow-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Controls-->
+                        <ol class="carousel-indicators carousel-indicators-portfolio">
+                            <li data-target="#carousel-thumb" data-slide-to="0" class="active">
+                                <img src="https://via.placeholder.com/730x550" alt="" width="100">
                             </li>
-                            <li>
-                                <p>{{__('website.Date')}}:<span>{{ $project->created_at?->toFormattedDateString() }}</span></p>
+                            <li data-target="#carousel-thumb" data-slide-to="1">
+                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
                             </li>
-                            <li>
-                                <p>{{__('website.Tags')}}:<span>{{ $project->tag }}</span></p>
+                            <li data-target="#carousel-thumb" data-slide-to="2">
+                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
                             </li>
-                            <li>
-                                <p>{{__('website.Value')}}:<span>{{ $project->cost }}</span></p>
+                            <li data-target="#carousel-thumb" data-slide-to="3">
+                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
                             </li>
+                        </ol>
+                    </div>
+                    <!--/.Carousel Wrapper-->
+                </div>
+                <div class="col-xl-4 col-md-12 col-sm-12 col-12 sidebar">
+                    <div class="sidebar-item sidebar--portfolio">
+                        <h3 class="title-h3">Coolbabka Brand</h3>
+                        <p>We worked on Coolbabka Brand for a long time and we managed to achieve the desired result in less than a month. Our entire team was 100% involved in the process and we can safely declare that we are proud of the achieved result.</p>
+                        <ul class="portfolio-detail">
+                            <li class="portfolio-detail-item"><strong>Client:</strong>Katerine Vie</li>
+                            <li class="portfolio-detail-item"><strong>Start date:</strong>Oct 05, 2019</li>
+                            <li class="portfolio-detail-item"><strong>Finish date:</strong>Oct 28, 2019</li>
+                            <li class="portfolio-detail-item"><strong>Category:</strong>Branding</li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-item">
+                        <h3 class="title-h3">Follow</h3>
+                        <ul class="portfolio-social">
+                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-facebook"></i><span>Facebook</span></a></li>
+                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-linkedin"></i><span>Linkedin</span></a></li>
+                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-behance"></i><span>Behance</span></a></li>
+                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-twitter"></i><span>Twitter</span></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="project-details__content">
-                <h3 class="project-details__title-1">{{ __('website.Product overview') }}</h3>
-                <p class="project-details__text-1">
-                    {!! $project->description !!}
-                </p>
-                <div class="project-details__pagination">
-                    <ul class="pg-pagination list-unstyled">
-                        <li class="prev">
-                            @if($previousProject)
-                            <a href="{{ route('project-details', ['slug' => $previousProject->slug]) }}" aria-label="prev">
-                                @if(app()->getLocale() == 'en')
-                                    <span class="icon-arrow-right"></span>
-                                @else
-                                    <span class="icon-arrow-left"></span>
-                                @endif
-                                {{ __('website.Prev Post') }}
-                            </a>
-                            @endif
-                        </li>
-                        <li class="next">
-                            @if($nextProject)
-                            <a href="{{ route('project-details', ['slug' => $nextProject->slug]) }}" aria-label="Next">
-                                {{ __('website.Next Post') }}
-                                @if(app()->getLocale() == 'en')
-                                    <span class="icon-arrow-left"></span>
-                                @else
-                                    <span class="icon-arrow-right"></span>
-                                @endif
-                            </a>
-                            @endif
-                        </li>
-                    </ul>
+            <div class="box-preview mb-0">
+                <div class="previous">
+                    <i class="zmdi zmdi-arrow-left"></i>
+                    <a href="" class="box-preview-link">
+                        <span>Previous post</span>
+                        Site Development for IT Company
+                    </a>
+                </div>
+                <div class="next">
+                    <a href="" class="box-preview-link">
+                        <span>Previous post</span>
+                        SEO Optimization for Bundus
+                    </a>
+                    <i class="zmdi zmdi-arrow-right"></i>
                 </div>
             </div>
         </div>
     </section>
-    <!--Project Details End-->
 
+    <!-- Works -->
 
-
-    <!--CTA Two Start-->
-    <section class="cta-two">
-        <div class="cta-two__img-1" style="background-image: url(website/images/resources/cta-two-img-1.jpg);"></div>
-        <div class="cta-two__shape-1 float-bob-x">
-            <img src="{{ asset('website/images/shapes/cta-two-shape-1.png')}}" alt="">
-        </div>
+    <section class="section section-services">
         <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-4"></div>
-                <div class="col-xl-6 col-lg-8">
-                    <div class="cta-two__right">
-                        <h3 class="cta-two__title">{{ __('website.Subscribe to our newsletter') }}</h3>
-                        <p class="cta-two__text">
-                            {{ __('website.Register now to get latest updates on promotions & coupons') }}
-                        </p>
-                        <form method="post" action="{{ route('contact.subscribe') }}">
-                            @csrf
-                            <div class="cta-two__contact-input-box">
-                                <input type="email" placeholder="{{ __('website.Enter Your Email') }}" required name="email">
-                                <button type="submit" class="cta-two__contact-btn thm-btn">{{ __('website.Subscribe') }}</button>
+
+            <p class="before-title text-center">view more cases</p>
+            <h2 class="title-h2 text-center">Related Works</h2>
+            <p class="text-center after-title">We have many more similar and successful cases. Take a look and you can truly appreciate the level of our skills.</p>
+
+            <div class="box-case box-case--static">
+                <div class="row row-cols-3 row-case">
+                    <div class="col col-case">
+                        <div class="case-item case-1">
+                            <div class="team-info">
+                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="col col-case">
+                        <div class="case-item case-2">
+                            <div class="team-info">
+                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-case">
+                        <div class="case-item case-3">
+                            <div class="team-info">
+                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--CTA Two End-->
-
-
 @endsection

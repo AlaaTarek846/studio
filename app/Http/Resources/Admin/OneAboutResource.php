@@ -14,6 +14,7 @@ class OneAboutResource extends JsonResource
             "id"  => $this->id,
             "title"     => $this->title_ar,
             "description"     => $this->current_translation?->description,
+            "years_of_experience" => $this->years_of_experience,
             "firstPhoto"     => $this->firstPhoto,
         ];
     }

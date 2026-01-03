@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\ArticleCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\ServiceVideoController;
 use App\Http\Controllers\Admin\CounterAboutController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -71,6 +73,7 @@ Route::prefix('api')->group(function () {
         Route::apiResource('two-abouts', TwoAboutController::class);
         Route::get('services-dropdown', [ServiceController::class, 'dropdown']);
         Route::apiResource('services', ServiceController::class);
+        Route::apiResource('service-videos', ServiceVideoController::class);
         Route::get('projects-dropdown', [ProjectController::class, 'dropdown']);
         Route::apiResource('projects', ProjectController::class);
         Route::apiResource('settings', SettingController::class);
@@ -84,6 +87,7 @@ Route::prefix('api')->group(function () {
         Route::apiResource('testimonials', TestimonialController::class);
         Route::apiResource('contact-messages', ContactMessageController::class);
         Route::apiResource('subscribes', SubscribeController::class);
+        Route::apiResource('clients', ClientController::class);
         Route::get('project-categories-dropdown', [ProjectCategoryController::class, 'dropdown']);
         Route::apiResource('project-categories', ProjectCategoryController::class);
         Route::apiResource('project-challenge-solutions', ProjectChallengeSolutionController::class);
@@ -132,6 +136,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('project-challenge-solutions', [ProjectChallengeSolutionController::class, 'indexPage'])->name('project-challenge-solutions');
             Route::get('contact-messages', [ContactMessageController::class, 'indexPage'])->name('contact-messages');
             Route::get('subscribes', [SubscribeController::class, 'indexPage'])->name('subscribes');
+            Route::get('clients', [ClientController::class, 'indexPage'])->name('clients');
             Route::get('gallery', [AdminGalleryController::class, 'indexPage'])->name('gallery');
             Route::get('policies', [PolicyController::class, 'indexPage'])->name('policies');
             Route::get('property-types', [PropertyTypeController::class, 'indexPage'])->name('property-types');
@@ -168,27 +173,10 @@ Route::get('/project/{slug}', [ProjectClientController::class, 'show'])->name('p
 Route::get('/service', [ServiceClientController::class, 'index'])->name('service');
 Route::get('/service/{slug}', [ServiceClientController::class, 'show'])->name('service-details');
 Route::get('/team', [TeamController::class, 'index'])->name('team');
-Route::get('/faq', [FaqController::class, 'index'])->name('faq');
-Route::get('/gallery', [ClientGalleryController::class, 'index'])->name('gallery');
-Route::get('/donate', [DonateController::class, 'index'])->name('donate');
-Route::get('/appointment', [AppointmentController::class, 'index'])->name('appointment');
-Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
 Route::post('/contact-message', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/subscribe', [ContactController::class, 'subscribe'])->name('contact.subscribe');
-
-Route::get('/volunteer', [App\Http\Controllers\Client\VolunteerController::class, 'index'])->name('volunteer');
-Route::get('/event', [App\Http\Controllers\Client\EventController::class, 'index'])->name('event');
-Route::get('/event-details', [App\Http\Controllers\Client\EventController::class, 'details'])->name('event-details');
-
-
-
-
-
-Route::get('/apartments/{slug?}', [App\Http\Controllers\Client\ApartmentController::class, 'index'])->name('apartments');
-Route::get('/apartments-resail', [App\Http\Controllers\Client\ApartmentController::class, 'resail'])->name('apartments-resail');
-Route::get('/apartment-details/{slug?}', [App\Http\Controllers\Client\ApartmentController::class, 'show'])->name('apartment-details');
-Route::get('/developments', [App\Http\Controllers\Client\ApartmentController::class, 'areas'])->name('areas');
-Route::get('/developments/{slug}', [App\Http\Controllers\Client\ApartmentController::class, 'developments'])->name('developments');
+Route::get('/project', [App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects');
+Route::get('/project/{slug}', [App\Http\Controllers\Client\ProjectController::class, 'show'])->name('project-details');
 Route::get('/policy', [App\Http\Controllers\Client\SettingController::class, 'policy'])->name('policy');
 Route::get('/terms', [App\Http\Controllers\Client\SettingController::class, 'termCondition'])->name('termCondition');
 
