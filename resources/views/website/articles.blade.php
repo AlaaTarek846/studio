@@ -45,7 +45,7 @@
                             <h3 class="title-h3 line-clamp">
                                 <a href="{{ route('blog-details', $article->route_slug ?? $article->id) }}">{{ $article->title }}</a>
                             </h3>
-                            <p class="description line-clamp">{{ Str::limit(strip_tags($article->content), 100) }}</p>
+                            <p class="description line-clamp">{{ Str::limit(getExcerpt($article->content), 100) }}</p>
                             <a class="btn-text btn-text-img" href="{{ route('blog-details', $article->route_slug ?? $article->id) }}">{{ __('website.Read More') }}</a>
                         </div>
                     @endforeach

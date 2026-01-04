@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('slug_en')->unique();
             $table->text('description_en');
             $table->text('description_ar');
-            $table->string('year')->nullable();
-            $table->unsignedBigInteger('company_id')->nullable();
+            $table->foreignIdFor(ProjectCategory::class,'project_category_id');
             $table->timestamps();
         });
     }

@@ -27,6 +27,7 @@
                     <th scope="col">#</th>
                     <th scope="col">{{ $t('global.image') }}</th>
                     <th scope="col">{{ $t('label.title') }}</th>
+                    <th scope="col">{{ $t('global.Video') }}</th>
                     <th scope="col">{{ $t('label.status') }}</th>
                     <th scope="col">{{ $t('global.action') }}</th>
                   </tr>
@@ -42,6 +43,14 @@
                       </div>
                     </td>
                     <td>{{item.title}}</td>
+                    <td>
+                      <div v-if="item.video && item.video.thumbnail">
+                        <span class="avatar avatar-md bg-light">
+                          <img :src="item.video.thumbnail.url" alt="Video Thumbnail" style="width: 100%; height: 100%; object-fit: cover;">
+                        </span>
+                      </div>
+                      <span v-else class="badge rounded-pill bg-secondary-transparent">{{ $t('global.No Video') }}</span>
+                    </td>
                     <td>
                       <span class="badge rounded-pill bg-success-transparent" v-if="item.status">{{$t('global.activated')}}</span>
                       <span class="badge rounded-pill bg-danger-transparent" v-else>{{$t('global.Inactive')}}</span>

@@ -27,8 +27,7 @@
                     <th scope="col">#</th>
                     <th scope="col">{{ $t('global.image') }}</th>
                     <th scope="col">{{ $t('label.title') }}</th>
-                    <th scope="col">{{ $t('global.year') }}</th>
-                    <th scope="col">{{ $t('global.company') }}</th>
+                    <th scope="col">{{ $t('global.projectCategory') }}</th>
                     <th scope="col">{{ $t('label.status') }}</th>
                     <th scope="col">{{ $t('global.action') }}</th>
                   </tr>
@@ -37,15 +36,14 @@
                   <tr v-for="(item,index) in data" :key="item.id">
                     <td scope="row">{{index + 1}}</td>
                     <td>
-                      <div class="me-3" v-if="item.media">
+                      <div class="me-3" v-if="item.thumbnail">
                         <span class="avatar avatar-xxl bg-light">
-                            <img :src="item.media.url" alt="" style="width: 100%; height: 100%">
+                            <img :src="item.thumbnail.url" alt="" style="width: 100%; height: 100%">
                         </span>
                       </div>
                     </td>
                     <td>{{item.title}}</td>
-                    <td>{{item.year}}</td>
-                    <td>{{item.company.title}}</td>
+                    <td>{{item.project_category?.title}}</td>
                     <td>
                       <span class="badge rounded-pill bg-success-transparent" v-if="item.status">{{$t('global.activated')}}</span>
                       <span class="badge rounded-pill bg-danger-transparent" v-else>{{$t('global.Inactive')}}</span>
@@ -84,7 +82,7 @@
         </div>
       </div>
       <!-- End:: data table -->
-      <ModalCreateAndUpdate  v-model="modalShow" :type="type" :dataRow="dataRow" @created="getData(pagePaginate)" />
+      <ModalCreateAndUpdate :dataProjectCategories="dataProjectCategories" v-model="modalShow" :type="type" :dataRow="dataRow" @created="getData(pagePaginate)" />
 
     </div>
 </template>
@@ -118,12 +116,29 @@ export default {
 
       ]
     }
+    let dataProjectCategories = ref([]);
+    let getProjectCategories = async () => {
 
+      adminApi.get(`project-categories-dropdown`)
+        .then((res) => {
+          
+          let l = res.data.data;
+          dataProjectCategories.value = l;
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => {
+          
+        })
+    };
 
     onMounted(() => {
         uri.value = 'projects';
         getData();
         step.value = 1;
+        getProjectCategories();
+        console.log(dataProjectCategories.value);
     });
 
     filterColumns.value = {
@@ -138,7 +153,7 @@ export default {
     }
 
 
-    return {getData,statuses,filterColumns,loading,search,deleteData,showEditMode,showModelCreate,data,dataPaginate,type,dataRow,modalShow,pagePaginate};
+    return {getData,statuses,filterColumns,loading,search,deleteData,showEditMode,showModelCreate,data,dataPaginate,type,dataRow,modalShow,pagePaginate,dataProjectCategories};
 
   }
 }

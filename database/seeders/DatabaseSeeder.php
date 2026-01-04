@@ -34,15 +34,11 @@ class DatabaseSeeder extends Seeder
             ProjectCategorySeeder::class,
             TeamSeeder::class,
             TestimonialSeeder::class,
-            TwoAboutSeeder::class,
             BlogSeeder::class,
             GallerySeeder::class,
             PolicySeeder::class,
-            PropertyTypeSeeder::class,
-            CompanySeeder::class,
             ProjectSeeder::class,
-            AreaSeeder::class,
-            ResaleSeeder::class,
+            ClientSeeder::class,
         ]);
     }
 }

@@ -71,6 +71,21 @@
                           </error-message>
                         </template>
                       </div>
+                      <div class="col-md-6 mt-3">
+                        <label class="form-label">سنوات الخبرة / Years of Experience</label>
+                        <input type="number" class="form-control form-control-lg" v-model.number="v$.years_of_experience.$model"
+                               :class="{'is-invalid': v$.years_of_experience.$error || errors['years_of_experience'],
+                                   'is-valid': !v$.years_of_experience.$invalid && !errors['years_of_experience']}">
+                        <div class="invalid-feedback">
+                          <span v-if="v$.years_of_experience.required.$invalid">{{ $t('validation.fieldRequired') }}<br /></span>
+                          <span v-if="v$.years_of_experience.minValue.$invalid">يجب أن يكون العدد أكبر من أو يساوي 0<br /></span>
+                        </div>
+                        <template v-if="errors['years_of_experience']">
+                          <error-message v-for="(errorMessage, index) in errors['years_of_experience']" :key="index">
+                            {{ errorMessage }}
+                          </error-message>
+                        </template>
+                      </div>
                         <h4 class="my-2">التفاصيل</h4>
                         <div class="row" v-for="(detail, index) in submitData.data.details" :key="index">
                           <div class="col-xl-5 mt-1" v-for="lang in languages">
@@ -85,6 +100,25 @@
                             </div>
                             <template v-if="errors[`details[${index}][title_${lang}]`]">
                               <error-message v-for="(errorMessage, index) in errors[`details[${index}][title_${lang}]`]" :key="index">
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                          <div class="col-xl-2 mt-1">
+                            <label class="form-label">العدد / Count</label>
+                            <input type="number" class="form-control form-control-lg" v-model.number="submitData.data.details[index].count"
+                                   :class="{ 'is-invalid': v$.details.$each.$response.$data[index].count.$error || errors[`details[${index}][count]`],
+                                    'is-valid': !v$.details.$each.$response.$data[index].count.$invalid && !errors[`details[${index}][count]`] }">
+                            <div class="invalid-feedback">
+                                <span v-if="v$.details.$each.$response.$data[index].count.required.$invalid">{{
+                                    $t('global.ThisFieldIsRequired') }}<br />
+                                </span>
+                                <span v-if="v$.details.$each.$response.$data[index].count.minValue.$invalid">
+                                    يجب أن يكون العدد أكبر من أو يساوي 0<br />
+                                </span>
+                            </div>
+                            <template v-if="errors[`details[${index}][count]`]">
+                              <error-message v-for="(errorMessage, index) in errors[`details[${index}][count]`]" :key="index">
                                 {{ errorMessage }}
                               </error-message>
                             </template>
@@ -108,8 +142,8 @@
                             </button>
                           </div>
                         </div>
-                        <div class="col-md-12 mt-3">
-                          <label class="form-label">صورة  (498 * 460)</label>
+                        <div class="col-md-6 mt-3">
+                          <label class="form-label">صورة أولى (440 × 400 px)</label>
                           <div class="row img-div-position">
                             <div class="col-12 text-end">
                               <button
@@ -147,6 +181,54 @@
                                 </div>
                                 <template v-if="errors['first_photo']">
                                   <error-message v-for="(errorMessage, index) in errors['first_photo']" :key="index">
+                                    {{ errorMessage }}
+                                  </error-message>
+                                </template>
+
+                              </div>
+
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6 mt-3">
+                          <label class="form-label">صورة ثانية (440 × 400 px)</label>
+                          <div class="row img-div-position">
+                            <div class="col-12 text-end">
+                              <button
+                                  type="button" class="btn btn-danger btn-sm"
+                                  @click="imageUpload2 = ''"
+                                  v-if="imageUpload2"
+                              >
+                                {{ $t('global.deleteImage') }}
+                              </button>
+                            </div>
+                            <div class="col-md-12 mt-3 d-flex flex-wrap flex-fill h-100">
+                              <div class="btn btn-outline-light waves-effect" style="width: 100%; height:90%">
+
+                                    <span v-if="!imageUpload2 && !submitData.data.second_photo" style="margin-top:35%;">
+                                        <br><i class="bi bi-cloud-upload fs-40" style="font-size: 85px;"></i>
+                                        <i class="fas fa-cloud-upload-alt ml-3" aria-hidden="true"></i>
+                                    </span>
+
+                                <input name="mediaPackageUpload2" type="file" @change="preview2"
+                                       id="photoPersonal2" accept="image/*">
+
+                                <div id="container-images2" class="row justify-content-center h-100"></div>
+
+                                <div v-if="imageUpload2 && !submitData.data.second_photo" class="row justify-content-center h-100">
+                                  <figure class="col-3" v-if="!imageUpload2.mime_type.includes('application/pdf')">
+                                    <img :src="imageUpload2.url" class="img-fluid rounded h-100 w-100 m-1" />
+                                  </figure>
+                                  <figure class="col-3" v-else>
+                                    <img src="/assets/images/pdf.png" class="img-fluid rounded h-100 w-100 m-1" />
+                                  </figure>
+                                </div>
+
+                                <div class="col-md-12 my-1" v-if="v$.second_photo.$error">
+                                  <span class="text-danger" v-if="v$.second_photo.required.$invalid">{{ $t('validation.fieldRequired') }}<br /></span>
+                                </div>
+                                <template v-if="errors['second_photo']">
+                                  <error-message v-for="(errorMessage, index) in errors['second_photo']" :key="index">
                                     {{ errorMessage }}
                                   </error-message>
                                 </template>
@@ -211,6 +293,7 @@
   const store = useStore();
   const id = ref(null);
   const imageUpload = ref('');
+  const imageUpload2 = ref('');
 
   onMounted(()=>{
     languages.value = store.state.lang.languages;
@@ -224,8 +307,10 @@
     submitData.data.title_color_ar = '';
     submitData.data.title_en = '';
     submitData.data.title_color_en = '';
+    submitData.data.years_of_experience = 0;
     submitData.data.status = true;
     submitData.data.first_photo = '';
+    submitData.data.second_photo = '';
     submitData.data.details = [{}];
     let langSize = {};
     languages.value.forEach((el)=>{
@@ -233,6 +318,8 @@
         submitData.data.details[0][title] = '';
         langSize[title] = {minLength: minLength(1),maxLength:maxLength(200), required};
      });
+    submitData.data.details[0].count = 0;
+    langSize.count = {required, numeric, minValue: minValue(0)};
     langValidation2.value = {
         $each: helpers.forEach({
           ...langSize,
@@ -242,8 +329,11 @@
     loading.value = false;
     errors.value = [];
     imageUpload.value = '';
+    imageUpload2.value = '';
     let i = document.querySelector('#container-images');
     if(i) { i.innerHTML = ''; }
+    let i2 = document.querySelector('#container-images2');
+    if(i2) { i2.innerHTML = ''; }
   }
   function resetModal() {
     defaultData();
@@ -257,12 +347,14 @@
               loading.value = true;
               let l = res.data.data;
               imageUpload.value = l.first_photo;
+              imageUpload2.value = l.second_photo;
               submitData.data.description_ar = l.description_ar;
               submitData.data.description_en = l.description_en;
               submitData.data.title_en = l.title_en;
               submitData.data.title_color_en = l.title_color_en;
               submitData.data.title_ar = l.title_ar;
               submitData.data.title_color_ar = l.title_color_ar;
+              submitData.data.years_of_experience = l.years_of_experience || 0;
               submitData.data.details = [];
               l.details.forEach((el,index) => {
                 submitData.data.details.push({});
@@ -270,6 +362,7 @@
                   let title = `title_${n}`;
                   submitData.data.details[index][title] = el[title];
                 });
+                submitData.data.details[index].count = el.count || 0;
               });
             })
             .catch((err) => {
@@ -294,8 +387,10 @@
       title_ar: '',
       title_color_en: '',
       title_color_ar: '',
+      years_of_experience: 0,
       status: true,
       first_photo: '',
+      second_photo: '',
       details: []
     }
   });
@@ -306,13 +401,18 @@
       title_color_ar: {minLength: minLength(1),maxLength:maxLength(100),required,},
       title_en: {minLength: minLength(1),maxLength:maxLength(100),required,},
       title_color_en: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      description_ar: {minLength: minLength(1),maxLength:maxLength(200),required,},
-      description_en: {minLength: minLength(1),maxLength:maxLength(200),required,},
+      description_ar: {minLength: minLength(1),maxLength:maxLength(1000),required,},
+      description_en: {minLength: minLength(1),maxLength:maxLength(1000),required,},
+      years_of_experience: {required, numeric, minValue: minValue(0)},
       details: {
         ...langValidation2.value,
       },
       first_photo: {required: requiredIf( (value) => {
           return props.type == 'create' || !imageUpload.value;
+        })
+      },
+      second_photo: {required: requiredIf( (value) => {
+          return props.type == 'create' || !imageUpload2.value;
         })
       },
     }
@@ -332,13 +432,18 @@
       formData.append('title_color_en', submitData.data.title_color_en);
       formData.append('description_ar', submitData.data.description_ar);
       formData.append('description_en', submitData.data.description_en);
+      formData.append('years_of_experience', submitData.data.years_of_experience || 0);
       if(submitData.data.first_photo) {
         formData.append('first_photo', submitData.data.first_photo);
+      }
+      if(submitData.data.second_photo) {
+        formData.append('second_photo', submitData.data.second_photo);
       }
       submitData.data.details.forEach((el,index)=>{
         languages.value.forEach((e)=>{
           formData.append(`details[${index}][title_${e}]`, submitData.data.details[index][`title_${e}`]);
         });
+        formData.append(`details[${index}][count]`, submitData.data.details[index].count || 0);
       });
 
       if (props.type !== 'edit') {
@@ -422,6 +527,41 @@
 
   };
 
+  const preview2 = (e) => {
+    let containerImages = document.querySelector("#container-images2");
+    containerImages.innerHTML = "";
+
+    if(e) {
+      submitData.data.second_photo = {};
+      submitData.data.second_photo = e.target.files[0];
+      if(submitData.data.second_photo.type.includes('application/')) {
+        let figure = document.createElement('figure');
+        figure.className = 'col-3';
+        let img = document.createElement('img');
+        img.className = 'img-fluid rounded h-100 w-100 m-1';
+        img.setAttribute('src', '/assets/images/pdf.png');
+        figure.appendChild(img);
+        containerImages.appendChild(figure);
+      }else {
+        let reader = new FileReader();
+        let figure = document.createElement('figure');
+        figure.className = 'col-3';
+
+        reader.onload = () => {
+          let img = document.createElement('img');
+          img.className = 'img-fluid rounded h-100 w-100 m-1';
+          img.setAttribute('src', reader.result);
+          figure.appendChild(img);
+        }
+
+        containerImages.appendChild(figure);
+        reader.readAsDataURL(submitData.data.second_photo);
+      }
+
+    }
+
+  };
+
   function removeSize(index) {
     submitData.data.details.splice(index, 1);
   }
@@ -430,6 +570,7 @@
     languages.value.forEach((el)=>{
       submitData.data.details[submitData.data.details.length - 1][`title_${el}`] = '';
     });
+    submitData.data.details[submitData.data.details.length - 1].count = 0;
   }
 </script>
 

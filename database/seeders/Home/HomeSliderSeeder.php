@@ -15,12 +15,10 @@ class HomeSliderSeeder extends Seeder
         HomeSlider::truncate();
 
         $model = HomeSlider::create([
-            'title_ar'       => "تجاوز البقية مع  ",
-            'title_color_ar' => "الأسقف  المبتكرة",
-            'description_ar' => 'نحن نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة لعملائنا ونبني سجلًا قويًا في الصناعة. لقد كنا نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة',
-            'title_en'       => "Rise Above the  Rest is with Our  Roofing",
-            'title_color_en' => "Innovation at Work",
-            'description_en' => 'We have been operating for over a decade, providing top-notch servicesto our clients and building a strong track record in the industry.We havebeen operating for over a decade, providing top-notch',
+            'title_ar'       => "اكتشف موهبتك في التمثيل",
+            'description_ar' => 'انضم إلى ورش التمثيل الاحترافية واكتشف عالم الفن والمسرح. نوفر لك بيئة إبداعية لتنمية موهبتك وتطوير مهاراتك التمثيلية مع أفضل المدربين المحترفين',
+            'title_en'       => "Discover Your Acting Talent",
+            'description_en' => 'Join our professional acting workshops and discover the world of art and theater. We provide you with a creative environment to develop your talent and enhance your acting skills with the best professional trainers',
             'status'         => 1,
         ]);
 
@@ -30,16 +28,14 @@ class HomeSliderSeeder extends Seeder
             'mime_type' => 'sdd',
             'identifier' => 'background',
             'uploaded_by' =>  1,
-            'url' => '/storage/home-slider/1.jpg',
+            'url' => '/website/img/slider/slide1.png',
         ]);
 
         $model = HomeSlider::create([
-            'title_ar'       => "تجاوز البقية مع  ",
-            'title_color_ar' => "الأسقف  المبتكرة",
-            'description_ar' => 'نحن نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة لعملائنا ونبني سجلًا قويًا في الصناعة. لقد كنا نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة',
-            'title_en'       => "Rise Above the  Rest is with Our  Roofing",
-            'title_color_en' => "Innovation at Work",
-            'description_en' => 'We have been operating for over a decade, providing top-notch servicesto our clients and building a strong track record in the industry.We havebeen operating for over a decade, providing top-notch',
+            'title_ar'       => "طور مهاراتك التمثيلية معنا",
+            'description_ar' => 'ورش متخصصة في التمثيل المسرحي والسينمائي. تعلم أساسيات التمثيل، تقنيات الأداء، والتحكم في الصوت والحركة. برامج تدريبية شاملة تناسب جميع المستويات من المبتدئين إلى المحترفين',
+            'title_en'       => "Develop Your Acting Skills With Us",
+            'description_en' => 'Specialized workshops in theater and film acting. Learn the basics of acting, performance techniques, and voice and movement control. Comprehensive training programs suitable for all levels from beginners to professionals',
             'status' => 1,
         ]);
 
@@ -49,18 +45,16 @@ class HomeSliderSeeder extends Seeder
             'mime_type' => 'sdd',
             'identifier' => 'background',
             'uploaded_by' =>  1,
-            'url' => '/storage/home-slider/2.jpg',
+            'url' => '/website/img/slider/slide2.png',
         ]);
 
 
 
         $model = HomeSlider::create([
-            'title_ar'       => "تجاوز البقية مع  ",
-            'title_color_ar' => "الأسقف  المبتكرة",
-            'description_ar' => 'نحن نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة لعملائنا ونبني سجلًا قويًا في الصناعة. لقد كنا نعمل منذ أكثر من عقد من الزمن، نقدم خدمات عالية الجودة',
-            'title_en'       => "Rise Above the  Rest is with Our  Roofing",
-            'title_color_en' => "Innovation at Work",
-            'description_en' => 'We have been operating for over a decade, providing top-notch servicesto our clients and building a strong track record in the industry.We havebeen operating for over a decade, providing top-notch',
+            'title_ar'       => "ابدأ رحلتك الفنية اليوم",
+            'description_ar' => 'انطلق في رحلة فنية مميزة مع ورش التمثيل الأفضل. نوفر لك فرصة للتعلم من خبراء الصناعة، المشاركة في عروض مسرحية حقيقية، وبناء شبكة علاقات في عالم الفن والتمثيل',
+            'title_en'       => "Start Your Artistic Journey Today",
+            'description_en' => 'Embark on an exceptional artistic journey with the best acting workshops. We provide you with the opportunity to learn from industry experts, participate in real theatrical performances, and build a network in the world of art and acting',
             'status' => 1,
         ]);
 
@@ -70,7 +64,7 @@ class HomeSliderSeeder extends Seeder
             'mime_type' => 'sdd',
             'identifier' => 'background',
             'uploaded_by' =>  1,
-            'url' => '/storage/home-slider/3.jpg',
+            'url' => '/website/img/slider/slide3.png',
         ]);
 
 

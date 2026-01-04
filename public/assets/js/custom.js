@@ -4,8 +4,10 @@
   /* page loader */
   
   function hideLoader() {
-    const loader = document.getElementById("loader");
+  const loader = document.getElementById("loader");
+  if (loader) {
     loader.classList.add("d-none")
+  }
   }
 
   window.addEventListener("load", hideLoader);
@@ -309,7 +311,10 @@
   /* Choices JS */
 
   /* footer year */
-  document.getElementById("year").innerHTML = new Date().getFullYear();
+  const yearElement = document.getElementById("year");
+  if (yearElement) {
+    yearElement.innerHTML = new Date().getFullYear();
+  }
   /* footer year */
 
   /* node waves */
@@ -381,15 +386,21 @@
 
   /* header dropdowns scroll */
   var myHeaderShortcut = document.getElementById("header-shortcut-scroll");
-  new SimpleBar(myHeaderShortcut, { autoHide: false });
+  if (myHeaderShortcut) {
+    new SimpleBar(myHeaderShortcut, { autoHide: false });
+  }
 
   var myHeadernotification = document.getElementById(
     "header-notification-scroll"
   );
-  new SimpleBar(myHeadernotification, { autoHide: false });
+  if (myHeadernotification) {
+    new SimpleBar(myHeadernotification, { autoHide: false });
+  }
 
   var myHeaderCart = document.getElementById("header-cart-items-scroll");
-  new SimpleBar(myHeaderCart, { autoHide: false});
+  if (myHeaderCart) {
+    new SimpleBar(myHeaderCart, { autoHide: false});
+  }
 
 })();
 

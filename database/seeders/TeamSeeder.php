@@ -18,46 +18,53 @@ class TeamSeeder extends Seeder
 
         $teams = [
             [
-                'name' => "JORDHAN LEON",
-                'job' => "Company Owner",
-                'url' => '/storage/team/1.jpg',
+                'name_ar' => "أحمد محمود",
+                'name_en' => "Ahmed Mahmoud",
+                'job_ar' => "مدرب تمثيل رئيسي",
+                'job_en' => "Lead Acting Coach",
+                'url' => '/website/img/team/photo1.png',
             ],
             [
-                'name' => "DEVIT KILLER",
-                'job' => "Sales Manager",
-                'url' => '/storage/team/2.jpg',
+                'name_ar' => "سارة علي",
+                'name_en' => "Sara Ali",
+                'job_ar' => "مدربة تمثيل مسرحي",
+                'job_en' => "Theater Acting Coach",
+                'url' => '/website/img/team/photo2.png',
             ],
             [
-                'name' => "MORAH JEIN",
-                'job' => "Manager",
-                'url' => '/storage/team/3.jpg',
+                'name_ar' => "محمد حسن",
+                'name_en' => "Mohamed Hassan",
+                'job_ar' => "مدرب إعداد الممثل",
+                'job_en' => "Actor Preparation Coach",
+                'url' => '/website/img/team/photo3.png',
             ],
             [
-                'name' => "KILIN WARD",
-                'job' => "Head of Optop",
-                'url' => '/storage/team/4.jpg',
+                'name_ar' => "فاطمة إبراهيم",
+                'name_en' => "Fatima Ibrahim",
+                'job_ar' => "مدربة تمثيل سينمائي",
+                'job_en' => "Cinematic Acting Coach",
+                'url' => '/website/img/team/photo4.png',
             ],
             [
-                'name' => "ENDON JEMS",
-                'job' => "Special Support",
-                'url' => '/storage/team/5.jpg',
-            ],
-            [
-                'name' => "LIAM WARD",
-                'job' => "Product Manager",
-                'url' => '/storage/team/6.jpg',
+                'name_ar' => "خالد عبدالله",
+                'name_en' => "Khaled Abdullah",
+                'job_ar' => "مدرب تمثيل متقدم",
+                'job_en' => "Advanced Acting Coach",
+                'url' => '/website/img/team/photo5.png',
             ],
         ];
 
         foreach ($teams as $team) {
             $model = Team::create([
-                'name' => $team['name'],
-                'job' => $team['job'],
+                'name_ar' => $team['name_ar'],
+                'name_en' => $team['name_en'],
+                'job_ar' => $team['job_ar'],
+                'job_en' => $team['job_en'],
             ]);
             $model->media()->create([
-                'name' =>  $team['name'],
+                'name' =>  $team['name_en'],
                 'size' => 444,
-                'mime_type' => 'sdd',
+                'mime_type' => 'image/png',
                 'identifier' => null,
                 'uploaded_by' =>  1,
                 'url' => $team['url'],

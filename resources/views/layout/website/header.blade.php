@@ -4,7 +4,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="{{ route('home') }}">
-                    <img class="logo" src="{{ asset('website/img/logo.png')}}" alt="Desart">
+                    <img class="logo" width="127" height="50" src="{{ asset('website/img/logo.png')}}" alt="Desart">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,6 +20,9 @@
                         </li>
                         <li class="nav-item {{ request()->routeIs('service') ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('service')}}">{{ __('website.services') }}</a>
+                        </li>
+                        <li class="nav-item {{ request()->routeIs('projects') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('projects') }}">{{ __('website.Acting workshops') }}</a>
                         </li>
                         <li class="nav-item {{ request()->routeIs('blogs') ? 'active' : '' }}">
                             <a class="nav-link" href="{{route('blogs')}}">{{ __('website.Articles') }}</a>

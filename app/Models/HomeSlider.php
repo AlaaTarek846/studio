@@ -30,10 +30,6 @@ class HomeSlider extends Model
         return app()->getLocale() === 'ar' ? $this->description_ar : $this->description_en;
     }
 
-    public function getTitleColorAttribute($value)
-    {
-        return app()->getLocale() === 'ar' ? $this->title_color_ar : $this->title_color_en;
-    }
 
     public function background()
     {

@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Gallery;
 use App\Models\Setting;
-use App\Models\StoreProduct;
+use App\Models\Service;
 use App\Policies\StoreProductPolicy;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
@@ -27,9 +27,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $shareSetting = Setting::first();
-
+        $footerServices = Service::where('status', 1)->orderBy('created_at', 'desc')->take(5)->get();
         View::share([
             'shareSetting' => $shareSetting,
+            'footerServices' => $footerServices,
         ]);
 
         Paginator::useBootstrap();

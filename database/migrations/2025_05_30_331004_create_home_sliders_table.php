@@ -1,10 +1,8 @@
 <?php
 
-use App\Models\ProductTransaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ProductDeliveryEnum;
 
 return new class extends Migration
 {
@@ -17,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('title_ar');
             $table->string('title_en');
-            $table->string('title_color_ar');
-            $table->string('title_color_en');
             $table->text('description_ar')->nullable();
             $table->text('description_en')->nullable();
-            $table->string('url')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
         });

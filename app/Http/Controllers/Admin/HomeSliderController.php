@@ -41,8 +41,11 @@ class HomeSliderController extends Controller
 
     public function show($id)
     {
-        $homeSlider = HomeSlider::with(['background','image'])->find($id);
-        return responseJson($homeSlider,'Data exited successfully',200);
+        $homeSlider = HomeSlider::with(['background'])->find($id);
+        if (!$homeSlider) {
+            return responseJson([],'Data not found',404);
+        }
+        return responseJson(new HomeSliderResource($homeSlider),'Data exited successfully',200);
     }
 
     public function update(HomeSliderRequest $request, HomeSlider $homeSlider)

@@ -1,140 +1,148 @@
 @extends('layout.website.master')
 
-@section('title',__('website.Products'))
+@section('title', $project->title)
 
 @section('content')
-    <div class="stricky-header stricked-menu main-menu main-menu-four ">
-        <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-    </div><!-- /.stricky-header -->
-
-
-
-    <!--Page Header Start-->
-    <section class="page-header">
-        <div class="page-header__bg" style="background-image: url(/website/images/backgrounds/page-header-bg.jpg);">
-        </div>
-        <div class="container">
-            <div class="page-header__inner">
-                <h2>{{ $project->title }}</h2>
-                <div class="thm-breadcrumb__box">
-                    <ul class="thm-breadcrumb list-unstyled">
-                        <li><a href="{{route('home')}}">{{ __('website.home') }}</a></li>
-                        <li>
-                            @if(app()->getLocale() == 'en')
-                                <span class="icon-arrow-left"></span>
-                            @else
-                                <span class="icon-arrow-right"></span>
-                            @endif
-                        </li>
-                        <li><a href="{{route('project')}}">{{ __('website.Products') }}</a></li>
-                        <li>
-                            @if(app()->getLocale() == 'en')
-                                <span class="icon-arrow-left"></span>
-                            @else
-                                <span class="icon-arrow-right"></span>
-                            @endif
-                        </li>
-                        <li>{{ $project->title }}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Page Header End-->
-
-    <!--Project Details Start-->
-    <section class="project-details">
-        <div class="container">
-            <div class="project-details__img-1">
-                <img {{ $project->media?->url }} alt="{{ $project->title }}">
-                <div class="project-details__info">
-                    <h3 class="project-details__info-title">{{__('website.Product')}}</h3>
-                    <div class="project-details__info-and-ratting">
-                        <ul class="project-details__info-list list-unstyled">
-                            <li>
-                                <p>{{__('website.Name')}}:<span>{{ $project->title }}</span></p>
-                            </li>
-                            <li>
-                                <p>{{__('website.Date')}}:<span>{{ $project->created_at?->toFormattedDateString() }}</span></p>
-                            </li>
-                            <li>
-                                <p>{{__('website.Tags')}}:<span>{{ $project->tag }}</span></p>
-                            </li>
-                            <li>
-                                <p>{{__('website.Value')}}:<span>{{ $project->cost }}</span></p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="project-details__content">
-                <h3 class="project-details__title-1">{{ __('website.Product overview') }}</h3>
-                <p class="project-details__text-1">
-                    {!! $project->description !!}
-                </p>
-                <div class="project-details__pagination">
-                    <ul class="pg-pagination list-unstyled">
-                        <li class="prev">
-                            @if($previousProject)
-                            <a href="{{ route('project-details', ['slug' => $previousProject->slug]) }}" aria-label="prev">
-                                @if(app()->getLocale() == 'en')
-                                    <span class="icon-arrow-right"></span>
-                                @else
-                                    <span class="icon-arrow-left"></span>
-                                @endif
-                                {{ __('website.Prev Post') }}
-                            </a>
-                            @endif
-                        </li>
-                        <li class="next">
-                            @if($nextProject)
-                            <a href="{{ route('project-details', ['slug' => $nextProject->slug]) }}" aria-label="Next">
-                                {{ __('website.Next Post') }}
-                                @if(app()->getLocale() == 'en')
-                                    <span class="icon-arrow-left"></span>
-                                @else
-                                    <span class="icon-arrow-right"></span>
-                                @endif
-                            </a>
-                            @endif
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--Project Details End-->
-
-
-
-    <!--CTA Two Start-->
-    <section class="cta-two">
-        <div class="cta-two__img-1" style="background-image: url(website/images/resources/cta-two-img-1.jpg);"></div>
-        <div class="cta-two__shape-1 float-bob-x">
-            <img src="{{ asset('website/images/shapes/cta-two-shape-1.png')}}" alt="">
-        </div>
+    <!-- Banner Header -->
+    <section class="section section-banner">
         <div class="container">
             <div class="row">
-                <div class="col-xl-6 col-lg-4"></div>
-                <div class="col-xl-6 col-lg-8">
-                    <div class="cta-two__right">
-                        <h3 class="cta-two__title">{{ __('website.Subscribe to our newsletter') }}</h3>
-                        <p class="cta-two__text">
-                            {{ __('website.Register now to get latest updates on promotions & coupons') }}
-                        </p>
-                        <form method="post" action="{{ route('contact.subscribe') }}">
-                            @csrf
-                            <div class="cta-two__contact-input-box">
-                                <input type="email" placeholder="{{ __('website.Enter Your Email') }}" required name="email">
-                                <button type="submit" class="cta-two__contact-btn thm-btn">{{ __('website.Subscribe') }}</button>
-                            </div>
-                        </form>
-                    </div>
+                <div class="col-xl-6 col-md-12 col-sm-12 col-12">
+                    <h2 class="title-h2">{{ $project->title }}</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('website.home') }}</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('projects') }}">{{ __('website.Acting workshops') }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $project->title }}</li>
+                        </ol>
+                    </nav>
                 </div>
             </div>
         </div>
+        <div class="section-banner__box">
+            <div class="section-banner__thumb">
+                <img class="section-banner__img" src="{{ '/website/img/header-img.jpg' }}" alt="{{ $project->title }}">
+            </div>
+        </div>
     </section>
-    <!--CTA Two End-->
 
+    <!-- Portfolio Description -->
 
+    <section class="section section-portfolio-work">
+        <div class="container">
+            <div class="row row-portfolio">
+                <div class="col-xl-8 col-md-12 col-sm-12 col-12">
+                    <!--Carousel Wrapper-->
+                    @if($project->sliderImages && $project->sliderImages->count() > 0)
+                        <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio" data-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                @foreach($project->sliderImages as $index => $sliderImage)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <img class="d-block w-100" src="{{ $sliderImage->url }}" alt="{{ $project->title }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                            <!--/.Slides-->
+                            <!--Controls-->
+                            <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                                @if(app()->getLocale() == 'en')
+                                    <i class="zmdi zmdi-arrow-left"></i>
+                                @else
+                                    <i class="zmdi zmdi-arrow-right"></i>
+                                @endif
+                                <span class="sr-only">{{ __('website.Previous') }}</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                                @if(app()->getLocale() == 'en')
+                                    <i class="zmdi zmdi-arrow-right"></i>
+                                @else
+                                    <i class="zmdi zmdi-arrow-left"></i>
+                                @endif
+                                <span class="sr-only">{{ __('website.Next') }}</span>
+                            </a>
+                            <!--/.Controls-->
+                            <ol class="carousel-indicators carousel-indicators-portfolio">
+                                @foreach($project->sliderImages as $index => $sliderImage)
+                                    <li data-target="#carousel-thumb" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ $sliderImage->url }}" alt="" width="100">
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @else
+                        <div class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{{ $project->thumbnail ? $project->thumbnail->url : '/website/img/service.jpg' }}" alt="{{ $project->title }}">
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                    <!--/.Carousel Wrapper-->
+                </div>
+                <div class="col-xl-4 col-md-12 col-sm-12 col-12 sidebar">
+                    <div class="sidebar-item sidebar--portfolio">
+                        <h3 class="title-h3">{{ $project->title }}</h3>
+                        <p>{{ $project->description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box-preview mb-0">
+                @if($previousProject)
+                    <div class="previous">
+                        @if(app()->getLocale() == 'en')
+                            <i class="zmdi zmdi-arrow-left"></i>
+                        @else
+                            <i class="zmdi zmdi-arrow-right"></i>
+                        @endif
+                        <a href="{{ route('project-details', $previousProject->slug) }}" class="box-preview-link">
+                            <span>{{ __('website.Previous post') }}</span>
+                            {{ $previousProject->title }}
+                        </a>
+                    </div>
+                @endif
+                @if($nextProject)
+                    <div class="next">
+                        <a href="{{ route('project-details', $nextProject->slug) }}" class="box-preview-link">
+                            <span>{{ __('website.Next post') }}</span>
+                            {{ $nextProject->title }}
+                        </a>
+                        @if(app()->getLocale() == 'en')
+                            <i class="zmdi zmdi-arrow-right"></i>
+                        @else
+                            <i class="zmdi zmdi-arrow-left"></i>
+                        @endif
+                    </div>
+                @endif
+            </div>
+        </div>
+    </section>
+
+    <!-- Works -->
+
+    <section class="section section-services">
+        <div class="container">
+
+            <p class="before-title text-center">{{ __('website.view more cases') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Related Workshops') }}</h2>
+            <p class="text-center after-title">{{ __('website.Related Workshops Description') }}</p>
+
+            @if($relatedProjects && $relatedProjects->count() > 0)
+                <div class="box-case box-case--static">
+                    <div class="row row-cols-3 row-case">
+                        @foreach($relatedProjects as $index => $relatedProject)
+                            <div class="col col-case">
+                                <div class="case-item case-{{ $index + 1 }}" style="background-image: url('{{ $relatedProject->thumbnail ? $relatedProject->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                    <div class="team-info">
+                                        <p class="team-name"><a href="{{ route('project-details', $relatedProject->slug) }}" title="{{ $relatedProject->title }}">{{ $relatedProject->title }}</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
+    </section>
 @endsection

@@ -22,15 +22,14 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             "title_ar"                   => "required|string|min:5|max:191|unique:projects,title_ar".($this->project?','.$this->project->id:''),
             "title_en"                   => "required|string|min:5|max:191|unique:projects,title_en".($this->project?','.$this->project->id:''),
             "description_ar"             => "required|string|min:5",
             "description_en"             => "required|string|min:5",
-            "year"                       => "required|digits:4",
-            "company_id"                 => "required|exists:companies,id",
-            'image' => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
-            
+            "project_category_id"        => "required|exists:project_categories,id",
+            "status"                     => "required|boolean",
+            'thumbnail' => [$this->method() == "PUT" ? 'nullable':'required','image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'slider.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }

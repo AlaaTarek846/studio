@@ -7,6 +7,7 @@ use App\Models\Article;
 use App\Models\ArticleCategory;
 use App\Models\ArticleClientQuiry;
 use App\Models\ArticleRedirect;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Setting;
 use Illuminate\Http\Request;
@@ -134,7 +135,15 @@ class ArticleController extends Controller
             ->where('id', '>', $article->id)
             ->orderBy('id', 'asc')
             ->first();
-        return view('website.article-details', compact('article', 'setting', 'categories','previousProject','nextProject'));
+
+        // 3 مشاريع أخرى للقسم Related Works
+        $relatedProjects = Project::where('status', 1)
+            ->with(['thumbnail'])
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+
+        return view('website.article-details', compact('article', 'setting', 'categories','previousProject','nextProject','relatedProjects'));
     }
     public function portfolioIndex()
     {

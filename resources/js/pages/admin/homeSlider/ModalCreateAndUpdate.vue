@@ -12,28 +12,6 @@
                 <div class="modal-body">
                     <div class="row">
                       <div class="col-md-6 mb-2" v-for="lang in languages">
-                        <label class="form-label">{{ $t('label.title') }} فرعي ({{ lang == 'ar' ? 'عربي' : 'English' }})</label>
-                        <input type="text" class="form-control form-control-lg"  v-model="v$[`title_color_${lang}`].$model"
-                               :class="{'is-invalid': v$[`title_color_${lang}`].$error || errors[`title_color_${lang}`],
-                                   'is-valid': !v$[`title_color_${lang}`].$invalid && !errors[`title_color_${lang}`]}">
-
-                        <div class="invalid-feedback">
-                          <span v-if="v$[`title_color_${lang}`].required.$invalid">{{ $t('validation.fieldRequired') }}<br /> </span>
-                          <span v-if="v$[`title_color_${lang}`].minLength.$invalid">{{ $t('validation.TitleIsMustHaveAtLeast') }} {{
-                              v$[`title_color_${lang}`].minLength.$params.min
-                            }} {{ $t('validation.Letters') }} <br />
-                                </span>
-                          <span v-if="v$[`title_color_${lang}`].maxLength.$invalid">{{ $t('validation.TitleIsMustHaveAtMost') }} {{
-                              v$[`title_color_${lang}`].maxLength.$params.max
-                            }} {{ $t('validation.Letters') }}
-                                </span></div>
-                        <template v-if="errors[`title_color_${lang}`]">
-                          <error-message v-for="(errorMessage, index) in errors[`title_color_${lang}`]" :key="index">
-                            {{ errorMessage }}
-                          </error-message>
-                        </template>
-                      </div>
-                      <div class="col-md-6 mb-2" v-for="lang in languages">
                         <label class="form-label">{{ $t('label.title') }} ({{ lang == 'ar' ? 'عربي' : 'English' }})</label>
                         <input type="text" class="form-control form-control-lg"  v-model="v$[`title_${lang}`].$model"
                                :class="{'is-invalid': v$[`title_${lang}`].$error || errors[`title_${lang}`],
@@ -72,13 +50,9 @@
 
 
                         <div class="invalid-feedback">
-                           <span v-if="v$.description_ar.required.$invalid">
-                            {{ $t('validation.fieldRequired') }}<br />
-                          </span>
-
-                          <span v-if="v$.description_ar.minLength?.$invalid">
+                          <span v-if="v$.description_ar.maxLength?.$invalid">
                             {{ $t('validation.DescriptionArIsMustHaveAtMost') }}
-                            {{ v$.description_ar.minLength.$params.min }}
+                            {{ v$.description_ar.maxLength.$params.max }}
                             {{ $t('validation.Letters') }}<br />
                           </span>
 
@@ -106,13 +80,9 @@
                             </textarea>
 
                         <div class="invalid-feedback">
-                            <span v-if="v$.description_en.required.$invalid">
-                              {{ $t('validation.fieldRequired') }}<br />
-                            </span>
-
-                          <span v-if="v$.description_en.minLength?.$invalid">
+                          <span v-if="v$.description_en.maxLength?.$invalid">
                               {{ $t('validation.DescriptionEnIsMustHaveAtMost') }}
-                              {{ v$.description_en.minLength.$params.min }}
+                              {{ v$.description_en.maxLength.$params.max }}
                               {{ $t('validation.Letters') }}<br />
                             </span>
 
@@ -276,8 +246,6 @@
     submitData.data.image = '';
     submitData.data.description_ar = '';
     submitData.data.description_en = '';
-    submitData.data.title_color_ar = '';
-    submitData.data.title_color_en = '';
     submitData.data.title_ar = '';
     submitData.data.title_en = '';
     is_disabled.value = false;
@@ -298,12 +266,10 @@
             .then((res) => {
               loading.value = true;
               let l = res.data.data;
-              submitData.data.description_ar = l.description_ar;
-              submitData.data.description_en = l.description_en;
-              submitData.data.title_en = l.title_en;
-              submitData.data.title_color_en = l.title_color_en;
-              submitData.data.title_ar = l.title_ar;
-              submitData.data.title_color_ar = l.title_color_ar;
+              submitData.data.description_ar = l.description_ar || '';
+              submitData.data.description_en = l.description_en || '';
+              submitData.data.title_en = l.title_en || '';
+              submitData.data.title_ar = l.title_ar || '';
               submitData.data.status = l.status == 1;
               imageUpload.value = l.background;
             })
@@ -327,8 +293,6 @@
       image: '',
       description_ar: '',
       description_en: '',
-      title_color_en: '',
-      title_color_ar: '',
       title_en: '',
       title_ar: '',
     }
@@ -336,12 +300,10 @@
 
   const rules = computed(() => {
     return {
-      title_ar: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      title_en: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      title_color_ar: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      title_color_en: {minLength: minLength(1),maxLength:maxLength(100),required,},
-      description_ar: {minLength: minLength(1),maxLength:maxLength(500),required,},
-      description_en: {minLength: minLength(1),maxLength:maxLength(500),required,},
+      title_ar: {minLength: minLength(1),maxLength:maxLength(200),required,},
+      title_en: {minLength: minLength(1),maxLength:maxLength(200),required,},
+      description_ar: {maxLength:maxLength(500)},
+      description_en: {maxLength:maxLength(500)},
       image: {required: requiredIf( (value) => {
           return props.type == 'create' || !imageUpload.value;
         })
@@ -360,10 +322,8 @@
       let formData = new FormData();
       formData.append('title_ar', submitData.data.title_ar);
       formData.append('title_en', submitData.data.title_en);
-      formData.append('title_color_ar', submitData.data.title_color_ar);
-      formData.append('title_color_en', submitData.data.title_color_en);
-      formData.append('description_ar', submitData.data.description_ar);
-      formData.append('description_en', submitData.data.description_en);
+      formData.append('description_ar', submitData.data.description_ar || '');
+      formData.append('description_en', submitData.data.description_en || '');
       formData.append('status', submitData.data.status ? 1 : 0);
       if(submitData.data.image) {
         formData.append('image', submitData.data.image);
