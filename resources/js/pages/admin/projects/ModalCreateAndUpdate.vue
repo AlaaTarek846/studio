@@ -12,7 +12,41 @@
                 <div class="modal-body">
                     <div class="row">
 
-                        <div class="col-md-12 mt-2">
+                      <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('label.sort') }}</label>
+
+                          <input
+                            type="number"
+                            class="form-control form-control-lg"
+                            v-model="v$.sort.$model"
+                            :class="{
+                              'is-invalid': v$.sort.$error || errors['sort'],
+                              'is-valid': !v$.sort.$invalid && !errors['sort']
+                            }"
+                          />
+
+                          <div class="invalid-feedback">
+                            <span v-if="v$.sort.required.$invalid">
+                              {{ $t('validation.fieldRequired') }}<br />
+                            </span>
+
+                            <span v-if="v$.sort.minValue?.$invalid">
+                              {{ $t('validation.SortMustBeAtLeast') }}
+                              {{ v$.sort.minValue.$params.min }}
+                              {{ $t('validation.Value') }}<br />
+                            </span>
+
+                            <template v-if="errors['sort']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['sort']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                        <div class="col-md-6 mt-2">
                             <div class="custom-toggle-switch d-flex align-items-center mt-4">
                                 <input id="toggleswitchPrimary" v-model="submitData.data.status" type="checkbox">
                                 <label for="toggleswitchPrimary" class="label-primary"></label><span class="ms-3">{{ $t('label.status') }}</span>
@@ -24,32 +58,32 @@
                             </template>
                         </div>
                         <div class="col-md-6 mb-2">
-                          <label class="form-label">{{ $t('global.year') }}</label>
+                          <label class="form-label">{{ $t('global.cost') }}</label>
 
                           <input
                             type="number"
                             class="form-control form-control-lg"
-                            v-model="v$.year.$model"
+                            v-model="v$.cost.$model"
                             :class="{
-                              'is-invalid': v$.year.$error || errors['year'],
-                              'is-valid': !v$.year.$invalid && !errors['year']
+                              'is-invalid': v$.cost.$error || errors['cost'],
+                              'is-valid': !v$.cost.$invalid && !errors['cost']
                             }"
                           />
 
                           <div class="invalid-feedback">
-                            <span v-if="v$.year.required.$invalid">
+                            <span v-if="v$.cost.required.$invalid">
                               {{ $t('validation.fieldRequired') }}<br />
                             </span>
 
-                            <span v-if="v$.year.minValue?.$invalid">
-                              {{ $t('validation.YearMustBeAtLeast') }}
-                              {{ v$.year.minValue.$params.min }}
+                            <span v-if="v$.cost.minValue?.$invalid">
+                              {{ $t('validation.CostMustBeAtLeast') }}
+                              {{ v$.cost.minValue.$params.min }}
                               {{ $t('validation.Value') }}<br />
                             </span>
 
-                            <template v-if="errors['year']">
+                            <template v-if="errors['cost']">
                               <error-message
-                                v-for="(errorMessage, index) in errors['year']"
+                                v-for="(errorMessage, index) in errors['cost']"
                                 :key="index"
                               >
                                 {{ errorMessage }}
@@ -57,27 +91,267 @@
                             </template>
                           </div>
                       </div>
-                      <div class="col-md-6">
-                        <label class="form-label">{{ $t('global.company') }}</label>
+                       <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.link') }}</label>
 
-                        <Select v-model="v$.company_id.$model" :filterFields="['id', 'title']" :options="categories" filter
-                                :invalid="v$.company_id.$error || errors[`company_id`]" optionLabel="title" optionValue="id"
-                                :class="['w-full w-100', { 'is-invalid': v$.company_id.$error || errors[`company_id`], 'is-valid': !v$.company_id.$invalid && !errors[`company_id`] }]">
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.link.$model"
+                            :class="{
+                              'is-invalid': v$.link.$error || errors['link'],
+                              'is-valid': !v$.link.$invalid && !errors['link']
+                            }"
+                          />
 
-                        </Select>
-                        <div class="invalid-feedback">
-                <span v-if="v$.company_id.required.$invalid">{{
-                    $t('global.ThisFieldIsRequired') }}<br />
-                </span>
-                        </div>
-                        <template v-if="errors['company_id']">
-                          <error-message v-for="(errorMessage, index) in errors['company_id']" :key="index">
-                            {{ errorMessage }}
-                          </error-message>
-                        </template>
+                          <div class="invalid-feedback">
+                           <span v-if="v$.link.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.link.minLength?.$invalid">
+                            {{ $t('validation.LinkIsMustHaveAtMost') }}
+                            {{ v$.link.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
+
+                            <span v-if="v$.link.maxLength?.$invalid">
+                              {{ $t('validation.LinkIsMustHaveAtLeast') }}
+                              {{ v$.link.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['link']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['link']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
                       </div>
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.industry') }}</label>
 
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.industry.$model"
+                            :class="{
+                              'is-invalid': v$.industry.$error || errors['industry'],
+                              'is-valid': !v$.industry.$invalid && !errors['industry']
+                            }"
+                          />
 
+                          <div class="invalid-feedback">
+                           <span v-if="v$.industry.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.industry.minLength?.$invalid">
+                            {{ $t('validation.IndustryIsMustHaveAtMost') }}
+                            {{ v$.industry.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
+
+                            <span v-if="v$.industry.maxLength?.$invalid">
+                              {{ $t('validation.IndustryIsMustHaveAtLeast') }}
+                              {{ v$.industry.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['industry']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['industry']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                         <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.client') }}</label>
+
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.client.$model"
+                            :class="{
+                              'is-invalid': v$.client.$error || errors['client'],
+                              'is-valid': !v$.client.$invalid && !errors['client']
+                            }"
+                          />
+
+                          <div class="invalid-feedback">
+                           <span v-if="v$.client.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.client.minLength?.$invalid">
+                            {{ $t('validation.ClientIsMustHaveAtMost') }}
+                            {{ v$.client.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
+
+                            <span v-if="v$.client.maxLength?.$invalid">
+                              {{ $t('validation.ClientIsMustHaveAtLeast') }}
+                              {{ v$.client.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['client']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['client']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                         <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.core_technologies') }}</label>
+
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.core_technologies.$model"
+                            :class="{
+                              'is-invalid': v$.core_technologies.$error || errors['core_technologies'],
+                              'is-valid': !v$.core_technologies.$invalid && !errors['core_technologies']
+                            }"
+                          />
+
+                          <div class="invalid-feedback">
+                           <span v-if="v$.core_technologies.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.core_technologies.minLength?.$invalid">
+                            {{ $t('validation.CoreTechnologiesIsMustHaveAtMost') }}
+                            {{ v$.core_technologies.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
+
+                            <span v-if="v$.core_technologies.maxLength?.$invalid">
+                              {{ $t('validation.CoreTechnologiesIsMustHaveAtLeast') }}
+                              {{ v$.core_technologies.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['core_technologies']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['core_technologies']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                          <div class="col-md-6">
+                          <label class="form-label">{{ $t('global.projectCategory') }}</label>
+                          <Select v-model="submitData.data.project_category_id"
+                            :options="dataProjectCategories"
+                            option-label="title_ar"
+                            option-value="id"
+                            :placeholder="$t('global.projectCategory')"
+                            class="w-full  w-100"></Select>
+                          <div class="invalid-feedback" style="display: block">
+                            <template v-if="errors['project_category_id']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['project_category_id']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                                        
+
+                         <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.country_ar') }}</label>
+
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.country_ar.$model"
+                            :class="{
+                              'is-invalid': v$.country_ar.$error || errors['country_ar'],
+                              'is-valid': !v$.country_ar.$invalid && !errors['country_ar']
+                            }"
+                          />
+
+                          <div class="invalid-feedback">
+                           <span v-if="v$.country_ar.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.country_ar.minLength?.$invalid">
+                            {{ $t('validation.CountryArIsMustHaveAtMost') }}
+                            {{ v$.country_ar.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
+
+                            <span v-if="v$.country_ar.maxLength?.$invalid">
+                              {{ $t('validation.CountryArIsMustHaveAtLeast') }}
+                              {{ v$.country_ar.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['country_ar']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['country_ar']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.country_en') }}</label>
+
+                          <input
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="v$.country_en.$model"
+                            :class="{
+                              'is-invalid': v$.country_en.$error || errors['country_en'],
+                              'is-valid': !v$.country_en.$invalid && !errors['country_en']
+                            }"
+                          />
+
+                          <div class="invalid-feedback">
+                            <span v-if="v$.country_en.required.$invalid">
+                              {{ $t('validation.fieldRequired') }}<br />
+                            </span>
+
+                            <span v-if="v$.country_en.minLength?.$invalid">
+                              {{ $t('validation.CountryEnIsMustHaveAtMost') }}
+                              {{ v$.country_en.minLength.$params.min }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <span v-if="v$.country_en.maxLength?.$invalid">
+                              {{ $t('validation.CountryEnIsMustHaveAtLeast') }}
+                              {{ v$.country_en.maxLength.$params.max }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                            <template v-if="errors['country_en']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['country_en']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
                        
                          <div class="col-md-6 mb-2">
                           <label class="form-label">{{ $t('global.title_ar') }}</label>
@@ -162,73 +436,178 @@
 
 
 
-                      <div class="col-md-6 mb-2">
-                        <label class="form-label">{{ $t('global.description_ar') }}</label>
+                       <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.description_ar') }}</label>
 
+                          
 
+                           <Editor ref="descRef" v-model="v$.description_ar.$model" />
 
-                        <Editor ref="descRef" v-model="v$.description_ar.$model" />
-
-                        <div class="invalid-feedback">
+                          <div class="invalid-feedback">
                            <span v-if="v$.description_ar.required.$invalid">
                             {{ $t('validation.fieldRequired') }}<br />
                           </span>
 
-                          <span v-if="v$.description_ar.minLength?.$invalid">
+                           <span v-if="v$.description_ar.minLength?.$invalid">
                             {{ $t('validation.DescriptionArIsMustHaveAtMost') }}
                             {{ v$.description_ar.minLength.$params.min }}
                             {{ $t('validation.Letters') }}<br />
                           </span>
 
-
-                          <template v-if="errors['description_ar']">
-                            <error-message
+                          
+                            <template v-if="errors['description_ar']">
+                              <error-message
                                 v-for="(errorMessage, index) in errors['description_ar']"
                                 :key="index"
-                            >
-                              {{ errorMessage }}
-                            </error-message>
-                          </template>
-                        </div>
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
                       </div>
-                      <div class="col-md-6 mb-2">
-                        <label class="form-label">{{ $t('global.description_en') }}</label>
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.description_en') }}</label>
 
 
-                        <Editor ref="descRef" v-model="v$.description_en.$model" />
+                            <Editor ref="descRef" v-model="v$.description_en.$model" />
 
-                        <div class="invalid-feedback">
+                          <div class="invalid-feedback">
                             <span v-if="v$.description_en.required.$invalid">
                               {{ $t('validation.fieldRequired') }}<br />
                             </span>
 
-                          <span v-if="v$.description_en.minLength?.$invalid">
+                            <span v-if="v$.description_en.minLength?.$invalid">
                               {{ $t('validation.DescriptionEnIsMustHaveAtMost') }}
                               {{ v$.description_en.minLength.$params.min }}
                               {{ $t('validation.Letters') }}<br />
                             </span>
 
+                         
 
-
-                          <template v-if="errors['description_en']">
-                            <error-message
+                            <template v-if="errors['description_en']">
+                              <error-message
                                 v-for="(errorMessage, index) in errors['description_en']"
                                 :key="index"
-                            >
-                              {{ errorMessage }}
-                            </error-message>
-                          </template>
-                        </div>
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
                       </div>
 
 
                       
+                       <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.overview_ar') }}</label>
+
+                           <Editor ref="descRef" v-model="v$.overview_ar.$model" />
+
+                          <div class="invalid-feedback">
+                           <span v-if="v$.overview_ar.required.$invalid">
+                            {{ $t('validation.fieldRequired') }}<br />
+                          </span>
+
+                           <span v-if="v$.overview_ar.minLength?.$invalid">
+                            {{ $t('validation.OverviewArIsMustHaveAtMost') }}
+                            {{ v$.overview_ar.minLength.$params.min }}
+                            {{ $t('validation.Letters') }}<br />
+                          </span>
 
 
+                            <template v-if="errors['overview_ar']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['overview_ar']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.overview_en') }}</label>
 
+
+                            <Editor ref="descRef" v-model="v$.overview_en.$model" />
+
+                          <div class="invalid-feedback">
+                            <span v-if="v$.overview_en.required.$invalid">
+                              {{ $t('validation.fieldRequired') }}<br />
+                            </span>
+
+                            <span v-if="v$.overview_en.minLength?.$invalid">
+                              {{ $t('validation.OverviewEnIsMustHaveAtMost') }}
+                              {{ v$.overview_en.minLength.$params.min }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                         
+
+                            <template v-if="errors['overview_en']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['overview_en']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.challenge_ar') }}</label>
+
+                           <Editor ref="descRef" v-model="v$.challenge_ar.$model" />
+                          
+                          <div class="invalid-feedback">
+
+                            <span v-if="v$.challenge_ar.minLength?.$invalid">
+                              {{ $t('validation.ChallengeArIsMustHaveAtMost') }}
+                              {{ v$.challenge_ar.minLength.$params.min }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                              <template v-if="errors['challenge_ar']">
+                                <error-message
+                                  v-for="(errorMessage, index) in errors['challenge_ar']"
+                                  :key="index"
+                                >
+                                  {{ errorMessage }}
+                                </error-message>
+                              </template>
+                          </div>
+                      </div>
+                        <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.challenge_en') }}</label>
+
+
+                            <Editor ref="descRef" v-model="v$.challenge_en.$model" />
+
+                          <div class="invalid-feedback">
+
+                            <span v-if="v$.challenge_en.minLength?.$invalid">
+                              {{ $t('validation.ChallengeEnIsMustHaveAtMost') }}
+                              {{ v$.challenge_en.minLength.$params.min }}
+                              {{ $t('validation.Letters') }}<br />
+                            </span>
+
+                         
+
+                            <template v-if="errors['challenge_en']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['challenge_en']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                            
+                      </div>
+                        
 
                         <div class="col-md-12 mt-3">
-                          <label class="form-label">صورة الخلفية (424 * 521)</label>
+                          <label class="form-label">صورة الخلفية (800 * 790)</label>
                           <div class="row img-div-position">
                             <div class="col-12 text-end">
                               <button
@@ -304,28 +683,12 @@
   import {useStore} from "vuex";
   import Editor from 'primevue/editor';
   const components = { Editor };
-  const categories = ref([]);
 
   const props = defineProps({
       type: {default: 'create'},
       dataRow: {default: ''},
+      dataProjectCategories: {default: () => []},
   });
-  let getCategories = (id) => {
-    loading.value = true;
-    adminApi.get(`companies-dropdown`)
-        .then((res) => {
-          let l = res.data.data;
-          categories.value = l;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        })
-        .finally(() => {
-          loading.value = false;
-        })
-  }
-
-
 
   const emit = defineEmits(['created','getStatus']);
 
@@ -350,19 +713,28 @@
   const imageUpload = ref('');
 
   onMounted(()=>{
-    getCategories();
   });
-
 
   function defaultData(){
 
-    submitData.data.company_id = '';
+    submitData.data.sort = '';
     submitData.data.image = '';
     submitData.data.title_en = '';
     submitData.data.title_ar = '';
     submitData.data.description_en = '';
     submitData.data.description_ar = '';
-    submitData.data.year = '';
+    submitData.data.overview_en = '';
+    submitData.data.overview_ar = '';
+    submitData.data.challenge_en = '';
+    submitData.data.challenge_ar = '';
+    submitData.data.country_ar = '';
+    submitData.data.country_en = '';
+    submitData.data.link = '';
+    submitData.data.cost = '';
+    submitData.data.industry = '';
+    submitData.data.client = '';
+    submitData.data.core_technologies = '';
+    submitData.data.project_category_id = '';
     submitData.data.status = true;
     submitData.data.image = '';
     is_disabled.value = false;
@@ -383,13 +755,24 @@
             .then((res) => {
               loading.value = true;
               let l = res.data.data;
-              submitData.data.company_id = l.company_id;
+              submitData.data.sort = l.sort;
               imageUpload.value = l.media;
               submitData.data.title_en = l.title_en;
               submitData.data.title_ar = l.title_ar;
               submitData.data.description_en = l.description_en;
               submitData.data.description_ar = l.description_ar;
-              submitData.data.year = l.year;
+              submitData.data.overview_en = l.overview_en;
+              submitData.data.overview_ar = l.overview_ar;
+              submitData.data.challenge_en = l.challenge_en;
+              submitData.data.challenge_ar = l.challenge_ar;
+              submitData.data.country_en = l.country_en;
+              submitData.data.country_ar = l.country_ar;
+              submitData.data.link = l.link;
+              submitData.data.cost = l.cost;
+              submitData.data.industry = l.industry;
+              submitData.data.client = l.client;
+              submitData.data.core_technologies = l.core_technologies;
+              submitData.data.project_category_id = l.project_category_id;
               submitData.data.status = l.status == 1;
             })
             .catch((err) => {
@@ -414,8 +797,19 @@
       title_ar: '',
       description_en: '',
       description_ar: '',
-      year: '',
-      company_id: '',
+      overview_en: '',
+      overview_ar: '',
+      challenge_en: '',
+      challenge_ar: '',
+      country_en: '',
+      country_ar: '',
+      link: '',
+      cost: '',
+      industry: '',
+      client: '',
+      core_technologies: '',
+      project_category_id: '',
+      sort: '',
     }
   });
 
@@ -426,15 +820,34 @@
           return props.type == 'create' || !imageUpload.value;
         })
       },
-      company_id: {required,integer},
+      sort: {required,integer,between: (value) => {
+          if(value === undefined || value === null || value === '') return true;
+          return value >= 1 && value <= 15;
+      }
+      },
       title_en: {required,minLength: minLength(5),maxLength: maxLength(191)},
       title_ar: {required,minLength: minLength(5),maxLength: maxLength(191)},
+      country_en: {required,minLength: minLength(2),maxLength: maxLength(191)},
+      country_ar: {required,minLength: minLength(2),maxLength: maxLength(191)},
       description_en: {required,minLength: minLength(5)},
       description_ar: {required,minLength: minLength(5)},
-      year: {required,integer,between: (value) => {
+      overview_en: {required,minLength: minLength(5)},
+      overview_ar: {required,minLength: minLength(5)},
+      challenge_en: {minLength: minLength(5)},
+      challenge_ar: {minLength: minLength(5)},
+      link: {required,minLength: minLength(5),maxLength: maxLength(191),logical: (value) => {
+          if(value === undefined || value === null || value === '') return true;
+          const pattern = /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/i;
+          return pattern.test(value);
+      }},
+      cost: {required,integer,between: (value) => {
           if(value === undefined || value === null || value === '') return true;
           return value >= 1 && value <= 9999999999;
       }},
+      industry: {required,minLength: minLength(2),maxLength: maxLength(191)},
+      client: {required,minLength: minLength(2),maxLength: maxLength(191)},
+      core_technologies: {required,minLength: minLength(2),maxLength: maxLength(191)},
+      project_category_id: {required},
     }
   });
 
@@ -451,8 +864,19 @@
       formData.append('title_ar', submitData.data.title_ar);
       formData.append('description_en', submitData.data.description_en);
       formData.append('description_ar', submitData.data.description_ar);
-      formData.append('year', submitData.data.year);
-      formData.append('company_id', submitData.data.company_id);
+      formData.append('overview_en', submitData.data.overview_en);
+      formData.append('overview_ar', submitData.data.overview_ar);
+      formData.append('challenge_en', submitData.data.challenge_en);
+      formData.append('challenge_ar', submitData.data.challenge_ar);
+      formData.append('country_en', submitData.data.country_en);
+      formData.append('country_ar', submitData.data.country_ar);
+      formData.append('link', submitData.data.link);
+      formData.append('cost', submitData.data.cost);
+      formData.append('industry', submitData.data.industry);
+      formData.append('client', submitData.data.client);
+      formData.append('core_technologies', submitData.data.core_technologies);
+      formData.append('sort', submitData.data.sort);
+      formData.append('project_category_id', submitData.data.project_category_id);
 
     if(submitData.data.image) {
       formData.append('image', submitData.data.image);

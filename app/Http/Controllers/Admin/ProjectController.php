@@ -26,27 +26,27 @@ class ProjectController extends Controller
 
     public function index(Request $request)
     {
-        $projects = Project::with('media','company')->paginate(10);
+        $projects = Project::with('media','projectCategory')->paginate(10);
         return responseJson(ProjectResource::collection($projects->items()),'',200,getPaginates($projects));
     }
 
     public function store(ProjectRequest $request)
     {
         $project = Project::create($request->validated());
-        saveFiles($request->image,$project,"project",'image');
+        saveFiles($request->image,$project,"service");
         return responseJson([],'Created Successfully',200);
     }
 
     public function show($id)
     {
-        $projects = Project::with(['media','company'])->find($id);
+        $projects = Project::with(['media','translations'])->find($id);
         return responseJson($projects,'Data exited successfully',200);
     }
 
     public function update(ProjectRequest $request, Project $project)
     {
         if ($request->hasFile('image')) 
-            saveFiles($request->image,$project,"project",'image','update');
+            saveFiles($request->image,$project,"service",null,'update');
 
         $project->update($request->validated());
         return responseJson([],'Updated Successfully',200);
@@ -54,14 +54,14 @@ class ProjectController extends Controller
 
     public function destroy(Project $project)
     {
-        deleteFile($project);
+        deleteFile($projects);
         $project->delete();
         return responseJson([],'Deleted Successfully',200);
     }
 
     public function dropdown( )
     {
-        $projects = Project::whereStatus('1')->get();
-        return responseJson(ProjectResource::collection($projects),'Data exited successfully',200);
+        $projects = Project::all();
+        return responseJson($projects,'Data exited successfully',200);
     }
 }

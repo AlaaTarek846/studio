@@ -136,103 +136,36 @@
 
     <!-- Start::home -->
     <li
-            class="slide has-sub {{ request()->routeIs('admin.page.property-types')   || request()->routeIs('admin.page.companies')  || request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.areas')|| request()->routeIs('admin.page.properties')|| request()->routeIs('admin.page.resales') ? 'active open' : '' }}">
+            class="slide has-sub {{ request()->routeIs('admin.page.project-categories') || request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.project-challenge-solutions') ? 'active open' : '' }}">
         <a href="javascript:void(0);"
-           class="side-menu__item {{ request()->routeIs('admin.page.property-types') ||  request()->routeIs('admin.page.companies')  || request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.areas')|| request()->routeIs('admin.page.properties')|| request()->routeIs('admin.page.resales') ? 'active' : '' }}">
+           class="side-menu__item {{ request()->routeIs('admin.page.articles') || request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.project-challenge-solutions') ? 'active' : '' }}">
             <i class="bi bi-map side-menu__icon"></i>
-            <span class="side-menu__label">المشاريع </span>
+            <span class="side-menu__label">صفحة المشاريع</span>
             <i class="fe fe-chevron-right side-menu__angle"></i>
+
         </a>
+
         <ul class="slide-menu child1">
             <li class="slide side-menu__label1">
-                <a href="javascript:void(0)">المشاريع</a>
+                <a href="javascript:void(0)">صفحة المشاريع</a>
             </li>
+
+
+
             <li class="slide">
-                <a href="{{ route('admin.page.property-types') }}"
-                   class="side-menu__item {{ request()->routeIs('admin.page.property-types') ? 'active' : '' }}">
-                    أنواع العقارات
+                <a href="{{ route('admin.page.project-categories') }}"
+                   class="side-menu__item {{ request()->routeIs('admin.page.project-categories') ? 'active' : '' }}">
+                    فئات المشاريع
                 </a>
             </li>
-            <!-- Start::articles -->
-            <li
-                    class="slide has-sub {{ request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.companies') || request()->routeIs('admin.page.areas') || request()->routeIs('admin.page.properties') ? 'active open' : '' }}">
-                <a href="javascript:void(0);"
-                   class="side-menu__item {{ request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.companies') || request()->routeIs('admin.page.areas')|| request()->routeIs('admin.page.properties') ? 'active' : '' }}">
-                    <i class="bi bi-map side-menu__icon"></i>
-                    <span class="side-menu__label"> primary</span>
-                    <i class="fe fe-chevron-right side-menu__angle"></i>
 
+
+            <li class="slide">
+                <a href="{{ route('admin.page.projects') }}"
+                   class="side-menu__item {{ request()->routeIs('admin.page.projects') ? 'active' : '' }}">
+                    المشاريع
                 </a>
-
-                <ul class="slide-menu child1">
-                    <li class="slide side-menu__label1">
-                        <a href="javascript:void(0)"> primary</a>
-                    </li>
-
-                    <li class="slide">
-                        <a href="{{ route('admin.page.companies') }}"
-                           class="side-menu__item {{ request()->routeIs('admin.page.companies') ? 'active' : '' }}">
-                            الشركات
-                        </a>
-                    </li>
-
-                    <li class="slide">
-                        <a href="{{ route('admin.page.projects') }}"
-                           class="side-menu__item {{ request()->routeIs('admin.page.projects') ? 'active' : '' }}">
-                            المشاريع
-                        </a>
-                    </li>
-
-                    <li class="slide">
-                        <a href="{{ route('admin.page.areas') }}"
-                           class="side-menu__item {{ request()->routeIs('admin.page.areas') ? 'active' : '' }}">
-                            المناطق
-                        </a>
-                    </li>
-
-                   <li class="slide">
-                        <a href="{{ route('admin.page.properties') }}"
-                           class="side-menu__item {{ request()->routeIs('admin.page.properties') ? 'active' : '' }}">
-                            العقارات
-                        </a>
-                    </li>
-
-
-
-                </ul>
             </li>
-            <!-- End::articles -->
-            <!-- Start::articles -->
-            <li
-                    class="slide has-sub {{ request()->routeIs('admin.page.resales')   ? 'active open' : '' }}">
-                <a href="javascript:void(0);"
-                   class="side-menu__item {{ request()->routeIs('admin.page.resales')  ? 'active' : '' }}">
-                    <i class="bi bi-map side-menu__icon"></i>
-                    <span class="side-menu__label"> Resale</span>
-                    <i class="fe fe-chevron-right side-menu__angle"></i>
-
-                </a>
-
-                <ul class="slide-menu child1">
-                    <li class="slide side-menu__label1">
-                        <a href="javascript:void(0)"> Resale</a>
-                    </li>
-
-
-
-                   <li class="slide">
-                        <a href="{{ route('admin.page.resales') }}"
-                           class="side-menu__item {{ request()->routeIs('admin.page.resales') ? 'active' : '' }}">
-                            العقارات
-                        </a>
-                    </li>
-
-
-
-                </ul>
-            </li>
-            <!-- End::articles -->
-
 
         </ul>
     </li>
