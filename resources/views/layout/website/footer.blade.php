@@ -5,66 +5,87 @@
             <div class="container">
                 <div class="row justify-content-between align-items-center footer-nav">
                     <div class="col-xl-2 col-md-2 col-sm-12 col-12">
-                        <a class="navbar-brand" href="index.html">
-                            <img class="logo" src="/website/img/logo.png" alt="Desart" width="127" height="50" >
+                        <a class="navbar-brand" href="{{ route('home') }}">
+                            <img class="logo" src="/website/img/logo.png" alt="{{ $shareSetting?->title ?? 'Studio' }}" width="127" height="50" >
                         </a>
                     </div>
-                    <div class="col-xl10 col-md-10 col-sm-12 col-12">
+                    <div class="col-xl-10 col-md-10 col-sm-12 col-12">
                         <ul class="nav justify-content-end">
-                            <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="portfolio.html">Portfolio</a></li>
-                            <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contacts</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">{{ __('website.home') }}</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">{{ __('website.about') }}</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('service') ? 'active' : '' }}" href="{{ route('service') }}">{{ __('website.services') }}</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('projects') ? 'active' : '' }}" href="{{ route('projects') }}">{{ __('website.Acting workshops') }}</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('blogs') ? 'active' : '' }}" href="{{ route('blogs') }}">{{ __('website.Blogs') }}</a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}" href="{{ route('contact') }}">{{ __('website.contact') }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="row justify-content-between footer-info">
                     <div class="col-xl-5 col-md-8 col-sm-8 col-12">
-                        <h3 class="title-h3">About</h3>
+                        <h3 class="title-h3">{{ __('website.about') }}</h3>
                         <p>
-                            We’ve got a lot of awards for our work and develop applications that became popular in the world. We try not to miss important details in each area.
+                            {{ __('website.Footer About Description') }}
                         </p>
-                        <ul class="list-social">
-                            <li class="list-social-item"><a href="" target="_blank" class="list-social-link"><i class="zmdi zmdi-facebook"></i></a></li>
-                            <li class="list-social-item"><a href="" target="_blank" class="list-social-link"><i class="zmdi zmdi-linkedin"></i></a></li>
-                            <li class="list-social-item"><a href="" target="_blank" class="list-social-link"><i class="zmdi zmdi-twitter"></i></a></li>
-                            <li class="list-social-item"><a href="" target="_blank" class="list-social-link"><i class="zmdi zmdi-pinterest"></i></a></li>
-                            <li class="list-social-item"><a href="" target="_blank" class="list-social-link"><i class="zmdi zmdi-behance"></i></a></li>
-                        </ul>
+                        @if($shareSetting)
+                            <ul class="list-social">
+                                @if($shareSetting->facebook)
+                                    <li class="list-social-item"><a href="{{ $shareSetting->facebook }}" target="_blank" class="list-social-link"><i class="zmdi zmdi-facebook"></i></a></li>
+                                @endif
+                                @if($shareSetting->linkedin)
+                                    <li class="list-social-item"><a href="{{ $shareSetting->linkedin }}" target="_blank" class="list-social-link"><i class="zmdi zmdi-linkedin"></i></a></li>
+                                @endif
+                                @if($shareSetting->twitter)
+                                    <li class="list-social-item"><a href="{{ $shareSetting->twitter }}" target="_blank" class="list-social-link"><i class="zmdi zmdi-twitter"></i></a></li>
+                                @endif
+                                @if($shareSetting->instagram)
+                                    <li class="list-social-item"><a href="{{ $shareSetting->instagram }}" target="_blank" class="list-social-link"><i class="zmdi zmdi-instagram"></i></a></li>
+                                @endif
+                            </ul>
+                        @endif
                     </div>
                     <div class="col-xl-1 col-md-4 col-sm-4 col-12"></div>
                     <div class="col-xl-3 col-md-6 col-sm-6 col-12">
                         <h3 class="title-h3">
-                            Services
+                            {{ __('website.services') }}
                         </h3>
-                        <ul class="list-services">
-                            <li class="list-services-item"><a class="list-services-link" href="services-detail.html">Brand Identity</a></li>
-                            <li class="list-services-item"><a class="list-services-link" href="services-detail.html">Marketing Strategy</a></li>
-                            <li class="list-services-item"><a class="list-services-link" href="services-detail.html">App Development</a></li>
-                            <li class="list-services-item"><a class="list-services-link" href="services-detail.html">eCommerce</a></li>
-                            <li class="list-services-item"><a class="list-services-link" href="services-detail.html">Landing Pages</a></li>
-                        </ul>
+                        @if($footerServices && $footerServices->count() > 0)
+                            <ul class="list-services">
+                                @foreach($footerServices as $service)
+                                    <li class="list-services-item">
+                                        <a class="list-services-link" href="{{ route('service-details', $service->slug) }}">
+                                            {{ app()->getLocale() == 'ar' ? $service->title_ar : $service->title_en }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
                     </div>
                     <div class="col-xl-3 col-md-6 col-sm-6 col-12">
                         <h3 class="title-h3">
-                            Contact us
+                            {{ __('website.contact') }}
                         </h3>
-                        <ul class="list-contact">
-                            <li class="list-contact-item">
-                                <span class="box-icon"><i class="zmdi zmdi-pin"></i></span>
-                                <span>694-762 Dekalb Ave<br>Brooklyn, NY 11216 USA</span>
-                            </li>
-                            <li class="list-contact-item">
-                                <span class="box-icon"><i class="zmdi zmdi-phone"></i></span>
-                                <span>+1 6548 96 21</span>
-                            </li>
-                            <li class="list-contact-item">
-                                <span class="box-icon"><i class="zmdi zmdi-email"></i></span>
-                                <span>info@sitename.com</span>
-                            </li>
-                        </ul>
+                        @if($shareSetting)
+                            <ul class="list-contact">
+                                @if($shareSetting->address)
+                                    <li class="list-contact-item">
+                                        <span class="box-icon"><i class="zmdi zmdi-pin"></i></span>
+                                        <span>{!! nl2br(e($shareSetting->address)) !!}</span>
+                                    </li>
+                                @endif
+                                @if($shareSetting->mobile)
+                                    <li class="list-contact-item">
+                                        <span class="box-icon"><i class="zmdi zmdi-phone"></i></span>
+                                        <span>{{ $shareSetting->mobile }}</span>
+                                    </li>
+                                @endif
+                                @if($shareSetting->email)
+                                    <li class="list-contact-item">
+                                        <span class="box-icon"><i class="zmdi zmdi-email"></i></span>
+                                        <span>{{ $shareSetting->email }}</span>
+                                    </li>
+                                @endif
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -73,17 +94,17 @@
         <div class="container">
             <div class="row justify-content-between align-items-center footer-bottom">
                 <div class="col-6">
-                    &copy; Copyright 2019 George_Fx
+                    {{__('website.footer_message')}} <a href="https://innovations-eg.com" target="_blank">Innovation</a>
                 </div>
                 <div class="col-6 ">
-                    <ul class="list-footer">
-                        <li class="list-footer-item">
-                            <a href="" class="list-footer-link">Privacy Policy</a>
-                        </li>
-                        <li class="list-footer-item">
-                            <a href="" class="list-footer-link">Terms and Conditions</a>
-                        </li>
-                    </ul>
+{{--                    <ul class="list-footer">--}}
+{{--                        <li class="list-footer-item">--}}
+{{--                            <a href="" class="list-footer-link">Privacy Policy</a>--}}
+{{--                        </li>--}}
+{{--                        <li class="list-footer-item">--}}
+{{--                            <a href="" class="list-footer-link">Terms and Conditions</a>--}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
                 </div>
             </div>
         </div>
@@ -91,17 +112,25 @@
 </footer>
 
 <!-- Social Networks Fixed -->
-<ul class="social-networks">
-    <li class="social-networks-item">
-        <a href="" class="social-networks-link" target="_blank"><i class="zmdi zmdi-facebook"></i> facebook</a>
-    </li>
-    <li class="social-networks-item">
-        <a href="" class="social-networks-link" target="_blank"><i class="zmdi zmdi-linkedin"></i> linkedin</a>
-    </li>
-    <li class="social-networks-item">
-        <a href="" class="social-networks-link" target="_blank"><i class="zmdi zmdi-twitter"></i> twitter</a>
-    </li>
-</ul>
+@if($shareSetting)
+    <ul class="social-networks">
+        @if($shareSetting->facebook)
+            <li class="social-networks-item">
+                <a href="{{ $shareSetting->facebook }}" class="social-networks-link" target="_blank"><i class="zmdi zmdi-facebook"></i> facebook</a>
+            </li>
+        @endif
+        @if($shareSetting->linkedin)
+            <li class="social-networks-item">
+                <a href="{{ $shareSetting->linkedin }}" class="social-networks-link" target="_blank"><i class="zmdi zmdi-linkedin"></i> linkedin</a>
+            </li>
+        @endif
+        @if($shareSetting->twitter)
+            <li class="social-networks-item">
+                <a href="{{ $shareSetting->twitter }}" class="social-networks-link" target="_blank"><i class="zmdi zmdi-twitter"></i> twitter</a>
+            </li>
+        @endif
+    </ul>
+@endif
 
 {{--<!-- Video Modal -->--}}
 {{--<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}

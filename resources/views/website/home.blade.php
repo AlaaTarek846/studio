@@ -135,36 +135,28 @@
         <div class="container">
             <div class="row justify-content-end portfolio">
                 <div class="col-md-12 col-xl-4">
-                    <p class="before-title">recent projects</p>
-                    <h2 class="title-h2">Check Our Latest&nbsp;Cases</h2>
-                    <p class="description">We always try to implement our creative ideas at the highest level. You can see it by looking at our portfolio.</p>
-                    <a href="portfolio.html" class="btn btn-primary">View all</a>
+                    <p class="before-title">{{ __('website.recent projects') }}</p>
+                    <h2 class="title-h2">{{ __('website.Check Our Latest Workshops') }}</h2>
+                    <p class="description">{{ __('website.Latest Workshops Description') }}</p>
+                    <a href="{{ route('projects') }}" class="btn btn-primary">{{ __('website.View all') }}</a>
                 </div>
             </div>
         </div>
         <div class="box-case">
             <div class="row row-cols-3 row-case">
+                @foreach($projects as $index => $project)
                 <div class="col col-case">
-                    <div class="case-item case-1">
+                    <div class="case-item case-{{ $index + 1 }}" style="background-image: url('{{ $project->thumbnail ? $project->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
                         <div class="team-info">
-                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
+                            <p class="team-name">
+                                <a href="{{ route('project-details', $project->slug) }}" title="{{ $project->title }}">
+                                    {{ $project->title }}
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col col-case">
-                    <div class="case-item case-2">
-                        <div class="team-info">
-                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col col-case">
-                    <div class="case-item case-3">
-                        <div class="team-info">
-                            <p class="team-name"><a href="portfolio-details.html" title="">Clean design concept</a></p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

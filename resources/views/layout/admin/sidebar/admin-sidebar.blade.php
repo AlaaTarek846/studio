@@ -119,21 +119,6 @@
         </li>
     <!-- End::articles -->
 
-
-
-
-
-    <!-- Start::faq -->
-    <li class="slide">
-        <a href="{{ route('admin.page.gallery') }}"
-           class="side-menu__item {{ request()->routeIs('admin.page.gallery') ? 'active' : '' }}">
-            <i class="bi bi-map side-menu__icon"></i>
-            <span class="side-menu__label">صور</span>
-        </a>
-    </li>
-    <!-- End::faq -->
-
-
     <!-- Start::home -->
     <li
             class="slide has-sub {{ request()->routeIs('admin.page.project-categories') || request()->routeIs('admin.page.projects') || request()->routeIs('admin.page.project-challenge-solutions') ? 'active open' : '' }}">

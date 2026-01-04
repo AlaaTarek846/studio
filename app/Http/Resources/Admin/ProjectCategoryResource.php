@@ -12,7 +12,9 @@ class ProjectCategoryResource extends JsonResource
     {
         return [
             "id"    => $this->id,
-            "title" => $this->title_ar,
+            "title" => $this->title,
+            "title_ar" => $this->title_ar,
+            "title_en" => $this->title_en,
         ];
     }
 }

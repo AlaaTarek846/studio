@@ -266,40 +266,30 @@
         </div>
     </section>
 
-    <!-- Clients -->
+    <!-- Works -->
 
     <section class="section section-services">
         <div class="container">
 
-            <p class="before-title text-center">view more cases</p>
-            <h2 class="title-h2 text-center">Related Works</h2>
-            <p class="text-center after-title">We have many more similar and successful cases. Take a look and you can truly appreciate the level of our skills.</p>
+            <p class="before-title text-center">{{ __('website.view more cases') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Related Workshops') }}</h2>
+            <p class="text-center after-title">{{ __('website.Related Workshops Description') }}</p>
 
-            <div class="box-case box-case--static">
-                <div class="row row-cols-3 row-case">
-                    <div class="col col-case">
-                        <div class="case-item case-1">
-                            <div class="team-info">
-                                <p class="team-name">Clean design concept</p>
+            @if($relatedProjects && $relatedProjects->count() > 0)
+                <div class="box-case box-case--static">
+                    <div class="row row-cols-3 row-case">
+                        @foreach($relatedProjects as $index => $relatedProject)
+                            <div class="col col-case">
+                                <div class="case-item case-{{ $index + 1 }}" style="background-image: url('{{ $relatedProject->thumbnail ? $relatedProject->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                    <div class="team-info">
+                                        <p class="team-name"><a href="{{ route('project-details', $relatedProject->slug) }}" title="{{ $relatedProject->title }}">{{ $relatedProject->title }}</a></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-2">
-                            <div class="team-info">
-                                <p class="team-name">Clean design concept</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-3">
-                            <div class="team-info">
-                                <p class="team-name">Clean design concept</p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 

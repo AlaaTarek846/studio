@@ -76,6 +76,7 @@ Route::prefix('api')->group(function () {
         Route::apiResource('service-videos', ServiceVideoController::class);
         Route::get('projects-dropdown', [ProjectController::class, 'dropdown']);
         Route::apiResource('projects', ProjectController::class);
+        Route::delete('projects/slider/{projectId}/{imageId}', [ProjectController::class, 'deleteSliderImage']);
         Route::apiResource('settings', SettingController::class);
         Route::apiResource('articleCategory', ArticleCategoryController::class);
         Route::get('articlesQueries', [ArticleController::class, 'articlesQueries']);
@@ -117,7 +118,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
             Route::get('home-sliders', [HomeSliderController::class, 'indexPage'])->name('home-sliders');
             Route::get('partners', [PartnerController::class, 'indexPage'])->name('partners');
-            Route::get('faq-section', [FaqSectionController::class, 'indexPage'])->name('faq-section');
             Route::get('faqs', [AdminFaqController::class, 'indexPage'])->name('faq');
             Route::get('counters', [CounterController::class, 'indexPage'])->name('counter');
             Route::get('services', [ServiceController::class, 'indexPage'])->name('services');
@@ -133,17 +133,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('team', [AdminTeamController::class, 'indexPage'])->name('team');
             Route::get('testimonial', [TestimonialController::class, 'indexPage'])->name('testimonial');
             Route::get('project-categories', [ProjectCategoryController::class, 'indexPage'])->name('project-categories');
-            Route::get('project-challenge-solutions', [ProjectChallengeSolutionController::class, 'indexPage'])->name('project-challenge-solutions');
             Route::get('contact-messages', [ContactMessageController::class, 'indexPage'])->name('contact-messages');
             Route::get('subscribes', [SubscribeController::class, 'indexPage'])->name('subscribes');
             Route::get('clients', [ClientController::class, 'indexPage'])->name('clients');
             Route::get('gallery', [AdminGalleryController::class, 'indexPage'])->name('gallery');
             Route::get('policies', [PolicyController::class, 'indexPage'])->name('policies');
-            Route::get('property-types', [PropertyTypeController::class, 'indexPage'])->name('property-types');
             Route::get('companies', [CompanyController::class, 'indexPage'])->name('companies');
             Route::get('areas', [AreaController::class, 'indexPage'])->name('areas');
-            Route::get('properties', [PropertyController::class, 'indexPage'])->name('properties');
-            Route::get('resales', [ResaleController::class, 'indexPage'])->name('resales');
         });
 
         // logout
@@ -175,8 +171,9 @@ Route::get('/service/{slug}', [ServiceClientController::class, 'show'])->name('s
 Route::get('/team', [TeamController::class, 'index'])->name('team');
 Route::post('/contact-message', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/subscribe', [ContactController::class, 'subscribe'])->name('contact.subscribe');
+Route::get('/project/load-more', [App\Http\Controllers\Client\ProjectController::class, 'loadMore'])->name('projects.load-more');
 Route::get('/project', [App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects');
-Route::get('/project/{slug}', [App\Http\Controllers\Client\ProjectController::class, 'show'])->name('project-details');
+Route::get('/project/{slug}', [App\Http\Controllers\Client\ProjectController::class, 'show'])->where('slug', '^(?!load-more$).*$')->name('project-details');
 Route::get('/policy', [App\Http\Controllers\Client\SettingController::class, 'policy'])->name('policy');
 Route::get('/terms', [App\Http\Controllers\Client\SettingController::class, 'termCondition'])->name('termCondition');
 

@@ -1,6 +1,6 @@
 @extends('layout.website.master')
 
-@section('title','Modern Minimal Concept for Coolbabka Brand')
+@section('title', $project->title)
 
 @section('content')
     <!-- Banner Header -->
@@ -8,12 +8,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-md-12 col-sm-12 col-12">
-                    <h2 class="title-h2">Modern Minimal Concept for Coolbabka Brand</h2>
+                    <h2 class="title-h2">{{ $project->title }}</h2>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ __('website.home') }}</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('projects') }}">{{ __('website.Acting workshops') }}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Modern Minimal Concept for Coolbabka Brand</li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ $project->title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="section-banner__box">
             <div class="section-banner__thumb">
-                <img class="section-banner__img" src="/website/img/header-img.jpg" alt="Image Banner">
+                <img class="section-banner__img" src="{{ '/website/img/header-img.jpg' }}" alt="{{ $project->title }}">
             </div>
         </div>
     </section>
@@ -33,87 +33,88 @@
             <div class="row row-portfolio">
                 <div class="col-xl-8 col-md-12 col-sm-12 col-12">
                     <!--Carousel Wrapper-->
-                    <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio" data-ride="carousel">
-                        <!--Slides-->
-                        <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active">
-                                <img class="d-block w-100" src="https://via.placeholder.com/730x550" alt="First slide">
+                    @if($project->sliderImages && $project->sliderImages->count() > 0)
+                        <div id="carousel-thumb" class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio" data-ride="carousel">
+                            <!--Slides-->
+                            <div class="carousel-inner" role="listbox">
+                                @foreach($project->sliderImages as $index => $sliderImage)
+                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                        <img class="d-block w-100" src="{{ $sliderImage->url }}" alt="{{ $project->title }}">
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Second slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Third slide">
-                            </div>
-                            <div class="carousel-item">
-                                <img class="d-block w-100" src="https://via.placeholder.com/166x123" alt="Four slide">
+                            <!--/.Slides-->
+                            <!--Controls-->
+                            <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
+                                @if(app()->getLocale() == 'en')
+                                    <i class="zmdi zmdi-arrow-left"></i>
+                                @else
+                                    <i class="zmdi zmdi-arrow-right"></i>
+                                @endif
+                                <span class="sr-only">{{ __('website.Previous') }}</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
+                                @if(app()->getLocale() == 'en')
+                                    <i class="zmdi zmdi-arrow-right"></i>
+                                @else
+                                    <i class="zmdi zmdi-arrow-left"></i>
+                                @endif
+                                <span class="sr-only">{{ __('website.Next') }}</span>
+                            </a>
+                            <!--/.Controls-->
+                            <ol class="carousel-indicators carousel-indicators-portfolio">
+                                @foreach($project->sliderImages as $index => $sliderImage)
+                                    <li data-target="#carousel-thumb" data-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}">
+                                        <img src="{{ $sliderImage->url }}" alt="" width="100">
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </div>
+                    @else
+                        <div class="carousel slide carousel-fade carousel-thumbnails carousel-portfolio">
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img class="d-block w-100" src="{{ $project->thumbnail ? $project->thumbnail->url : '/website/img/service.jpg' }}" alt="{{ $project->title }}">
+                                </div>
                             </div>
                         </div>
-                        <!--/.Slides-->
-                        <!--Controls-->
-                        <a class="carousel-control-prev" href="#carousel-thumb" role="button" data-slide="prev">
-                            <i class="zmdi zmdi-arrow-left"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carousel-thumb" role="button" data-slide="next">
-                            <i class="zmdi zmdi-arrow-right"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
-                        <!--/.Controls-->
-                        <ol class="carousel-indicators carousel-indicators-portfolio">
-                            <li data-target="#carousel-thumb" data-slide-to="0" class="active">
-                                <img src="https://via.placeholder.com/730x550" alt="" width="100">
-                            </li>
-                            <li data-target="#carousel-thumb" data-slide-to="1">
-                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
-                            </li>
-                            <li data-target="#carousel-thumb" data-slide-to="2">
-                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
-                            </li>
-                            <li data-target="#carousel-thumb" data-slide-to="3">
-                                <img src="https://via.placeholder.com/166x123" alt="" width="100">
-                            </li>
-                        </ol>
-                    </div>
+                    @endif
                     <!--/.Carousel Wrapper-->
                 </div>
                 <div class="col-xl-4 col-md-12 col-sm-12 col-12 sidebar">
                     <div class="sidebar-item sidebar--portfolio">
-                        <h3 class="title-h3">Coolbabka Brand</h3>
-                        <p>We worked on Coolbabka Brand for a long time and we managed to achieve the desired result in less than a month. Our entire team was 100% involved in the process and we can safely declare that we are proud of the achieved result.</p>
-                        <ul class="portfolio-detail">
-                            <li class="portfolio-detail-item"><strong>Client:</strong>Katerine Vie</li>
-                            <li class="portfolio-detail-item"><strong>Start date:</strong>Oct 05, 2019</li>
-                            <li class="portfolio-detail-item"><strong>Finish date:</strong>Oct 28, 2019</li>
-                            <li class="portfolio-detail-item"><strong>Category:</strong>Branding</li>
-                        </ul>
-                    </div>
-                    <div class="sidebar-item">
-                        <h3 class="title-h3">Follow</h3>
-                        <ul class="portfolio-social">
-                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-facebook"></i><span>Facebook</span></a></li>
-                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-linkedin"></i><span>Linkedin</span></a></li>
-                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-behance"></i><span>Behance</span></a></li>
-                            <li class="portfolio-social-item"><a href="#" target="_blank" class="portfolio-social-link"><i class="zmdi zmdi-twitter"></i><span>Twitter</span></a></li>
-                        </ul>
+                        <h3 class="title-h3">{{ $project->title }}</h3>
+                        <p>{{ $project->description }}</p>
                     </div>
                 </div>
             </div>
             <div class="box-preview mb-0">
-                <div class="previous">
-                    <i class="zmdi zmdi-arrow-left"></i>
-                    <a href="" class="box-preview-link">
-                        <span>Previous post</span>
-                        Site Development for IT Company
-                    </a>
-                </div>
-                <div class="next">
-                    <a href="" class="box-preview-link">
-                        <span>Previous post</span>
-                        SEO Optimization for Bundus
-                    </a>
-                    <i class="zmdi zmdi-arrow-right"></i>
-                </div>
+                @if($previousProject)
+                    <div class="previous">
+                        @if(app()->getLocale() == 'en')
+                            <i class="zmdi zmdi-arrow-left"></i>
+                        @else
+                            <i class="zmdi zmdi-arrow-right"></i>
+                        @endif
+                        <a href="{{ route('project-details', $previousProject->slug) }}" class="box-preview-link">
+                            <span>{{ __('website.Previous post') }}</span>
+                            {{ $previousProject->title }}
+                        </a>
+                    </div>
+                @endif
+                @if($nextProject)
+                    <div class="next">
+                        <a href="{{ route('project-details', $nextProject->slug) }}" class="box-preview-link">
+                            <span>{{ __('website.Next post') }}</span>
+                            {{ $nextProject->title }}
+                        </a>
+                        @if(app()->getLocale() == 'en')
+                            <i class="zmdi zmdi-arrow-right"></i>
+                        @else
+                            <i class="zmdi zmdi-arrow-left"></i>
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </section>
@@ -123,35 +124,25 @@
     <section class="section section-services">
         <div class="container">
 
-            <p class="before-title text-center">view more cases</p>
-            <h2 class="title-h2 text-center">Related Works</h2>
-            <p class="text-center after-title">We have many more similar and successful cases. Take a look and you can truly appreciate the level of our skills.</p>
+            <p class="before-title text-center">{{ __('website.view more cases') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Related Workshops') }}</h2>
+            <p class="text-center after-title">{{ __('website.Related Workshops Description') }}</p>
 
-            <div class="box-case box-case--static">
-                <div class="row row-cols-3 row-case">
-                    <div class="col col-case">
-                        <div class="case-item case-1">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
+            @if($relatedProjects && $relatedProjects->count() > 0)
+                <div class="box-case box-case--static">
+                    <div class="row row-cols-3 row-case">
+                        @foreach($relatedProjects as $index => $relatedProject)
+                            <div class="col col-case">
+                                <div class="case-item case-{{ $index + 1 }}" style="background-image: url('{{ $relatedProject->thumbnail ? $relatedProject->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                    <div class="team-info">
+                                        <p class="team-name"><a href="{{ route('project-details', $relatedProject->slug) }}" title="{{ $relatedProject->title }}">{{ $relatedProject->title }}</a></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-2">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-3">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 @endsection

@@ -32,7 +32,12 @@ class HomeController extends Controller
         $services = Service::whereStatus(1)->take(3)->get();
         $oneAbout = OneAbout::with(['details', 'firstPhoto', 'secondPhoto'])->first();
         $teams = Team::with('media')->get();
-        $projects = Project::with('media')->whereStatus(1)->inRandomOrder()->limit(3)->get();
+        // 3 مشاريع أخرى للقسم Related Works
+        $projects = Project::where('status', 1)
+            ->with(['thumbnail'])
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
         $articles = Article::latest()->limit(3)->get();
 
         return view('website.home',compact('homeSliders','oneAbout','teams','articles','services','projects'));

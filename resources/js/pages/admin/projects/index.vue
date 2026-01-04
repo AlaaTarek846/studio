@@ -28,7 +28,6 @@
                     <th scope="col">{{ $t('global.image') }}</th>
                     <th scope="col">{{ $t('label.title') }}</th>
                     <th scope="col">{{ $t('global.projectCategory') }}</th>
-                    <th scope="col">{{ $t('label.sort') }}</th>
                     <th scope="col">{{ $t('label.status') }}</th>
                     <th scope="col">{{ $t('global.action') }}</th>
                   </tr>
@@ -37,15 +36,14 @@
                   <tr v-for="(item,index) in data" :key="item.id">
                     <td scope="row">{{index + 1}}</td>
                     <td>
-                      <div class="me-3" v-if="item.media">
+                      <div class="me-3" v-if="item.thumbnail">
                         <span class="avatar avatar-xxl bg-light">
-                            <img :src="item.media.url" alt="" style="width: 100%; height: 100%">
+                            <img :src="item.thumbnail.url" alt="" style="width: 100%; height: 100%">
                         </span>
                       </div>
                     </td>
                     <td>{{item.title}}</td>
-                    <td>{{item.project_category.title}}</td>
-                    <td>{{item.sort}}</td>
+                    <td>{{item.project_category?.title}}</td>
                     <td>
                       <span class="badge rounded-pill bg-success-transparent" v-if="item.status">{{$t('global.activated')}}</span>
                       <span class="badge rounded-pill bg-danger-transparent" v-else>{{$t('global.Inactive')}}</span>

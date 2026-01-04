@@ -25,270 +25,199 @@
         </div>
     </section>
 
-    <!-- Portfolio Tabs -->
+    <!-- Portfolio Section -->
     <section class="section section-portfolio">
         <div class="container">
-            <ul class="nav nav-tabs nav-tabs-portfolio" id="Portfolio" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">All</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="design-tab" data-toggle="tab" href="#design" role="tab" aria-controls="design" aria-selected="false">UI/UX Design</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="web-tab" data-toggle="tab" href="#web" role="tab" aria-controls="web" aria-selected="false">Web Development</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="seo-tab" data-toggle="tab" href="#seo" role="tab" aria-controls="seo" aria-selected="false">SEO Optimization</a>
-                </li>
-            </ul>
+            @if($categories->count() > 0)
+                <ul class="nav nav-tabs nav-tabs-portfolio" id="Portfolio" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link {{ $categoryId == 'all' ? 'active' : '' }}" 
+                           id="all-tab" 
+                           data-toggle="tab" 
+                           href="#all" 
+                           role="tab" 
+                           aria-controls="all" 
+                           aria-selected="{{ $categoryId == 'all' ? 'true' : 'false' }}"
+                           data-category="all">All</a>
+                    </li>
+                    @foreach($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link {{ $categoryId == $category->id ? 'active' : '' }}" 
+                               id="category-{{ $category->id }}-tab" 
+                               data-toggle="tab" 
+                               href="#category-{{ $category->id }}" 
+                               role="tab" 
+                               aria-controls="category-{{ $category->id }}" 
+                               aria-selected="{{ $categoryId == $category->id ? 'true' : 'false' }}"
+                               data-category="{{ $category->id }}">{{ $category->title }}</a>
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
+            
             <div class="tab-content tab-portfolio" id="myTabContent">
-                <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
-                    <div class="box-portfolio">
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-1">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
+                <div class="tab-pane fade {{ $categoryId == 'all' ? 'show active' : '' }}" 
+                     id="all" 
+                     role="tabpanel" 
+                     aria-labelledby="all-tab">
+                    <div class="box-portfolio" id="projects-container-all">
+                        @if($categoryId == 'all')
+                            @foreach($projects as $project)
+                                <div class="box-portfolio-item">
+                                    <a href="{{ route('project-details', $project->slug) }}">
+                                        <div class="portfolio-thumb" style="background-image: url('{{ $project->thumbnail ? $project->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                            <div class="portfolio-thumb__info">
+                                                <p class="portfolio-thumb__name">{{ $project->title }}</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-2">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
+                            @endforeach
+                            @if($hasMore)
+                                <div class="text-center w-100" id="load-more-container-all" style="flex: 0 0 100%; max-width: 100%; margin-top: 2rem;">
+                                    <button type="button" class="load-more-btn btn btn-primary" data-offset="6" data-category="all">{{ __('website.Load more') }}</button>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-3">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-4">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-5">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-6">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a href="" class="btn btn-primary">Load more</a>
-                        </div>
+                            @endif
+                        @endif
                     </div>
                 </div>
-                <div class="tab-pane fade" id="design" role="tabpanel" aria-labelledby="design-tab">
-                    <div class="box-portfolio">
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-1">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
+                
+                @foreach($categories as $category)
+                    <div class="tab-pane fade {{ $categoryId == $category->id ? 'show active' : '' }}" 
+                         id="category-{{ $category->id }}" 
+                         role="tabpanel" 
+                         aria-labelledby="category-{{ $category->id }}-tab">
+                        <div class="box-portfolio" id="projects-container-{{ $category->id }}">
+                            @if($categoryId == $category->id)
+                                @foreach($projects as $project)
+                                    <div class="box-portfolio-item">
+                                        <a href="{{ route('project-details', $project->slug) }}">
+                                            <div class="portfolio-thumb" style="background-image: url('{{ $project->thumbnail ? $project->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                                <div class="portfolio-thumb__info">
+                                                    <p class="portfolio-thumb__name">{{ $project->title }}</p>
+                                                </div>
+                                            </div>
+                                        </a>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="#">
-                                <div class="portfolio-thumb portfolio-thumb-2">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
+                                @endforeach
+                                @if($hasMore)
+                                    <div class="text-center w-100" id="load-more-container-{{ $category->id }}" style="flex: 0 0 100%; max-width: 100%; margin-top: 2rem;">
+                                        <button type="button" class="load-more-btn btn btn-primary" data-offset="6" data-category="{{ $category->id }}">{{ __('website.Load more') }}</button>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-3">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-4">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-5">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-6">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a href="" class="btn btn-primary">Load more</a>
+                                @endif
+                            @endif
                         </div>
                     </div>
-                </div>
-                <div class="tab-pane fade" id="web" role="tabpanel" aria-labelledby="web-tab">
-                    <div class="box-portfolio">
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-1">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-2">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-3">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-4">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-5">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-6">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a href="" class="btn btn-primary">Load more</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="seo" role="tabpanel" aria-labelledby="seo-tab">
-                    <div class="box-portfolio">
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-1">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-2">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-3">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-4">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-5">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="box-portfolio-item">
-                            <a href="{{ route('project-details','slug') }}">
-                                <div class="portfolio-thumb portfolio-thumb-6">
-                                    <div class="portfolio-thumb__info">
-                                        <p class="portfolio-thumb__name">Clean design concept</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="text-center">
-                            <a href="" class="btn btn-primary">Load more</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
 @endsection
+
+@push('script')
+<script>
+$(document).ready(function() {
+    // Handle tab clicks
+    $(document).on('click', '.nav-tabs-portfolio .nav-link', function(e) {
+        e.preventDefault();
+        const categoryId = $(this).attr('data-category');
+        
+        // Update URL without reload
+        const url = new URL(window.location);
+        if (categoryId === 'all') {
+            url.searchParams.delete('category');
+        } else {
+            url.searchParams.set('category', categoryId);
+        }
+        window.history.pushState({}, '', url);
+        
+        // Load projects for this category
+        loadProjectsByCategory(categoryId);
+    });
+    
+    // Load projects by category
+    function loadProjectsByCategory(categoryId) {
+        const containerId = 'projects-container-' + categoryId;
+        const $container = $('#' + containerId);
+        if ($container.length === 0) return;
+        
+        // Show loading
+        $container.html('<div class="text-center w-100" style="flex: 0 0 100%; padding: 2rem;"><p>Loading...</p></div>');
+        
+        $.ajax({
+            url: '{{ route("projects") }}',
+            type: 'GET',
+            data: { category: categoryId },
+            success: function(html) {
+                const $html = $(html);
+                const $newContainer = $html.find('#' + containerId);
+                if ($newContainer.length > 0) {
+                    $container.html($newContainer.html());
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                $container.html('<div class="text-center w-100" style="flex: 0 0 100%; padding: 2rem;"><p>حدث خطأ أثناء تحميل المشاريع</p></div>');
+            }
+        });
+    }
+
+    // Handle load more button clicks
+    $(document).on('click', '.load-more-btn', function() {
+        const $btn = $(this);
+        const offset = parseInt($btn.attr('data-offset'));
+        const categoryId = $btn.attr('data-category');
+        const containerId = 'projects-container-' + categoryId;
+        const $container = $('#' + containerId);
+        const $loadMoreContainer = $btn.closest('[id^="load-more-container"]');
+        if ($container.length === 0 || $loadMoreContainer.length === 0) return;
+        $btn.prop('disabled', true);
+        $btn.text('Loading...');
+        
+        $.ajax({
+            url: '{{ route("projects.load-more") }}',
+            type: 'GET',
+            data: {
+                offset: offset,
+                category: categoryId
+            },
+            dataType: 'json',
+            headers: {
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            success: function(data) {
+                if (data.html) {
+                    // Append new projects before the load more button
+                    const $tempDiv = $('<div>').html(data.html);
+                    const $newItems = $tempDiv.find('.box-portfolio-item');
+                    
+                    $newItems.each(function() {
+                        $loadMoreContainer.before($(this));
+                    });
+                    
+                    // Update offset
+                    const newOffset = data.nextOffset;
+                    $btn.attr('data-offset', newOffset);
+                    
+                    // Hide button if no more projects
+                    if (!data.hasMore) {
+                        $loadMoreContainer.hide();
+                    } else {
+                        $btn.prop('disabled', false);
+                        $btn.text('{{ __("website.Load more") }}');
+                    }
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                $btn.prop('disabled', false);
+                $btn.text('{{ __("website.Load more") }}');
+                alert('حدث خطأ أثناء تحميل المشاريع. يرجى المحاولة مرة أخرى.');
+            }
+        });
+    });
+});
+</script>
+@endpush

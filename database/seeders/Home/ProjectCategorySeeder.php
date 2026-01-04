@@ -17,24 +17,28 @@ class ProjectCategorySeeder extends Seeder
     {
         $ProjectCategorises = [
             [
-                'title_ar' => 'علامة تجارية',
-                'title_en' => 'Branding',
+                'title_ar' => 'ورش التمثيل المسرحي',
+                'title_en' => 'Theater Acting Workshops',
             ],
             [
-                'title_ar' => 'التصميم',
-                'title_en' => 'Design',
+                'title_ar' => 'ورش التمثيل السينمائي',
+                'title_en' => 'Film Acting Workshops',
             ],
             [
-                'title_ar' => 'تطوير',
-                'title_en' => 'Development',
+                'title_ar' => 'ورش الإعداد والتحضير',
+                'title_en' => 'Preparation & Training Workshops',
             ],
             [
-                'title_ar' => 'تحليل البيانات',
-                'title_en' => 'Data Analysis',
+                'title_ar' => 'ورش تقنيات الأداء',
+                'title_en' => 'Performance Techniques Workshops',
             ],
             [
-                'title_ar' => 'إدارة المشاريع',
-                'title_en' => 'Project Management',
+                'title_ar' => 'ورش التمثيل للمبتدئين',
+                'title_en' => 'Beginner Acting Workshops',
+            ],
+            [
+                'title_ar' => 'ورش التمثيل للمحترفين',
+                'title_en' => 'Professional Acting Workshops',
             ],
         ];
 
