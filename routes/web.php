@@ -102,6 +102,7 @@ Route::prefix('api')->group(function () {
         Route::apiResource('properties', PropertyController::class);
         Route::delete('properties/media/{id}',[PropertyController::class,'deleteMedia']);
         Route::apiResource('resales', ResaleController::class);
+        Route::get('dashboard/statistics', [DashboardController::class, 'statistics']);
 
     });
 

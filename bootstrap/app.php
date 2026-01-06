@@ -32,14 +32,14 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
 
         // 404 page when a model is not found
-        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
-                if ($request->is('api/*')) {
-                    return response()->json([
-                        'message' => 'Record not found.'
-                    ], 404);
-                }
-                return response()->view('admin.error.404', [] ,404);
-        });
+//        $exceptions->render(function (NotFoundHttpException $e, Request $request) {
+//                if ($request->is('api/*')) {
+//                    return response()->json([
+//                        'message' => 'Record not found.'
+//                    ], 404);
+//                }
+//                return response()->view('admin.error.404', [] ,404);
+//        });
 
         $exceptions->render(function (InvalidOrderException $e, Request $request) {
             if (config('app.env') == 'production') {

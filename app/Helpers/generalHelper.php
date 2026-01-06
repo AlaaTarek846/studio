@@ -110,20 +110,37 @@ function productTransaction($order, $item, $product, $fromStore = null, $toStore
  * @param int $length Maximum length of excerpt
  * @return string Cleaned excerpt
  */
-function getExcerpt($html, $length = 150) {
+function getExcerpt($html, $length = 150)
+{
+    // Decode HTML entities (مثل &nbsp;)
+    $html = html_entity_decode($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    // Replace non-breaking space with normal space
+    $html = str_replace("\u{00A0}", ' ', $html); // NBSP char
+    $html = str_replace('&nbsp;', ' ', $html);   // fallback
+
     // Remove HTML tags
     $text = strip_tags($html);
+
+    // Normalize spaces
+    $text = preg_replace('/\s+/u', ' ', $text);
+
     // Trim whitespace
     $text = trim($text);
+
     // Limit length
     if (mb_strlen($text) > $length) {
         $text = mb_substr($text, 0, $length);
-        // Find last space to avoid cutting words
+
+        // Avoid cutting words
         $lastSpace = mb_strrpos($text, ' ');
         if ($lastSpace !== false) {
             $text = mb_substr($text, 0, $lastSpace);
         }
+
         $text .= '...';
     }
+
     return $text;
 }
+

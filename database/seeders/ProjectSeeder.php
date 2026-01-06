@@ -30,6 +30,9 @@ class ProjectSeeder extends Seeder
                 "description_ar" => "ورشة شاملة للمبتدئين تركز على أساسيات التمثيل المسرحي. تعلم تقنيات الأداء، التحكم في الصوت، والحركة على المسرح. برنامج تدريبي متكامل يغطي جميع الجوانب الأساسية للتمثيل المسرحي.",
                 "description_en" => "A comprehensive workshop for beginners focusing on the fundamentals of theater acting. Learn performance techniques, voice control, and stage movement. A complete training program covering all essential aspects of theater acting.",
                 "project_category_id" => $category->id,
+                "actors_names" => "أحمد محمد، فاطمة علي، خالد حسن، نورا إبراهيم",
+                "start_date" => "2025-01-15",
+                "end_date" => "2025-03-15",
                 "status" => 1,
                 'thumbnail' => [
                     'name' => 'theater-workshop-thumbnail',
@@ -78,6 +81,9 @@ class ProjectSeeder extends Seeder
                 "description_ar" => "ورشة متخصصة في التمثيل السينمائي والتلفزيوني. تعلم كيفية العمل أمام الكاميرا، تقنيات التمثيل للشاشة، والتفاعل مع المخرج. برنامج متقدم للممثلين ذوي الخبرة.",
                 "description_en" => "A specialized workshop in film and television acting. Learn how to work in front of the camera, screen acting techniques, and director interaction. An advanced program for experienced actors.",
                 "project_category_id" => $category->id,
+                "actors_names" => "سارة أحمد، محمود خالد، ليلى فؤاد، يوسف سمير",
+                "start_date" => "2025-02-01",
+                "end_date" => "2025-04-01",
                 "status" => 1,
                 'thumbnail' => [
                     'name' => 'film-acting-thumbnail',
@@ -117,6 +123,9 @@ class ProjectSeeder extends Seeder
                 "description_ar" => "ورشة متخصصة في تطوير مهارات الصوت والحركة للممثلين. تعلم التحكم في التنفس، نطق الكلمات، والحركة التعبيرية. برنامج شامل لتحسين الأداء التمثيلي.",
                 "description_en" => "A specialized workshop in developing voice and movement skills for actors. Learn breath control, diction, and expressive movement. A comprehensive program to improve acting performance.",
                 "project_category_id" => $category->id,
+                "actors_names" => "عمر محمد، ريم علي، كريم حسن، هناء محمود",
+                "start_date" => "2025-01-20",
+                "end_date" => "2025-03-20",
                 "status" => 1,
                 'thumbnail' => [
                     'name' => 'voice-movement-thumbnail',
@@ -204,6 +213,9 @@ class ProjectSeeder extends Seeder
                 "description_ar" => "ورشة مثالية للمبتدئين الذين يرغبون في بدء رحلتهم في عالم التمثيل. تعلم الأساسيات من الصفر في بيئة داعمة ومشجعة. برنامج تدريبي شامل يبني الثقة والمهارات الأساسية.",
                 "description_en" => "An ideal workshop for beginners who want to start their journey in acting. Learn the basics from scratch in a supportive and encouraging environment. A comprehensive training program that builds confidence and basic skills.",
                 "project_category_id" => $category->id,
+                "actors_names" => "سارة محمود، أحمد خالد، نورا علي، محمد حسن",
+                "start_date" => "2025-01-25",
+                "end_date" => "2025-03-25",
                 "status" => 1,
                 'thumbnail' => [
                     'name' => 'beginner-acting-thumbnail',
@@ -894,10 +906,60 @@ class ProjectSeeder extends Seeder
             ],
         ];
 
-        foreach ($projects as $projectData) {
+        // Actors names arrays for seeding
+        $actorsNamesList = [
+            "أحمد محمد، فاطمة علي، خالد حسن، نورا إبراهيم",
+            "سارة أحمد، محمود خالد، ليلى فؤاد، يوسف سمير",
+            "عمر محمد، ريم علي، كريم حسن، هناء محمود",
+            "مريم سعيد، عمرو يوسف، دينا الشربيني، تامر حبيب",
+            "سارة محمود، أحمد خالد، نورا علي، محمد حسن",
+            "إيمان فتحي، وليد جمال، سلمى أحمد، كريم محمود",
+            "نورا حسن، يوسف علي، مريم خالد، أحمد فؤاد",
+            "ليلى محمود، خالد سعيد، سارة يوسف، عمرو علي",
+            "فاطمة خالد، محمد حسن، نورا أحمد، كريم محمود",
+            "ريم سعيد، يوسف علي، مريم فؤاد، أحمد خالد",
+            "سلمى محمود، وليد حسن، إيمان علي، كريم يوسف",
+            "نورا فؤاد، خالد أحمد، سارة محمود، عمرو حسن",
+            "ليلى يوسف، محمد علي، مريم خالد، أحمد سعيد",
+            "فاطمة محمود، يوسف حسن، نورا علي، كريم أحمد",
+            "ريم خالد، عمرو فؤاد، سارة يوسف، أحمد محمود",
+            "إيمان علي، وليد خالد، سلمى حسن، كريم يوسف",
+            "نورا محمود، خالد أحمد، مريم علي، يوسف فؤاد",
+            "ليلى حسن، محمد يوسف، فاطمة خالد، عمرو محمود",
+            "سارة علي، أحمد فؤاد، نورا يوسف، كريم حسن",
+            "مريم محمود، خالد علي، ريم حسن، يوسف أحمد",
+        ];
+        
+        // Generate dates for each project
+        $startDates = [];
+        $endDates = [];
+        for ($i = 0; $i < count($projects); $i++) {
+            $startMonth = 1 + ($i % 12);
+            $startDay = 1 + ($i % 28);
+            $endMonth = $startMonth + 2;
+            if ($endMonth > 12) {
+                $endMonth = $endMonth - 12;
+            }
+            $endDay = $startDay;
+            $startDates[] = sprintf("2025-%02d-%02d", $startMonth, $startDay);
+            $endDates[] = sprintf("2025-%02d-%02d", $endMonth, $endDay);
+        }
+
+        foreach ($projects as $index => $projectData) {
             $thumbnail = $projectData['thumbnail'] ?? null;
             $slider = $projectData['slider'] ?? [];
             unset($projectData['thumbnail'], $projectData['slider']);
+
+            // Add actors_names, start_date, end_date if not already set
+            if (!isset($projectData['actors_names'])) {
+                $projectData['actors_names'] = $actorsNamesList[$index % count($actorsNamesList)];
+            }
+            if (!isset($projectData['start_date'])) {
+                $projectData['start_date'] = $startDates[$index] ?? null;
+            }
+            if (!isset($projectData['end_date'])) {
+                $projectData['end_date'] = $endDates[$index] ?? null;
+            }
 
             $model = Project::create($projectData);
             

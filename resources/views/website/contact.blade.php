@@ -71,7 +71,7 @@
                     <img src="/website/img/icons/call.svg" alt="{{ __('website.Call Us') }}">
                     <h3 class="title-h3">{{ __('website.Call Us') }}</h3>
                     <ul class="col-contact__list">
-                        <li class="col-contact__list-item"><span>{{ __('website.Phone') }}:</span> {{ $shareSetting->mobile ?? '' }}</li>
+                        <li class="col-contact__list-item"><span>{{ __('website.phoneNumber') }}:</span> {{ $shareSetting->mobile ?? '' }}</li>
                     </ul>
                 </div>
                 <div class="col-contact">
