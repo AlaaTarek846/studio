@@ -85,6 +85,32 @@
                     <div class="sidebar-item sidebar--portfolio">
                         <h3 class="title-h3">{{ $project->title }}</h3>
                         <p>{{ $project->description }}</p>
+                        <ul class="portfolio-detail">
+                            @if($project->actors_names)
+                                <li class="portfolio-detail-item">
+                                    <strong>{{ __('website.Actors Names') }}:</strong>
+                                    {{ $project->actors_names }}
+                                </li>
+                            @endif
+                            @if($project->start_date)
+                                <li class="portfolio-detail-item">
+                                    <strong>{{ __('website.Start Date') }}:</strong>
+                                    {{ \Carbon\Carbon::parse($project->start_date)->format('M d, Y') }}
+                                </li>
+                            @endif
+                            @if($project->end_date)
+                                <li class="portfolio-detail-item">
+                                    <strong>{{ __('website.End Date') }}:</strong>
+                                    {{ \Carbon\Carbon::parse($project->end_date)->format('M d, Y') }}
+                                </li>
+                            @endif
+                            @if($project->projectCategory)
+                                <li class="portfolio-detail-item">
+                                    <strong>{{ __('website.Category') }}:</strong>
+                                    {{ $project->projectCategory->title }}
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -104,38 +104,30 @@
 
     <!-- Clients -->
 
+    <!-- Works -->
+
     <section class="section section-services">
         <div class="container">
 
-            <p class="before-title text-center">view more cases</p>
-            <h2 class="title-h2 text-center">Related Works</h2>
-            <p class="text-center after-title">We have many more similar and successful cases. Take a look and you can truly appreciate the level of our skills.</p>
+            <p class="before-title text-center">{{ __('website.view more cases') }}</p>
+            <h2 class="title-h2 text-center">{{ __('website.Related Workshops') }}</h2>
+            <p class="text-center after-title">{{ __('website.Related Workshops Description') }}</p>
 
-            <div class="box-case box-case--static">
-                <div class="row row-cols-3 row-case">
-                    <div class="col col-case">
-                        <div class="case-item case-1">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
+            @if($relatedProjects && $relatedProjects->count() > 0)
+                <div class="box-case box-case--static">
+                    <div class="row row-cols-3 row-case">
+                        @foreach($relatedProjects as $index => $relatedProject)
+                            <div class="col col-case">
+                                <div class="case-item case-{{ $index + 1 }}" style="background-image: url('{{ $relatedProject->thumbnail ? $relatedProject->thumbnail->url : '/website/img/service.jpg' }}'); background-size: cover; background-position: center; min-height: 300px;">
+                                    <div class="team-info">
+                                        <p class="team-name"><a href="{{ route('project-details', $relatedProject->slug) }}" title="{{ $relatedProject->title }}">{{ $relatedProject->title }}</a></p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-2">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-case">
-                        <div class="case-item case-3">
-                            <div class="team-info">
-                                <p class="team-name"><a href="#" title="">Clean design concept</a></p>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
     </section>
 
@@ -154,19 +146,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="embed-responsive embed-responsive-16by9">
-                        @php
-                            // Extract YouTube video ID from URL
-                            $youtubeUrl = $service->video->youtube_url;
-                            $videoId = '';
-                            
-                            // Handle different YouTube URL formats
-                            if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/', $youtubeUrl, $matches)) {
-                                $videoId = $matches[1];
-                            }
-                            
-                            $embedUrl = $videoId ? 'https://www.youtube.com/embed/' . $videoId : $youtubeUrl;
-                        @endphp
-                        <iframe class="embed-responsive-item" src="{{ $embedUrl }}" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        @if(!empty($service->video->youtube_url))
+                            {!! $service->video->youtube_url !!}
+                        @else
+                            <div class="alert alert-warning text-center p-4">
+                                <p>{{ __('website.Video URL not available') }}</p>
+                                @if(config('app.debug'))
+                                    <small class="text-muted">URL: {{ $youtubeUrl ?? 'N/A' }}</small>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -343,6 +332,27 @@
 </style>
 <script>
 $(document).ready(function() {
+    // Handle video modal
+    $('#videoModal').on('shown.bs.modal', function () {
+        var $iframe = $(this).find('iframe');
+        if ($iframe.length && $iframe.attr('src')) {
+            // Reload iframe to ensure video loads
+            var src = $iframe.attr('src');
+            $iframe.attr('src', '');
+            setTimeout(function() {
+                $iframe.attr('src', src);
+            }, 100);
+        }
+    });
+    
+    $('#videoModal').on('hidden.bs.modal', function () {
+        var $iframe = $(this).find('iframe');
+        if ($iframe.length) {
+            // Pause video when modal is closed
+            $iframe.attr('src', $iframe.attr('src'));
+        }
+    });
+    
     $('#newsletter-form').on('submit', function(e) {
         e.preventDefault();
         

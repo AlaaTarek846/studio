@@ -156,6 +156,74 @@
                             </template>
                           </div>
                       </div>
+                      
+                      <div class="col-md-12 mb-2">
+                          <label class="form-label">{{ $t('global.actorsNames') }}</label>
+                          <textarea
+                            type="text"
+                            class="form-control form-control-lg"
+                            v-model="submitData.data.actors_names"
+                            rows="3"
+                            :class="{
+                              'is-invalid': errors['actors_names']
+                            }"
+                            :placeholder="$t('global.actorsNamesPlaceholder')"
+                          ></textarea>
+                          <div class="invalid-feedback">
+                            <template v-if="errors['actors_names']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['actors_names']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                      
+                      <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.startDate') }}</label>
+                          <input
+                            type="date"
+                            class="form-control form-control-lg"
+                            v-model="submitData.data.start_date"
+                            :class="{
+                              'is-invalid': errors['start_date']
+                            }"
+                          />
+                          <div class="invalid-feedback">
+                            <template v-if="errors['start_date']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['start_date']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
+                      
+                      <div class="col-md-6 mb-2">
+                          <label class="form-label">{{ $t('global.endDate') }}</label>
+                          <input
+                            type="date"
+                            class="form-control form-control-lg"
+                            v-model="submitData.data.end_date"
+                            :class="{
+                              'is-invalid': errors['end_date']
+                            }"
+                          />
+                          <div class="invalid-feedback">
+                            <template v-if="errors['end_date']">
+                              <error-message
+                                v-for="(errorMessage, index) in errors['end_date']"
+                                :key="index"
+                              >
+                                {{ errorMessage }}
+                              </error-message>
+                            </template>
+                          </div>
+                      </div>
 
                         <!-- Thumbnail Image -->
                         <div class="col-md-12 mt-3">
@@ -326,6 +394,9 @@
     submitData.data.description_en = '';
     submitData.data.description_ar = '';
     submitData.data.project_category_id = '';
+    submitData.data.actors_names = '';
+    submitData.data.start_date = '';
+    submitData.data.end_date = '';
     is_disabled.value = false;
     loading.value = false;
     errors.value = [];
@@ -354,6 +425,9 @@
               submitData.data.description_en = l.description_en || '';
               submitData.data.description_ar = l.description_ar || '';
               submitData.data.project_category_id = l.project_category_id || '';
+              submitData.data.actors_names = l.actors_names || '';
+              submitData.data.start_date = l.start_date || '';
+              submitData.data.end_date = l.end_date || '';
               submitData.data.status = l.status == 1;
               thumbnailUpload.value = l.thumbnail || '';
               existingSliderImages.value = Array.isArray(l.slider_images) ? l.slider_images : [];
@@ -384,6 +458,9 @@
       description_en: '',
       description_ar: '',
       project_category_id: '',
+      actors_names: '',
+      start_date: '',
+      end_date: '',
     }
   });
 
@@ -414,6 +491,9 @@
       formData.append('description_en', submitData.data.description_en);
       formData.append('description_ar', submitData.data.description_ar);
       formData.append('project_category_id', submitData.data.project_category_id);
+      formData.append('actors_names', submitData.data.actors_names || '');
+      formData.append('start_date', submitData.data.start_date || '');
+      formData.append('end_date', submitData.data.end_date || '');
 
       if(submitData.data.thumbnail) {
         formData.append('thumbnail', submitData.data.thumbnail);

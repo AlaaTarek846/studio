@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\CounterSection;
 use App\Models\Partner;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
@@ -33,7 +34,13 @@ class ServiceController extends Controller
             $query->where('status', 1)->orderBy('sort', 'asc');
         }])->where('slug_ar',$slug)->orWhere('slug_en',$slug)->firstOrFail();
         $allServices = Service::with('icon')->whereStatus(1)->where('id', '!=', $service->id)->get();
-        return view('website.serviceDetails',compact('service','allServices'));
+        // 3 مشاريع أخرى للقسم Related Works
+        $relatedProjects = Project::where('status', 1)
+            ->with(['thumbnail'])
+            ->orderBy('id', 'desc')
+            ->take(3)
+            ->get();
+        return view('website.serviceDetails',compact('service','allServices','relatedProjects'));
 
     }
 
